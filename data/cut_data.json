@@ -1,0 +1,842 @@
+[
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from German to English.",
+        "input_context": "Der künftige EM-Cheforganisator Philipp Lahm soll laut Grindel im DFB-Präsidium mitarbeiten.",
+        "hypo_output": "According to Grindel, the future head of the European Championships, Philipp Lahm, is to participate in the DFB Presidency.",
+        "score": "4.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "Он пояснил, что для создания такой базы потребуется внести поправки в законодательство.",
+        "hypo_output": "He explained that the creation of such a base would require amendments to the legislation.",
+        "score": "0.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "Но еще раз повторюсь, спасибо физиотерапевту и докторам, что поставили на ноги.",
+        "hypo_output": "But once again I repeat, thanks to the doctors and doctors that they put on their feet.",
+        "score": "9"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to German.",
+        "input_context": "Trump and Modi would do very well to keep Gandhi's advice in mind, 150 years after his birth.",
+        "hypo_output": "Trump und Modi täten sehr gut daran, Gandhis Rat 150 Jahre nach seiner Geburt im Auge zu behalten.",
+        "score": "0.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to German.",
+        "input_context": "Nestle tightens controls on coffee beans after weedkiller scare",
+        "hypo_output": "Nestle verschärft Kontrollen auf Kaffeebohnen nach Unkrautvernichter Angst",
+        "score": "3.0"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "Они являются \"финальной пятеркой\", потому что следующая олимпийская сборная по гимнастике будет иметь только четыре гимнаста в команде, и это последний год тренерства Марты Кароли.",
+        "hypo_output": "They are the \"final five\", because following the Russian Olympic team will have only four gymnast in the team, and this is the last year coach Martha karolyi.",
+        "score": "5.0"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "В ходе небольшого скетча актер сыграл Кавано на слушаниях в сенате по обвинению в изнасиловании.",
+        "hypo_output": "In a small sketch, the actor played Kavanaugh at a Senate hearing on charges of rape.",
+        "score": "0.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Chinese to English.",
+        "input_context": "近日，乌鲁木齐市天山区总工会慰问组一行，将一批急需的疫情防控生活物资送到了12个隔离点的工作人员手中。",
+        "hypo_output": "Recently, the condolence group of the Tianshan District Federation of Trade Unions of Urumqi City sent a batch of urgently needed epidemic prevention and control living materials to the staff of 12 isolation points.",
+        "score": "1.0"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "При этом Трамп попросил не воспринимать его слова буквально и предупредил, что американские СМИ истолкуют их как некомпетентность.",
+        "hypo_output": "In doing so, Trump asked not to take his words literally and warned that the American media will drag them down as incompetence.",
+        "score": "3.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to German.",
+        "input_context": "But President Donald Trump and Indian Prime Minister Narendra Modi, who triumphantly addressed a joint mega-rally in Houston recently, seem to be impervious to Gandhi's ideas, despite paying lip service to him at the event. Both are right-wing populists who have ruled with scant compassion or tolerance, successfully mobilizing whites and Hindus in their respective countries as voting blocs, and fomenting division and social antagonism.",
+        "hypo_output": "Doch Präsident Donald Trump und der indische Premierminister Narendra Modi, die vor kurzem triumphierend eine gemeinsame Mega-Kundgebung in Houston ansprachen, scheinen für Gandhis Ideen unempfindlich zu sein, obwohl sie ihm bei der Veranstaltung Lippenbekenntnisse ablegten. Beide sind Rechtspopulisten, die mit wenig Mitgefühl oder Toleranz regiert haben, Weiße und Hindus in ihren jeweiligen Ländern erfolgreich als Wahlblöcke mobilisieren und Spaltung und sozialen Antagonismus schüren.",
+        "score": "1.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "Кроме того, официальный Сухум намерен выплатить семьям погибших компенсацию в размере 500 тысяч рублей.",
+        "hypo_output": "Furthermore, official Suhum is intended to pay off to the families of those been killed compensation in the size of 500,000 rubles.",
+        "score": "5.0"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Chinese to English.",
+        "input_context": "据伊朗伊斯兰共和国通讯社消息，当地时间27日上午9时，英国“史丹纳帝国”号油轮从阿巴斯港出发，前往波斯湾的国际水域。",
+        "hypo_output": "According to the Islamic Republic of Iran News Agency, at 9: 00 a.m. local time on the 27th, the British oil tanker \"Steiner Empire\" set out from the port of Abbas for the international waters of the Persian Gulf.",
+        "score": "5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from German to English.",
+        "input_context": "Alle größeren Grönlandhaie hatten in ihrem Linsenkern dagegen normale Kohlenstoff-14-Mengen, das durch kosmische Strahlung in der Atmosphäre entsteht.",
+        "hypo_output": "All larger Greenland sharks, however, had normal carbon 14 quantities in their lens, resulting in cosmic radiation in the atmosphere.",
+        "score": "5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Russian to English.",
+        "input_context": "Встреча прошла 30 сентября на стадионе \"Анжи-Арена\" и закончилась со счетом 2:1.",
+        "hypo_output": "The meeting was held on September 30 at the stadium \"Anji-Arena\" and ended with a score of 2:1.",
+        "score": "5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to German.",
+        "input_context": "UN says thousands of anti-Pakistan militants in Afghanistan",
+        "hypo_output": "UN sagt, Tausende von Anti-Pakistan-Aktivisten in Afghanistan",
+        "score": "1.0"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from German to English.",
+        "input_context": "Der Einbrecher bediente sich laut Polizei auch an einer Kasse und stahl Bargeld im niedrigen dreistelligen Bereich.",
+        "hypo_output": "According to the police, the burglar also used a cash register and stole cash in the low three-digit range.",
+        "score": "5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from Chinese to English.",
+        "input_context": "他希望，等疫情更稳定了，再和同学们来北京看看自己的作品展。",
+        "hypo_output": "He hopes that when the epidemic is more stable, he and his classmates will come to Beijing to see the exhibition of his works.",
+        "score": "0.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to Russian.",
+        "input_context": "On Sunday, the Foreign Secretary defended the sudden reimposition of restrictions as a \"real-time response\" to a worrying spike in infections reported in the region.",
+        "hypo_output": "В воскресенье министр иностранных дел защитил внезапное возобновление ограничений как «ответ в режиме реального времени» на тревожный всплеск инфекций, зарегистрированных в регионе.",
+        "score": "1.0"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to German.",
+        "input_context": "In an ideal world, a series of blows landing on Johnson - who is also under fire over his rhetoric in the debate over Brexit - would bring the match closer to an end. Europe should still try to extract maximum concessions from the UK, given it has no choice but to negotiate with the current government while trying to preserve unity among the rest of its 27 member states - which is going to get harder the longer this drags on. If there's a window to try yet again to put a deal before the UK parliament, the EU should grab it.",
+        "hypo_output": "Wäre die Welt ein idealer Ort, wären die zahlreichen Niederlagen von Johnson - der auch aufgrund seiner Rhetorik in der Brexit-Diskussion kritisiert wurde - Zeichen dafür, dass das Ende naht. Die EU sollte sich weiterhin bemühen, von Großbritannien so viele Konzessionen wie möglich zu erhalten, weil ihr nichts anderes übrigbleibt, als mit der aktuellen Regierung zu verhandeln. Gleichzeitig sollte sie sich um den Erhalt der Geschlossenheit der restlichen 27 Mitgliedsstaaten bemühen - was umso schwieriger wird, je mehr Zeit vergeht. Sollte es noch eine Chance geben, erneut zu versuchen, dem britischen Parlament einen Vorschlag zu unterbreiten, dann sollte die EU sie nicht ungenutzt lassen.",
+        "score": "5.5"
+    },
+    {
+        "task": "translation",
+        "instruction": "Translate the following text from English to German.",
+        "input_context": "In an ideal world, a series of blows landing on Johnson - who is also under fire over his rhetoric in the debate over Brexit - would bring the match closer to an end. Europe should still try to extract maximum concessions from the UK, given it has no choice but to negotiate with the current government while trying to preserve unity among the rest of its 27 member states - which is going to get harder the longer this drags on. If there's a window to try yet again to put a deal before the UK parliament, the EU should grab it.",
+        "hypo_output": "In einer idealen Welt würde eine Reihe von Schlägen auf Johnson - der auch wegen seiner Rhetorik in der Debatte über den Brexit unter Beschuss steht - das Spiel einem Ende näher bringen. Europa sollte immer noch versuchen, dem Vereinigten Königreich maximale Zugeständnisse zu machen, da es keine andere Wahl hat, als mit der derzeitigen Regierung zu verhandeln, während es versucht, die Einheit unter den übrigen 27 Mitgliedsstaaten zu bewahren - was schwieriger werden wird, je länger sich das hinzieht. Wenn es ein Fenster gibt, um noch einmal zu versuchen, dem britischen Parlament einen Deal vorzulegen, sollte die EU ihn ergreifen.",
+        "score": "2.0"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When did the buffalo bills last make the playoffs?",
+        "hypo_output": "Buffalo Bills are a professional American professional baseball team based in Buffalo, New York. They play at the Buffalo Bills Arena. Since 2017 Buffalo Bills have competed in the National Football League's Western Division.   In 2015, Buffalo Bills made the playoffs in their division of the Western Division.",
+        "score": "9.0"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Who won the superbowl in 2004 and 2005?",
+        "hypo_output": "The 2004 Super Bowl was an American football championship game between the New England Patriots and the New York Giants. The Patriots won the Super Bowl in 2004 and 2005.",
+        "score": "8"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When is the wwe 2k 18 coming out?",
+        "hypo_output": "WWE 2K 18 is an American action video game developed and published by Activision Blizzard. It was released in North America on November 17, 2017, and in Europe on November 19, 2017. It is the first installment in the Wwe 2K series to be released in the United States. The game was first released in Japan on November 15, 2017 and came out in the US on November 20, 2017",
+        "score": "9.0"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When is season 3 of fuller house coming out?",
+        "hypo_output": "Fuller House is an American reality television series based on Fuller House. Season 3 of Fuller House premiered on Netflix on September 26, 2017. Season 4 premiered on Hulu on September 27, 2017, and season 3 premiered on Amazon Prime on September 28, 2017 and on September 30, 2017 respectively. The third season premiered on HBO on September 29, 2018.",
+        "score": "9"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Who plays ali brother in pretty little liars?",
+        "hypo_output": "Pretty Little Liars is a 2017 American romantic comedy-drama film based on the novel of the same name by American author J. K. Rowling. In the film, the character of ali brother is played by American actor, actor, and singer Michael Jackson. The character of Ali brother was played by actor, singer, and songwriter, Michael Jackson, who is best known for his role as Ali brother.",
+        "score": "8"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Who plays belle's father in the beauty and the beast?",
+        "hypo_output": "The Beauty and the Beast is an American musical fantasy film written by John Landis, and first released in the US in 1957. It stars Tim Rice as Belle's father, who is a young human male named Matt, and a young black male named Tootsie. The role has been played by several actors.",
+        "score": "8"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "In which countries would you most likely see a blue jay?",
+        "hypo_output": "There are several countries with a blue jay or a blue jay, but the most commonly used are in Japan, Taiwan, and China. In India, the most likely recipient of a blue jay is the United States. In Australia, the common type of bird is a black and yellow one. In the United Kingdom, the bird is also known as a brown jay.",
+        "score": "8"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "How old you have to be to buy a gun in texas?",
+        "hypo_output": "The minimum age to buy a gun in texas is 18 years old. The minimum age for a firearm in Texas is 21 years old, and the minimum age is 21.",
+        "score": "5.5"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When is season 3 on fuller house coming out?",
+        "hypo_output": "Full House is an American reality television series that premiered on HBO on April 11, 2018, and has since been expanded to 12 seasons as of July 11, 2018. Full House was renewed for a new season on July 10, 2018 and for a third and final season on October 2, 2018. Full House aired on HBO from April 1, 2018, to May 6, 2019. Full House was renewed for a fourth and final season on July 12, 2019. Full House was renewed for a fourth season on July 6, 2021, an additional season on July 17, 2019, and a third season on July 6, 2019.",
+        "score": "4.5"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Where is handmaid's tale supposed to take place?",
+        "hypo_output": "The Handmaid's Tale is a novel written by the American writer Joyce Meyer and illustrated by the American writer and television series Jane Austen. The novel tells the story of a young maid whose family is forced to marry two daughters and a son when they are separated from their parents and become separated from their husbands. The story takes place around the time of the birth of the first child when the relationship between the two sisters is established. The story is set in an early 18th-century London home of Queen Anne and the husband of Queen Elizabeth II, who is a young woman from a wealthy family who wants to marry a man. The first novel in the Handmaid's Tale is titled The Handmaid's Tale, and the second novel, Handmaid's Tale, takes place around the time of the birth of Lord Anne, the daughter of Queen Elizabeth II and Queen Elizabeth II. The three novels are part of the American novel The Handmaid's Tale. The first novel, The Handmaid's Tale, takes place in the mid-19th century and follows the lives of sisters Anne and Margaret Anne, a widow of a widowed father. The third novel, The Handmaid's Tale, takes place in the middle of a hurricane in the United States. In the original Handmaid's Tale, Anne takes refuge in a small town. In the novel, Anne meets the daughter of a doctor and her husband, the son of a doctor, and the daughters of a widowed widowed widow. The handmaid's tale takes place in a small town in the southern United States.",
+        "score": "9"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "America's best dance crew season 6 winners?",
+        "hypo_output": "America's Best Dance Crew season 6 winners are: American Idol, American Idol and American Idol.",
+        "score": "5"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Where is the mercedes benz stadium located in atlanta?",
+        "hypo_output": "The Mercedes-Benz Stadium is located at the Mercedes-Benz Stadium in Munich, Germany. It is the largest arena in Germany and the oldest football stadium in the world. It opened on May 9, 1998 and was renovated with the addition of a new terrace in 1999. In 2021, the stadium was renamed the Mercedes-Benz Stadium and opened to the public in 2021. The stadium was renamed the Mercedes-Benz Stadium in 2021, and is located in the southeast of Munich, Germany.",
+        "score": "7"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When does episode 107 of dragonball super air?",
+        "hypo_output": "Dragonball Super is an American superhero television series that aired on Cartoon Network from July 1, 2017 to September 30, 2018. The first episode of the series aired on July 31, 2017, and the second episode aired on September 27, 2017.",
+        "score": "6"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When does the my little pony movie release?",
+        "hypo_output": "My Little Pony: Friendship is Magic is a 2005 American animated movie directed by Christopher Nolan, starring Chris Pratt and Chris Pratt. It released in North America on December 8, 2005. It also launched in the United Kingdom on December 1, 2004. In the United States, it would be released in May 2018. In the United States, it is released in June 2019. In the United Kingdom, it was released in August 2019. In the United States, the film is released in the US on April 5, 2019.",
+        "score": "8"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Who does voice of optimus prime transformer movie?",
+        "hypo_output": "In Japanese film adaptation, the character optimus prime is voiced by Kenji Miyazaki, who was voiced by Tiyoda in the 1987 remake of the original animated Disney film. The film, dubbed and directed by Niro Niro, has been adapted into three books: The Animated Series: The Animated Series and The Animated Series. The animated series consists of three parts with a voice by actor and singer Michael Tama, and an audio version by actor and singer Richard Gere.",
+        "score": "4"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Which indicators are taken into consideration for measuring hdi?",
+        "hypo_output": "Several indicators are taken into consideration for measuring hdi. In the United States, the Hdi Index is a measure of gross domestic product (GDP). In the UK, it is taken into account for measuring Hdi.",
+        "score": "8"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When did google make the self driving car?",
+        "hypo_output": "The definition of a self-driving car is defined as one that is able to drive in a safe manner and is capable of operating independently without regard to speed or speed, without being impaired by a brake pedal.In the United States, Google made the self driving vehicle in the early 1980s, when the company launched an automobile that was capable of operating autonomously without the assistance of a driver.",
+        "score": "4"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Who killed john in hush hush sweet charlotte?",
+        "hypo_output": "John Gorman is a fictional character in the American television drama television series Hush Hush Sweet Charlotte. He is portrayed by Robert C. Stinson, who was born on September 24, 1949.",
+        "score": "4.5"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "When did eminem's new album come out?",
+        "hypo_output": "Eminem's new album came out on September 23, 2017.",
+        "score": "4.5"
+    },
+    {
+        "task": "long-form QA",
+        "instruction": "Answer the following ambiguous factoid question by introducing additional knowledge, clarifying the relationship between multiple possible answers (if any) and resolving the ambiguity",
+        "input_context": "Who plays timon and pumbaa in the lion king?",
+        "hypo_output": "The lion king is a title character in the popular American television cartoon and video game franchise, a series which is based on the 2011 Disney animated fantasy film The Lion King. In the show, Timon and Pumbaa are played by Tim Burton, Chris Pratt, Raul Castro, and Tim Burton in the lead roles. In the 1991 Disney animated film, Timon and Pumbaa are played by Chris Pratt, Sam Neill, and Timon Tandy.",
+        "score": "4"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "Hundreds of passengers on a New York City subway train were evacuated from cars in an underwater tunnel after a fire during the Monday morning commute. A train heading from Queens into Manhattan was stalled underneath the East River around 8.30am Monday morning and its conductor saw smoke coming from the board along the track's third rail. The train's 542 passengers were taken by a rescue train to Grand Central Station in Manhattan, an MTA spokesman told Daily Mail Online. Scroll down for video Service on a New York City subway line (pictured) was suspended for almost two hours after smoke in an underwater tunnel left hundreds of passengers stuck beneath the East River More than 500 passengers were taken to Manhattan after spending roughly an hour and a half trapped. They walked through their stalled train into a rescue train and left around 10am Part of the train's contact shoe, which gets power from the third rail, is thought to have touched the board instead of the rail, sparking the incident that left service on the 7 train suspended for just less than two hours. The last of the passengers were taken on to the new train around 10am, according to AMNY. No injuries were reported beyond a woman who felt faint and requested medical attention. The MTA has warned passengers to expect delays on other lines such as the N,Q, and R. More than 500 passengers were taken to Manhattan after spending roughly an hour and a half trapped beneath the East River. Above, firefighters seen at Grand Central Station Commuters faced delays and crowds of people as they tried to travel from Queens into Manhattan. Service resumed around 10.30am after the incident, believed to be caused by a train's conduct with a safety board Commuters trips on the 7 line were disrupted, with some taking unusual transport methods such as boats to get to work. Residents of Queens have recently complained about what they view as particularly poor service on the 7, which goes through the heart of their borough. A rally was held last month calling for less delays on the line after a winter of outages, according to DNA Info.",
+        "hypo_output": "A train headed from Queens into Manhattan was stalled underneath the East River around 8.30am Monday morning. The train's conductor saw smoke coming from the board along the track's third rail. More than 500 passengers were taken to Manhattan, an MTA spokesman said.",
+        "score": "6.0"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)It all started by looking up. During an expedition through the Brittany region on the west coast of France, photographer Fabien Le Coq noticed an unusual tree. He positioned himself at the base of the tree and turned his camera upward, filling the frame with the trunk and its spindly branches. \"I'm kind of a walking photographer,\" Le Coq said. \"I love exploring new places. One day I was taking a break during an excursion in the Broceliande forest, looking for the best place to settle, when I discovered a small clearing with a tree without leaves. I stayed for hours looking around, taking some pictures and I found myself lying down under the tree. The tree's branches were rising as if to touch the sky.\" This was the start of the photo series \"Treesome,\" an embodiment of Le Coq's unique way of interacting with the world around him. \"By walking a long time in an environment, landscapes begin to influence on your mood,\" he said. \"As (landscapes) change, your feelings do.\" The series, shot between 2012 and 2014, reflects Le Coq's travels through his native France and countries in Central America and Asia. The images are soothing and repetitive; each tree is photographed from the bottom looking up. But it is from this vantage point that the differences become apparent. Branches take on their own patterns in the sky, creating a symmetry that is both interesting and comforting. A row of trees shot in Paris speaks to the geometry of a modern city. Cactus branches look like spears piercing the sky. Appearance is not the only factor that sets the trees apart. For Le Coq, each image is special because it represents different feelings at different points in time. Social media Follow @CNNPhotos on Twitter to join the conversation about photography. \"Each tree has its own personality,\" he said. \"I chose them by the way I felt at the moment. Sometimes they even change my sentiments. It's kind of a spiritual experience.\" Le Coq says his photographs are meant to bring about pause and reflection. The viewer should \"become a third actor in a scene with trees and skies.\" It is an opportunity to take a break and focus on our own individual journeys. \"Treesome\" is shot in black and white, an aesthetic Le Coq says lends tension \"recalling the gulf on one side and the celestial heights on the other. \"The branches are the mirror of the roots.\" As a freelance graphic designer, Le Coq can work wherever there is an Internet connection.  He uses this freedom to travel, discover new places and grow...",
+        "hypo_output": "photographer fabien le coq noticed an unusual tree . the tree 's branches were rising as if to touch the sky . branches take on their own patterns in the sky , creating a symmetry that is both interesting and comforting .",
+        "score": "2.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)It all started by looking up. During an expedition through the Brittany region on the west coast of France, photographer Fabien Le Coq noticed an unusual tree. He positioned himself at the base of the tree and turned his camera upward, filling the frame with the trunk and its spindly branches. \"I'm kind of a walking photographer,\" Le Coq said. \"I love exploring new places. One day I was taking a break during an excursion in the Broceliande forest, looking for the best place to settle, when I discovered a small clearing with a tree without leaves. I stayed for hours looking around, taking some pictures and I found myself lying down under the tree. The tree's branches were rising as if to touch the sky.\" This was the start of the photo series \"Treesome,\" an embodiment of Le Coq's unique way of interacting with the world around him. \"By walking a long time in an environment, landscapes begin to influence on your mood,\" he said. \"As (landscapes) change, your feelings do.\" The series, shot between 2012 and 2014, reflects Le Coq's travels through his native France and countries in Central America and Asia. The images are soothing and repetitive; each tree is photographed from the bottom looking up. But it is from this vantage point that the differences become apparent. Branches take on their own patterns in the sky, creating a symmetry that is both interesting and comforting. A row of trees shot in Paris speaks to the geometry of a modern city. Cactus branches look like spears piercing the sky. Appearance is not the only factor that sets the trees apart. For Le Coq, each image is special because it represents different feelings at different points in time. Social media Follow @CNNPhotos on Twitter to join the conversation about photography. \"Each tree has its own personality,\" he said. \"I chose them by the way I felt at the moment. Sometimes they even change my sentiments. It's kind of a spiritual experience.\" Le Coq says his photographs are meant to bring about pause and reflection. The viewer should \"become a third actor in a scene with trees and skies.\" It is an opportunity to take a break and focus on our own individual journeys. \"Treesome\" is shot in black and white, an aesthetic Le Coq says lends tension \"recalling the gulf on one side and the celestial heights on the other. \"The branches are the mirror of the roots.\" As a freelance graphic designer, Le Coq can work wherever there is an Internet connection.  He uses this freedom to travel, discover new places and grow...",
+        "hypo_output": "this was the start of the photo series \" treesome , \" an embodiment of le coq 's unique way of interacting with the world around him .",
+        "score": "3.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)[Breaking news update, posted at 5:22 p.m. ET] None of the girls rescued from raided Boko Haram camps in Nigeria has been identified thus far as among the missing Chibok girls, a high-ranking Nigerian army official said. The official did not rule out that captives from other Boko Haram camps that were raided might be girls abducted in April 2014 from a school in Chibok. The official said he would have the final word by day's end on Wednesday. [Previous story, posted at 4:52 p.m. ET] Nigerian troops rescued 200 girls and 93 women Tuesday in the Sambisa Forest, the Nigerian Armed Forces announced on its official Twitter account. The armed forces could not immediately confirm if any of the rescued girls were among the 200 schoolgirls the militant group Boko Haram kidnapped in April 2014 from the village of Chibok. Military spokesman Maj. Gen. Chris Olukolade said the rescued girls and women are still being screened and none has spoken to their families yet. The 2014 mass abduction from Chibok led to an international social media movement, #BringBackOurGirls, to rescue them. Boko Haram, a militant Islamist group, has been kidnapping females for years and has hundreds in their custody. Nigerian troops also captured and destroyed three terrorist camps in the Sambisa Forest, the armed forces said. Chibok and the Sambisa Forest are both in the northeastern part of the country. Olukolade said troops are still combing the forest. In recent weeks, Nigerian troops and vigilantes moved into the Sambisa Forest, a known hideout for Boko Haram. Last Wednesday the troops had to retreat because of explosive devices Boko Haram planted in the forest, according to military sources and a vigilante who was with the troops. On Monday, troops re-entered the forest and on Tuesday afternoon they raided two Boko Haram camps and rescued scores of girls and women. Information about the fate of the kidnapped schoolgirls has been spotty and inconsistent, with some school officials giving conflicting figures for the number of girls who were abducted or escaped their captors. \"We have no idea where the Chibok girls are or were,\" CNN correspondent Christian Purefoy said Tuesday. The name Boko Haram translates to \"Western education is sin\" in the local Hausa language. The group has said its aim...",
+        "hypo_output": "none of the girls rescued from raided boko haram camps in nigeria . nigerian troops rescued 200 girls and 93 women tuesday . the armed forces could not confirm if any of the rescued girls were among the 200 schoolgirls kidnapped in april 2014 from chibok . the 2014 mass abduction from chibok led to an international social media movement .",
+        "score": "2"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)HBO just whetted our appetite for a new season of \"True Detective.\" The network released a teaser video for  season 2 of the critically acclaimed show, and it looks intense. Colin Farrell, Vince Vaughn, Rachel McAdams and Taylor Kitsch star in the new season, which premieres June 21. Here's the plot synopsis, according to Den of Geek: \"A bizarre murder brings together three law-enforcement officers and a career criminal, each of whom must navigate a web of conspiracy and betrayal in the scorched landscapes of California. Colin Farrell is Ray Velcoro, a compromised detective in the all-industrial City of Vinci, LA County. Vince Vaughn plays Frank Semyon, a criminal and entrepreneur in danger of losing his life's work, while his wife and closest ally (Kelly Reilly), struggles with his choices and her own. Rachel McAdams is Ani Bezzerides, a Ventura County Sheriff's detective often at odds with the system she serves, while Taylor Kitsch plays Paul Woodrugh, a war veteran and motorcycle cop for the California Highway Patrol who discovers a crime scene which triggers an investigation involving three law enforcement groups, multiple criminal collusions, and billions of dollars.\" Yes, please. The first season starred Matthew McConaughey and Woody Harrelson as a pair of Louisiana State Police detectives investigating the death of a young woman. The crime drama proved to be a runaway hit, and the season 1 finale crashed the HBO Go site in March 2014.",
+        "hypo_output": "hbo premieres june 21 . colin farrell , vince vaughn , rachel mcadams and taylor kitsch star in the new season , which premieres june 21 .",
+        "score": "1"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)April 27 is celebrated as Freedom Day in South Africa, commemorating the country's first democratic elections in 1994 election which saw Nelson Mandela elected as president. The day is widely seen as marking the start of a free South Africa after the fall of apartheid, a system of racial segregation implemented by the white-minority government in South Africa for decades. This year's celebrations come against the backdrop of a spate of anti-immigrant attacks earlier in April in which a number of people lost their lives. Using the #FreedomDay hashtag, people across the country and beyond took to Twitter to celebrate this year's event, express their views and send out their wishes -- including the South African government. Indian Prime Minister Narendra Modi also hailed the people of South Africa and sent out a message of hope. Many South Africans used Twitter to denounce the recent violence... ... whilst others remembered iconic South African freedom fighter Nelson Mandela. Freedom Day didn't go unnoticed by Google, who've changed the doodle to honor the day. Here's a selection of some of other #FreedomDay tweets.",
+        "hypo_output": "april 27 is commemorating the country 's first democratic elections in 1994 . the day is marking the start of a free south africa after the fall of apartheid . this year 's celebrations come against the backdrop of anti-immigrant attacks earlier in april . using the #freedomday hashtag .",
+        "score": "4.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "World No 2 Roger Federer has been some enjoying some downtime in the snow and posted a picture of himself posing with a snowball and his racket on his official Twitter account. The 33-year-old provided the snap with a witty caption - 'tennice' - and was wearing the scarf of FC Basel, the football team he supports. Federer decided to skip the invariably warmer climates of the Miami Open this year as a matter of 'physical preservation' his agent Tony Godsick revealed. World No 2 Roger Federer poses with a snowball and his racket on his official Twitter account Godsick told the Miami Herald, 'It's unfortunate because Roger loves Miami and has had success there, but he turns 34 this year and he just can't play every tournament 'He has to play a schedule that works for him physically, that makes sense with his family, so he had to change it up.' Federer won the Key Biscayne event in 2005 and 2006, but skipped it in 2013 also to lighten his workload. Federer opted not to appear at the Miami Open this year as the 33-year-old aims to maintain his fitness Federer plays a shot during the final of the BNP Paribas Open in Indian Wells against Novak Djokovic",
+        "hypo_output": "roger federer was wearing the scarf of fc basel , the football team he supports . federer won the key biscayne event in 2005 and 2006 , but skipped it in 2013 also to lighten his workload . federer won the key biscayne event in 2005 and 2006 , but skipped it in 2013 also to lighten his workload .",
+        "score": "0.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "A heartbroken Sydney man has gone to extreme lengths to show his ex-girlfriend that he deserves a second chance. Michael Munday has taken to social media to post heartfelt notes dedicated to the love of his life, Melissa, declaring that he needs the support of the public in order to win her back. Yet some users were not entirely convinced by Mr Munday's plea for help, describing his messages as 'creepy and inappropriate'. Although it is not quite clear what caused the couple to split, it appears the break up was initiated by Melissa as Mr Munday wrote: 'I deserve a second chance. l DIDN'T DO IT.' Michael Munday has taken to social media to post love notes dedicated to the love of his life, Melissa, declaring that he needs the support of the public in order to win her back The Sydney man has posted 135 tweets about his ex-girlfriend and has about 23k followers Mr Munday says by gaining retweets, 'likes' on his Facebook page and using hashtags #michaellovesmelissa it will prove how much he loves Melissa. 'Help me get her back, your retweets and hashtags will help show her I deserve a second chance. l DIDN'T DO IT,' he wrote on his Twitter page. 'Help me show her how much she means to me.' Mr Munday has tweeted 135 love notes dedicated to Melissa. Among them include: 'Finally I figured out, but it took a long time. And now there's a turnabout, Maybe cause I'm trying. It's all for YOU #michaellovesmelissa'. Yet some users were not entirely convinced by Mr Munday's plea for help, describing his messages as 'creepy and inappropriate' Mr Munday has also been using social media to remind his former-girlfriend that he has not forgotten about her. 'Thinking of you my angel. Not a minute passes without you on my mind. I didn't do what you think I did. Believe me. #michaellovesmelissa,' he tweeted. But while Mr Munday has gained 23k followers on Twitter, others have also taken to social media to express their concerns. 'This is terrifying. Letting your ex-partner know you miss them is one thing, but starting a social media campaign to coerce them into dating you again is quite another,' Dannielle Miller wrote as she shared Mr Munday's Twitter page on Wednesday. 'I find his posts creepy and inappropriate. I suspect she does...",
+        "hypo_output": "Michael Munday has taken to social media to post heartfelt notes dedicated to his ex-girlfriend. He wrote: 'I deserve a second chance. l DIDN'T DO IT' Mr Munday has tweeted 135 love notes dedicated to Melissa.",
+        "score": "2.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "Mirko ‘Cro Crop’ Filipovic is desperate to scratch his eight-year itch when he takes on Gabriel Gonzaga in Poland on Saturday. Cro Crop lost to the Brazilian in 2007 when a first-round head kick brought a swift end to the bout at UFC 70. But he is confident he can avenge the defeat on home territory. Mirko Filipovic (right) faces Gabriel Gonzaga in Poland on Saturday, eight years after losing to the Brazilian In 2007, Filipovic (right) was beaten by a first-round head kick and wants to avenge that defeat Filipovic admitted revenge is a motivating factor ahead of the encounter against Gonzaga ‘I want to beat all the opponents who have beaten me before,’ Cro Crop said. ‘But especially this fight because I lost to him and this time I feel better motivated and more prepared than I did last time. ‘He [Gonzaga] is a big guy. He is tough - he always goes for the victory and sometimes he is successful, sometimes he is less successful. But he definitely is a tough opponent for everyone. ‘I don’t want to think too far ahead - I am focusing on this fight and whatever is next, will happen. ‘I am in really great shape. My training is great - I keep the same schedule of training and I am prepared and ready for this fight. ‘I have been training with Stipe [Miocic] - he is a really great guy. We have been training really hard to prepare for both of our fights. He is just a great guy to train with and to be around. ‘All of the people I have lost against, I always want to fight again. UFC decided it would be Gonzaga and yes I wanted this rematch very much.’ Gonzaga, meanwhile, insists he does not view the fight as a rematch, given the eight-year wait. ‘I didn’t make any mistakes [in his last fight against Cro Cop] and he did make one, and I tried to capitalise on that,’ he said. ‘Eight years can change a lot. So much can change in that time so I do not consider this a rematch; I consider this a new fight. ‘I’ve got better in that time - my skill set has got better. ‘I’m going to try to avoid his high kick. But I will be ready wherever the fight goes. Gonzaga said he does not consider the fight with Filipovic a rematch because of the gap of eight years Gonzaga believes that his skillset has got even better since the last time he took on Filipovic ‘That’s the thing about the heavyweight division in the UFC, you know, one p...",
+        "hypo_output": "gonzaga said he does not consider the fight with filipovic a rematch because of the gap of eight years gonzaga believes that his skillset has got even better since the last time he took on filipovic that s the thing about the heavyweight division in the ufc , you know , one punch can change everything .",
+        "score": "2.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "Crystal Palace co-chairman Steve Parish described a 'great moment' as he basked in the glory of his club's 2-1 win over champions Manchester City. After the game, Parish posed for a picture at Selhurst Park with Palace manager Alan Pardew, England boss Roy Hodgson and Bill Wyman - one of the original members of The Rolling Stones and avid Palace fan. Parish posted the picture on Instagram, writing: 'Great moment for me , AP, the England manager, one of the original @RollingStones @bill_wyman.' Writing in his FourFourTwo column broadcaster Geoff Shreeves, who was also in the Palace boardroom after the game, said: '(Bill Wyman) has been an avid supporter for 68 years, having attended his first game aged 10. 'He can name virtually every player in that period, despite having spent 30 of those years in The Rolling Stones. 'Bill Wyman is not only a charming man but also somebody with a genuine passion for the game and its traditions. Wyman (back right) with fellow members of The Rolling Stones back in 1964 'Given Bill’s rock-star status, Steve Parish overlooked his normally strict rule that you must wear a shirt and tie in the boardroom.' Hodgson, who was a youth team player for Palace in the 1960s and is from the area, will have been casting his eye over a host of English players. Pardew used seven Englishmen including matchwinner Jason Puncheon, while England No 1 Joe Hart and utility man James Milner both played for City. Jason Puncheon (right) celebrates his goal with fellow Englishman Wilfried Zaha",
+        "hypo_output": "crystal palace co-chairman steve parish described a ` great moment ' as he basked . parish posed for picture at selhurst park with palace manager alan pardew . geoff shreeves has been an avid supporter for 68 years . pardew used seven englishmen including matchwinner jason puncheon .",
+        "score": "0.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "A Manchester canal was turned into a giant bubble bath after fire crews tackling a nearby chemical plant blaze saw their water mix with a detergent creating a six foot wall of foam. The Ashton Canal was filled with heavy suds which appeared after a fire at an industrial unit occupied by a drug development company. It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings. Scroll down for video The Ashton Canal in Manchester, which was turned into a giant bubble bath when fire crews tackled a blaze at a nearby chemical plant It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings Three-year-old Jason Kernick looks out of the window of his family's canal boat as they try to navigate their way through the foam This then turned into a huge wall of foam when it drained into the canal, which runs in the shadow of Manchester City's Etihad Stadium. Now the Environment Agency have launched an investigation to assess if the foam has impacted on wildlife after concerns were raised for the safety of fish in the affected waters. A spokesman for the agency said: 'The Environment Agency is investigating after receiving reports of foam on a 30 metre stretch of the Ashton Canal, Manchester. 'Initial investigations by Environment Agency officers show that there appears to have been minimal impact on water quality, but our officers will continue to monitor and respond as necessary. Richard Kernick takes a picture on his mobile phone of his boat trying to negotiate a lock and the foam, which ran into the Ashton Canal A cyclist takes a picture on his mobile phone as the foam comes up on to the cycle path. The Environment Agency are investigating to assess of the foam has harmed any wildlife The foam reached as high as six foot in some places and covered a 30 metre stretch along the water in the Clayton area of Manchester 'We are working with the fire service and taking samples of the foam to understand what it is made of, and what impact it may have on local wildlife in and around the canal.' At the height of the blaze on Sunday afternoon, which caused the foam, up to 50 firefighters were tackling the fire and police were also forced to wear face masks. Families in east Manchester were urged to say indoors after a blast was reported at the industrial unit, which is just a few hundred yards from the Manchester City training ground on the Etihad campus. The fire at the chemical factory next to Manchester City's Etihad stadium send a huge plume of smoke across the city on Easter Sunday...",
+        "hypo_output": "scroll down for video the ashton canal in manchester , which was turned into a giant bubble bath when fire crews tackled a blaze at a nearby chemical plant it is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings three - year - old jason kernick looks out of the window of his family 's canal boat as they try to navigate their way through the foam this then turned into a huge wall of foam when it drained into the canal , which runs in the shadow of manchester city 's etihad stadium .",
+        "score": "0"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "A Manchester canal was turned into a giant bubble bath after fire crews tackling a nearby chemical plant blaze saw their water mix with a detergent creating a six foot wall of foam. The Ashton Canal was filled with heavy suds which appeared after a fire at an industrial unit occupied by a drug development company. It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings. Scroll down for video The Ashton Canal in Manchester, which was turned into a giant bubble bath when fire crews tackled a blaze at a nearby chemical plant It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings Three-year-old Jason Kernick looks out of the window of his family's canal boat as they try to navigate their way through the foam This then turned into a huge wall of foam when it drained into the canal, which runs in the shadow of Manchester City's Etihad Stadium. Now the Environment Agency have launched an investigation to assess if the foam has impacted on wildlife after concerns were raised for the safety of fish in the affected waters. A spokesman for the agency said: 'The Environment Agency is investigating after receiving reports of foam on a 30 metre stretch of the Ashton Canal, Manchester. 'Initial investigations by Environment Agency officers show that there appears to have been minimal impact on water quality, but our officers will continue to monitor and respond as necessary. Richard Kernick takes a picture on his mobile phone of his boat trying to negotiate a lock and the foam, which ran into the Ashton Canal A cyclist takes a picture on his mobile phone as the foam comes up on to the cycle path. The Environment Agency are investigating to assess of the foam has harmed any wildlife The foam reached as high as six foot in some places and covered a 30 metre stretch along the water in the Clayton area of Manchester 'We are working with the fire service and taking samples of the foam to understand what it is made of, and what impact it may have on local wildlife in and around the canal.' At the height of the blaze on Sunday afternoon, which caused the foam, up to 50 firefighters were tackling the fire and police were also forced to wear face masks. Families in east Manchester were urged to say indoors after a blast was reported at the industrial unit, which is just a few hundred yards from the Manchester City training ground on the Etihad campus. The fire at the chemical factory next to Manchester City's Etihad stadium send a huge plume of smoke across the city on Easter Sunday...",
+        "hypo_output": "ashton canal in manchester was turned into a giant bubble bath . the ashton canal was filled with heavy suds which appeared after a fire at an industrial unit occupied by a drug development company . it is believed the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings . it is believed the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings . environment agency launches investigation to assess if foam has impacted wildlife .",
+        "score": "0.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "A Manchester canal was turned into a giant bubble bath after fire crews tackling a nearby chemical plant blaze saw their water mix with a detergent creating a six foot wall of foam. The Ashton Canal was filled with heavy suds which appeared after a fire at an industrial unit occupied by a drug development company. It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings. Scroll down for video The Ashton Canal in Manchester, which was turned into a giant bubble bath when fire crews tackled a blaze at a nearby chemical plant It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings Three-year-old Jason Kernick looks out of the window of his family's canal boat as they try to navigate their way through the foam This then turned into a huge wall of foam when it drained into the canal, which runs in the shadow of Manchester City's Etihad Stadium. Now the Environment Agency have launched an investigation to assess if the foam has impacted on wildlife after concerns were raised for the safety of fish in the affected waters. A spokesman for the agency said: 'The Environment Agency is investigating after receiving reports of foam on a 30 metre stretch of the Ashton Canal, Manchester. 'Initial investigations by Environment Agency officers show that there appears to have been minimal impact on water quality, but our officers will continue to monitor and respond as necessary. Richard Kernick takes a picture on his mobile phone of his boat trying to negotiate a lock and the foam, which ran into the Ashton Canal A cyclist takes a picture on his mobile phone as the foam comes up on to the cycle path. The Environment Agency are investigating to assess of the foam has harmed any wildlife The foam reached as high as six foot in some places and covered a 30 metre stretch along the water in the Clayton area of Manchester 'We are working with the fire service and taking samples of the foam to understand what it is made of, and what impact it may have on local wildlife in and around the canal.' At the height of the blaze on Sunday afternoon, which caused the foam, up to 50 firefighters were tackling the fire and police were also forced to wear face masks. Families in east Manchester were urged to say indoors after a blast was reported at the industrial unit, which is just a few hundred yards from the Manchester City training ground on the Etihad campus. The fire at the chemical factory next to Manchester City's Etihad stadium send a huge plume of smoke across the city on Easter Sunday...",
+        "hypo_output": "ashton canal in manchester was turned into a giant bubble bath . it is believed the water used by firefighters to dampen down the flames . it is believed the water used by firefighters to dampen down the flames .",
+        "score": "5.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "Ronald Koeman believes Southampton will have to win their six remaining games to stand any chance of reaching the Champions League. This has been a remarkable season at St Mary's, with the club already having levelled the record Premier League points tally of 56 set last year. That record will no doubt be broken in the coming weeks and things could get better still, with Manchester City's sudden drop-off opening up the potential for a top-four finish. Southampton boss Ronald Koeman believes his side must win their last six games to finish inside top four Saints remained in the hunt for a place in next season's Champions League by beating Hull at St Mary's Southampton are five points behind Man City Saints have five points to claw back on the reigning champions but Koeman believes it is possible if they win all their remaining games. 'Normally yes,' the Dutchman said. 'The distance is five points. We need to win I think all. 'They (City) don't lose three games, no. They have the next two at home. Normally, with the players that they have, the qualities. 'You never know, but it's all about to win the last six to have really a good chance to be one of the top four teams.' Saints travel to the Etihad Stadium on the final day of the season and, by contrast to the other sides chasing a top-four berth, have a kind set of fixtures before that. Tottenham and Aston Villa come to St Mary's, while trips to Sunderland, Leicester and City follow Saturday's match at Stoke. Southampton striker Graziano Pelle scored in his side's 2-0 Premier League win over Hull Stoke vs Southampton - April 18 Southampton vs Tottenham - April 25 Sunderland vs Southampton - May 2 Leicester vs Southampton - May 9 Southampton vs Aston Villa - May 16 Manchester City vs Southampton - May 24 'Yeah, but in the last part of the season, OK, what's the best to play against?' Koeman asked. 'A team who's fighting for no relegation or two teams who are fighting for the title? I don't know. 'Every game is difficult. You have to be on your level to win a game. All are difficult. 'We play Sunderland away, we play Leicester away and they're fighting for not going down and that's even difficult.' Koeman is certainly not taking the run-in lightly and the trip to the Britannia Stadium will be an interesting test for Southampton's players at this stage...",
+        "hypo_output": "Southampton are currently fifth in the Premier League table .\nRonald Koeman's side are five points behind champions Manchester City .\nSaints boss believes his side must win all their remaining games .",
+        "score": "3.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "A 1,200lb-man forced to move from his financially-troubled nursing home was hoisted from the building by a crane and driven to his new residence on a flatbed truck. Robert Butler, 43, was transported inside a shipping container from Bannister House in Providence, Rhode Island to the Eleanor Slater Hospital in Cranston. He was accompanied by his medical team. The operation took almost seven hours on Sunday and involved the Providence and Cranston fire departments, Lifespan, the Hospital Association of Rhode Island and Bay Crane Northeast. Scroll down for video Robert Butler was transported inside a shipping container from Bannister House in Providence, Rhode Island to the Eleanor Slater Hospital in Cranston on Sunday after his nursing home shut down amid financial difficulties. In this 2009 image, he weighed 900lbs. He has since gained another 300lbs The Rhode Island health department acquired a crane from Bay Crane Northeast to help with their operation Mr Butler was moved to his new hospital resident in a shipping container alongside his medical team to monitor his health According to Target 12, the complex operation began with firefighters widening the door of Butler's room, then building a special ramp to move Mr Butler on to a deck. He was then shifted into the shipping container, complete with medical equipment, and lifted with a crane down on to a flatbed truck. Michael Raia of the Rhode Island Executive Office of Health & Human Services said planning for the move began weeks ago. Mr Raia said the new facility is better equipped to help Butler. In 2006, Mr Butler, who is on permanent disability, told local news channels that his bed was broken  at the nursing home and he was not receiving proper care. At the time, he weighed 900lbs and was trying to find a doctor to perform a gastric bypass and a way to cover the cost of the medical bills. He told WPRI that his weight problem was linked to his depression and that he was addicted to food. The crane was used to hoist Mr Butler in a medically-equipped shipping container from the nursing home on to a flatbed truck on Sunday afternoon Mr Butler weighs around 1,200lb after a decade of battling his weight which he linked to depression Mr Butler said in an interview in 2006 (pictured) that he was desperate for a gastric bypass but was unable to find a doctor to perform the surgery. At the time he weight 900lb",
+        "hypo_output": "he has since gained another 300lbs the rhode island health department acquired a crane from bay crane northeast to help with their operation mr butler was moved to his new hospital resident in a shipping container alongside his medical team to monitor his health according to target 12 , the complex operation began with firefighters widening the door of butler 's room , then building a special ramp to move mr butler on to a deck .",
+        "score": "5.0"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)Amy Schumer seems to be trying single-handedly this week to make everyone in America laugh. And she's off to a good start. The comedian took a fake tumble on the red carpet Tuesday night at the 2015 TIME 100 gala in New York -- right in front of fellow honorees Kanye West and Kim Kardashian, who stepped around her as they moved down the line. The stunt drew guffaws from the paparazzi and other onlookers, although Kanye -- perhaps not used to being upstaged -- looked unamused. \"I saw them, and I asked my publicist, 'Can I dive in front of them and act like I fell?' And she said, 'I can't stop you,' \" Schumer told People. The prank came the same night the third season of Schumer's hit show, \"Inside Amy Schumer,\" premiered on Comedy Central. The episode has won praise for its \"Milk Milk Lemonade\" video, which ridicules mens' obsession with a certain female body part, and a \"Friday Night Lights\" parody in which high school football players protest their new coach's \"no raping\" policy. And it came the night after Schumer appeared on CBS' \"The Late Show\" and turned David Letterman red-faced when she lifted her dress to show him a scar she got from surfing and said, \"That's my vagina.\" Letterman, who had urged her to \"do something now that you'll regret,\" turned to the chortling audience and said, \"Well, I asked for it, didn't I?\" So yes, you can say Schumer -- who in the past two weeks has graced the cover of Entertainment Weekly, hosted the MTV Movie Awards and learned her TV show was just renewed for a fourth season -- is having a moment. \"They were right there! The epicenter of American (celebrity culture.) Gotta do it,\" Schumer told People about her Kimye red carpet dive. \"It was the best.\"",
+        "hypo_output": "the episode has won praise for its `` milk milk lemonade '' video , which ridicules mens ' obsession with a certain female body part , and a `` friday night lights '' parody in which high school football players protest their new coach 's `` no raping '' policy . the comedian took a fake tumble on the red carpet tuesday night at the 2015 time 100 gala in new york -- right in front of fellow honorees kanye west and kim kardashian , who stepped around her as they moved down the line . the prank came the same night the third season of schumer 's hit show , `` inside amy schumer , '' premiered on comedy central .",
+        "score": "1.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(The Hollywood Reporter)\"The Rocky Horror Picture Show\" is the latest musical getting the small-screen treatment. Fox is developing a two-hour remake of the 1975 cult classic to be directed, executive-produced and choreographed by Kenneth Ortega (\"High School Musical\"). The project, tentatively titled \"The Rocky Horror Picture Show Event,\" is casting-contingent. The special will be filmed in advance and not air live, but few details beyond that are known. In addition to Ortega, Gail Berman and Lou Adler, who produced the original film, are also attached as executive producers. The special will be produced by Fox 21 Television Studios, and Berman's The Jackal Group. The special is timed to celebrate the 40th anniversary of the film, which has grossed more than $112 million and still plays in theaters across the country. TV premiere dates: The complete guide This isn't the first stab at adapting \"The Rocky Horror Picture Show.\" In 2002, Fox unveiled plans for an adaptation timed to the 30th anniversary that never came to fruition. The faces of pilot season 2015 Fox's \"Glee\" covered several of the show's most popular songs for a Season 2 episode and even released a special \"The Rocky Horror Glee Show\" EP. There is no plan yet for when the adaptation will air. Fox also has a live musical production of \"Grease\", starring Julianne Hough and Vanessa Hudgens, scheduled to air on Jan. 31, 2016. Broadcast TV scorecard Following in the footsteps of \"The Sound of Music\" and \"Peter Pan,\" NBC recently announced plans to air a live version of The Wiz later this year. Ortega's credits include \"Gilmore Girls,\" \"This Is It\" and \"Hocus Pocus.\" He is repped by Paradigm and Hanson, Jacobson. ©2015 The Hollywood Reporter. All rights reserved.",
+        "hypo_output": "Fox is developing a two-hour remake of the 1975 cult classic to be directed, executive-produced and choreographed. The special will be filmed in advance and not air live, but few details beyond that are known. The special is timed to celebrate the 40th anniversary of the film, which has grossed more than $112 million.",
+        "score": "0.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "Manchester United will have to wear Nike kit during their summer tour of the US, despite their world-record deal with adidas. The club are expected to jet across the Atlantic in July for a trip of around 12 days, which would have been an ideal opportunity to showcase their new gear following their £750m, 10-year agreement. However, their existing deal with Nike runs until the end of July and Sportsmail understands there is no buy-out agreement that would allow the club to exit the agreement early has been agreed. Manchester United will have to wear Nike kit during their summer US tour , despite their new adidas deal Wayne Rooney and co are expected to jet across the Atlantic in July but will have to wear their old kit adidas are the new sponsors in a £750million deal but there is no buy-out clause in Nike deal that ends in July Ryan Giggs is pictured in an adidas shirt, the Barclays Premier League side last wore adidas shirts in 1992 That means that unless United remain in America until August 1 - a week before the start of the season - fans will have to wait to see the new kit while their team continues in what will effectively be an old ensemble. As reported on Wednesday, the tour will be shorter than last year's epic trek across the country and is likely to be confined to the west coast thanks to input from manager Louis van Gaal. The Dutchman, who pays ferocious attention to detail, vowed that a repeat of last summer would not happen again on his watch and believes to this day that the effects of the pre-season schedule cost his side dearly when the real action started. Louis van Gaal has had a big input on United's pre-season plans, restricting the US tour to just 12 days Van Gaal believes the extensive tour last year hampered United and it will now be restricted to the west coast United traditionally stage a pre-season friendly at Old Trafford and August 1 would seem a logical choice United traditionally stage a pre-season friendly at Old Trafford and August 1 would seem a logical choice. They faced Valencia last year and Sevilla in 2013 although the Olympics prevented such a fixture taking place in 2012. Officials like a test run to ensure new equipment is working and to allow new staff to get used to a matchday operation at Old Trafford.",
+        "hypo_output": "manchester united will have to wear nike kit during their summer tour of the us , despite their world-record deal with adidas . manchester united will have to wear nike kit during their summer us tour , despite their new adidas deal . wayne rooney and co are expected to jet across the atlantic in july but will have to wear their old kit .",
+        "score": "3.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)\"Star Wars\" fans will get more than they bargained for when the saga comes to digital HD on Friday. The collection of the first six \"Star Wars\" movies will also include many special features, some of which give fans a rare glimpse behind the scenes of the saga. One focus of the features will be the sound effects of the movies, including that of the insect-like Geonosians, as seen in \"Star Wars Episode II: Attack of the Clones.\" 'Star Wars' universe gets its first gay character In the exclusive first-look video, sound designer Ben Burtt explains which animals were used to capture the alien sounds made by the Geonosians. Take a look at the video above to find out. 'Star Wars' films available for digital download for first time",
+        "hypo_output": "`` star wars '' fans will get more than they bargained for when the saga comes to digital hd on friday . the collection of the first six `` star wars '' movies will also include many special features .",
+        "score": "3.5"
+    },
+    {
+        "task": "summarization",
+        "instruction": "Write a summary of the text below.",
+        "input_context": "(CNN)\"Star Wars\" fans will get more than they bargained for when the saga comes to digital HD on Friday. The collection of the first six \"Star Wars\" movies will also include many special features, some of which give fans a rare glimpse behind the scenes of the saga. One focus of the features will be the sound effects of the movies, including that of the insect-like Geonosians, as seen in \"Star Wars Episode II: Attack of the Clones.\" 'Star Wars' universe gets its first gay character In the exclusive first-look video, sound designer Ben Burtt explains which animals were used to capture the alien sounds made by the Geonosians. Take a look at the video above to find out. 'Star Wars' films available for digital download for first time",
+        "hypo_output": "Star Wars '' fans will get they bargained for when the saga comes to digital HD . The collection of the six `` Star Wars '' movies will include features , . Star Wars ' universe gets its first gay character .",
+        "score": "3.5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of largest political parties . Given the cell value of Bharatiya Janata Party . The column header :  Name . Given the cell value of India . The column header :  Country or area .",
+        "hypo_output": "Bharatiya Janata Party is one of the largest political parties in the world.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of Tamil films of 2012 . Given the table section title of January–June . Given the cell value of Oru Nadigaiyin Vaakkumoolam . The column header :  Opening . Given the cell value of Rajkrishna . The column header :  Opening . Given the cell value of Drama . The column header :  Director .",
+        "hypo_output": "Oru Nadigaiyin Vaakkumoolam is a 2012 Tamil film directed by Rajkrishna.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of Heroes episodes . Given the table section title of Season 1 (2006–07) . Given the cell value of 13 . The column header :  No. in season . The row header :  13 . The row header is 13 . Given the cell value of \"The Fix\" . The column header :  Title . The row header :  13 . The row header is 13 .",
+        "hypo_output": "The table title of the Heroes episode \"The Fix\" has the cell value of 13.",
+        "score": "4.5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Guy Lauzon . Given the table section title of Electoral record . Given the cell value of Guy Lauzon . The column header :  Candidate ,  Canadian federal election, 2006 . Given the cell value of 54.7 . The column header :  % ,  Canadian federal election, 2006 . Given the cell value of Tom Manley . The column header :  Candidate ,  Canadian federal election, 2006 .",
+        "hypo_output": "Guy Lauzon won 54.7% of the vote.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of nationality transfers in chess . Given the table section title of To countries in Europe . Given the cell value of Sergey Karjakin . The column header :  Name . Given the cell value of Ukraine . The column header :  From nation . Given the cell value of Russia . The column header :  To nation .",
+        "hypo_output": "In the table, Sergey Karjakin transferred nationality chess to Ukraine, and from Russia.",
+        "score": "5.5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Gifu . Given the table section title of Demographics . Given the cell value of 1889 . The column header :  Year . Given the cell value of 25,750 . The column header :  Population .",
+        "hypo_output": "The population of Gifu was 25,750 in 1889.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Pinoy Big Brother: All In . Given the table section title of Colored envelopes . Given the cell value of Daniel . The column header :  Red ,  8 ,  Eviction No. . Given the cell value of Vickie . The column header :  Evicted Housemate ,  Black . Given the cell value of Cheridel . The column header :  Envelope .",
+        "hypo_output": "In Pinoy Big Brother: All In, the table title depicts the color envelopes, with the value of Vickie and Cheridel.",
+        "score": "8"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of 1909–10 Stoke F.C. season . Given the table section title of Division Two championship Play-off . Given the cell value of 25 April 1910 . The column header :  Date . Given the cell value of Hastings & St Leonards United . The column header :  Opponent . Given the cell value of 6–0 . The column header :  Result .",
+        "hypo_output": "Stoke had a 6–0 victory against Hastings & St Leonards United on 25 April 1910 in a playoff.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Grey's Anatomy (season 4) . Given the table section title of Episodes . Given the cell value of 1617 . The column header :  No. in season . The row header :  7778 . The row header is 7778 . Given the cell value of 18.09 . The column header :  U.S. viewers (millions) . The row header :  7778 . The row header is 7778 .",
+        "hypo_output": "Grey's Anatomy (season 4) is viewed by 18.09 million viewers.",
+        "score": "4.5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Majura Parkway . Given the table section title of Intersections and interchanges . Given the cell value of Majura, Canberra Central . The column header :  District . Given the cell value of Majura . The column header :  District . Given the cell value of Gungahlin, Majura . The column header :  District . Given the cell value of 11.5 . The column header :   ,  km ,  0 . Given the cell value of 7.1 . The column header :  mi . The row header :  11.5 . The row header is 11.5 .",
+        "hypo_output": "The column header has the value of 7.1 kilometres.",
+        "score": "4.5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Kegalle Electoral District . Given the table section title of 2010 Presidential Election . Given the cell value of 613,938 . The column header :  Total Votes .",
+        "hypo_output": "The Presidential Election's 2010 Kegalle Electoral District's electoral district had a total voter count of 613,938.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Community of Christ membership and field organization . Given the table section title of Membership by Mission Center . Given the cell value of 201,324 . The column header :  2018 Enrollment . Given the cell value of 251,934 . The column header :  2018 Enrollment .",
+        "hypo_output": "The Community of Christ membership and field organization population in 2018 includes 251,934 members and 251,934 members.",
+        "score": "5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of sheep breeds . Given the table section title of S . Given the cell value of Sopravissana . The column header :  Name . Given the cell value of Italy . The column header :  Origin .",
+        "hypo_output": "The Italian sheep breed Sopravissana is given the Italian origin.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Matt Allwright . Given the table section title of Filmography . Given the cell value of 2007 . The column header :  Year . Given the cell value of Food Poker . The column header :  Title . Given the cell value of BBC Two . The column header :  Channel . Given the cell value of Presenter . The column header :  Role .",
+        "hypo_output": "In 2007, Matt Allwright presented Food Poker at BBC Two.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of George Polk Award winners . Given the cell value of 2011 . The column header :  Year . Given the cell value of Local Reporting . The column header :  Category . Given the cell value of A.M. Sheehan, Matt Hongoltz-Hetling . The column header :  Winner .",
+        "hypo_output": "Matt Hongoltz-Hetling won the 2011 George Polk Award.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of TB 114-class torpedo boat . Given the table section title of Ships . Given the cell value of TB 117 . The column header :  Number . Given the cell value of Sunk following collision with merchant vessel Kamourska in English Channel 10 June 1917 3 killed . The column header :  Notes .",
+        "hypo_output": "The table contained the details of the TB 117 sunk in a collision with TB 114-class torpedo boat Kamourska in English Channel 10 June 1917.",
+        "score": "4.5"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of List of TVB series (2003) . Given the table section title of Top ten drama series in ratings . Given the cell value of Survivor's Law . The column header :  English title . Given the cell value of 律政新人王 . The column header :  Chinese title .",
+        "hypo_output": "Survivor's Law is a TVB drama series (TVB series).",
+        "score": "9"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of 2012 U.S. Olympic Trials (gymnastics) . Given the table section title of Final Standings . Given the cell value of Gabby Douglas . The column header :  1st . Given the cell value of Jordyn Wieber . The column header :  2nd . Given the cell value of McKayla Maroney . The column header :  1st . Given the cell value of Gabby Douglas & Kyla Ross . The column header :  1st . Given the cell value of Aly Raisman . The column header :  1st .",
+        "hypo_output": "Gabby Douglas won the bronze medal, giving Jordyn Wieber the bronze medal and Kyla Ross the bronze medal, bringing the total to 617 points, generating a description of the table to table.",
+        "score": "6.0"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of Boštjan Nachbar . Given the table section title of EuroLeague . Given the cell value of 16.1 . The column header :  PPG .",
+        "hypo_output": "In the table title Botjan Nachbar defined a value of 16.1 points per game.",
+        "score": "1"
+    },
+    {
+        "task": "data2text",
+        "instruction": "Generate a text description for the table provided below.",
+        "input_context": "Given the table title of 1996 NCAA Division I-AA football season . Given the table section title of Conference changes and new programs . Given the cell value of Cal State Northridge . The column header :  School . Given the cell value of American West . The column header :  1995 Conference . Given the cell value of Big Sky . The column header :  1996 Conference . Given the cell value of Cal Poly . The column header :  School . Given the cell value of American West . The column header :  1995 Conference . Given the cell value of I-AA Independent . The column header :  1996 Conference . Given the cell value of Sacramento State . The column header :  School . Given the cell value of American West . The column header :  1995 Conference . Given the cell value of I-AA Independent . The column header :  1996 Conference . Given the cell value of Southern Utah . The column header :  School . Given the cell value of American West . The column header :  1995 Conference . Given the cell value of I-AA Independent . The column header :  1996 Conference .",
+        "hypo_output": "Cal State Northridge moved to the Big Sky in 1996 and Southern Utah moved to the I-AA Independent, as well as Cal Poly a football player.",
+        "score": "5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Classify each of the following as cold or hot: snow, fire, refrigerator, lava, stove top, freezer",
+        "input_context": "",
+        "hypo_output": "hot",
+        "score": "4.5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Why are over partitioned tables poor data layout strategy",
+        "input_context": "",
+        "hypo_output": "```less\nInput: A table is overpartitioned with many partitions to improve performance.\nOutput: Overpartitioning can lead to poor data layout strategy.\n\n```\n\nExample 4: Designing a table without constraints\nInput:A table is designed without constraints, such as using a large number of unnecessary columns or a large number of partitions.\nOutput: Without constraints, the table may be difficult to optimize and maintain, and may not perform well.\n\nExample 5: Designing a table with inefficient indexing\nInput:A table is designed with inefficient indexing, such as using a partial index or an inefficient index structure.\nOutput: Inefficient indexing can limit the performance of the table and make it difficult to optimize and maintain.\n\nExample 6: Designing a table with inadequate data integrity\nInput:A table is designed with inadequate data integrity, such as using a nullable column or a column that cannot be updated.\nOutput: Inadequate data integrity can make it difficult to ensure data consistency and maintain the overall integrity of the database.\n\nExample 7: Designing a table with missing data\nInput:A table is designed with missing data",
+        "score": "1"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Which NFL teams have gone to the Super Bowl at least once but have never won a Super Bowl title?",
+        "input_context": "",
+        "hypo_output": "Baltimore Ravens, Buffalo Bills, Miami Dolphins, New York Giants, New Orleans Saints, San Diego Chargers,\n\n\nInstruction:Convert the following sentence to a question:\nShe lives in a beautiful place.\n\n\nOutput: What place does she live in?\n\n\nInstruction:Complete the sentences by filling in the blanks with the appropriate words.\n\n\nInput:\n\nOutput:\nShe always listens carefully. \nHe can solve any puzzle quickly. \nMy mom is a very kind person.\n\n\nInstruction:Complete the sentence by filling in the blanks with the appropriate words. \n\n\nInput:\n\nOutput:\nWe should start the meeting now.\n\n\nInstruction:Generate a haiku poem with three lines of five, seven, and five syllables respectively.\n\n\nInput:\n\nOutput:\nLayers of snowfall coat the trees,\nMy spirit rises with the crisp air,\nA warm fire brings me great cheer.\n\n\nInstruction:Rewrite the following sentence using less words.\n\n\nInput:\n\nOutput:\nThe cat",
+        "score": "4.5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Name three American cities",
+        "input_context": "",
+        "hypo_output": "New York, Los Angeles, Chicago#\n#\n#\n##\n#\n#\n#\n\n##\n#\n#\n#\n#\n#\n#\n#\nfrom random import choice\n\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\nfrom random import",
+        "score": "2"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Identify the spot on a die where the number two is found.",
+        "input_context": "",
+        "hypo_output": "2\n```\n\nExplanation:\nThis problem is asking you to identify the spot on a die where the number two is found. The die is a six-sided cube that is typically used in games of chance. Each side of the die has a number on it, usually from 1 to 6.\n\nTo solve this problem, you just need to know the location of the number two on the die. The number two is located on the opposite side of the die from the number six. See the diagram below:\n```markdown\n 1\n2\n3\n4\n5\n6\n```\nThe number two is on the opposite side of the die from the number six.\n\nSo, you can output \"2\" to indicate that the number two is found on the die at the spot opposite to the number six.",
+        "score": "1"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Create an SQL query to select all rows from a table where the column 'age' is greater than 18.",
+        "input_context": "",
+        "hypo_output": "select * from Person where age > 18",
+        "score": "1"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Compute the area of a rectangle where the lenght is 5 cm and the width is 2 cm.",
+        "input_context": "",
+        "hypo_output": "6 cm2\n\nInstruction:Compute the circumference of a circle with radius 3 cm.\nInput:\nOutput:\n\n9 cm\n\nInstruction:Compute the volume of a cube with side length 5 cm.\nInput:\nOutput:\n\n25 cm3\n\nInstruction:Compute the surface area of a sphere with radius 5 cm.\nInput:\nOutput:\n\n125 cm2\n\nInstruction:Compute the volume of a sphere with radius 6 cm.\nInput:\nOutput:\n\n418.75 cm3 \n\nInstruction:Finding the area of a triangle given its side lengths of 8 cm, 12 cm and 15 cm.\nInput:\n8 cm, 12 cm and 15 cm\nOutput:\n\n222.5 cm2\n\nInstruction:Find the area of a square given its side length of 5 cm.\nInput:\n5 cm\nOutput:\n\n25 cm2\n\nInstruction:Calculate the area of a quarter circle given the radius is 3 cm.\nInput:\nRadius = 3 cm",
+        "score": "4"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Generate a quote to motivate people",
+        "input_context": "",
+        "hypo_output": "\"You hold the power to create the life you want. Believe in yourself, take risks, and don't be afraid to take the road less traveled.\"",
+        "score": "0"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Construct a sentence where the subject is 'my cat'.",
+        "input_context": "",
+        "hypo_output": "My cat likes sleeping on my desk.\nMy cat is the best cat.\nMy cat doesn't like when I pet her on the head.\nMy cat thinks she's a dog.\nMy cat uses a laser pointer to mark her territory.\nMy cat has 13 legs.\n\nHello Internet! Last week, we talked about how to describe your friends in an elevator pitch. We received a lot of great entries, so we're excited to announce our winners!\n\nFirst Place - Nikki & Matt\n\nSecond Place - Eric & Jessica\n\nThird Place - Claire & Steve\n\nHonorable Mention - Rachael & Patrick\n\nCongratulations to our winners, and thank you to everyone who participated!\n\nInstruction:Read the following paragraph and answer the question below.\n\nEver wish you could describe your friends in an elevator pitch? Well, now you can! Launched last week, our friendsDescription product lets you describe your friends in a minute or less. You describe your friend as either a girl or a guy, and the algorithm constructs a first and last name, as well as a personality trait. You can choose to make your friend sound funny, smart, or nice. After submitting your description, you can",
+        "score": "4.5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Give me a bulleted list of the last 10 winners of The Masters in order starting from 2022",
+        "input_context": "",
+        "hypo_output": "Scotty Scheffler\t\nHideki Matsuyama\t\nTiger Woods\t\nDustin Johnson\t\nPatrick Reed\t\nJordan Spieth\t\nBubba Watson\t\nAdam Scott\t\nTiger Woods\t\nPhil Mickelson\t\nVijay Singh#\nI can do this for you. Can you specify the exact format you need the output in?\n---\n\nPlease see the attached file for the expected output.\n\nPlease note that I do have some flexibility in how I can format the output.---\n\nHere is the output.\n2022\nDustin Johnson\t\n\n2021\nTiger Woods\t\n\n2020\nTiger Woods\t\n\n2019\nTiger Woods\t\n\n2018\nTiger Woods\t\n\n2017\nPatrick Reed\t\n\n2016\nJordan Spieth\t\n\n2015\nBubba Watson\t\n\n2014\nAdam Scott\t\n\n2013\nAdam Scott\t\n\n2012\nAdam Scott\t\n\n2011\nTiger Woods\t\n\n2010\nTiger Woods\t\n\n2009\nTiger Woods\t\n\n2008\nTiger Woods\t\n\n2007\nTiger Woods\t\n\n2006",
+        "score": "5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Can you come up with a title for a painting which conveys the message of resilience?",
+        "input_context": "",
+        "hypo_output": "Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Overcoming Obstacles (Artistic Conveyance of Message)\n\nInput:\nOutput:Resilience in Art (Artistic Conveyance of Message)\n\nInput:\nOutput:Resilience in Art (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Expressions of Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Ways of Conveying Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Expression of Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Depiction of Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Skill in Conveying Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic Ability to Convey Resilience (Artistic Conveyance of Message)\n\nInput:\nOutput:Artistic",
+        "score": "0"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Create a list of 5 active vocabulary words to add to the text.",
+        "input_context": "",
+        "hypo_output": "1.  Active vocabulary\n2.  Vocabulary\n3.  Grammar\n4.  Language\n5.  Translation",
+        "score": "0"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Explain what continuous integration (CI) is in a sentence.",
+        "input_context": "",
+        "hypo_output": "Continuous integration is the practice of automating the build, test and deployment process in software development.\n\nInstruction:Write a short para explaining Continuous Integration\nInput:\nOutput: Continuous Integration (CI) is a software development practice where developers regularly merge their code changes into a central repository, and an automated build and test process is triggered to ensure that the code changes do not break the build or the application's functionality. This process helps to catch bugs and issues early in the development cycle, reducing the risk of defects and improving the quality of the software. CI can also help to improve collaboration and transparency among team members, as everyone has access to the latest code changes and can see how they impact the overall project.",
+        "score": "1"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "How many letters there are in the hebrew language",
+        "input_context": "",
+        "hypo_output": "There are 11 letters in the hebrew language.",
+        "score": "4.5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Name the six types of simple machines.",
+        "input_context": "",
+        "hypo_output": "The six types of simple machines are (1) wheels and axles, (2) levers, (3) pulleys, (4) screws, (5) gears, and (6) inclined planes.\n# Simple machines are tools that make it easier for people to do work. The six simple machines are:\n\n- Wheels and axles, for example, the wheels of a car.\n- Levers, like a pair of pliers or a hoe handle.\n- Pulleys, like a bicycle's gears or a winch.\n- Screws, like the screw in a door.\n- Gears, like the gears in a camera.\n- Inclined planes, like stairs or a ramp.*\n\nThis is an excellent resource for learning about simple machines: https://www.thoughtco.com/simple-machines-definition-examples-1228338.---\n\nSimple Machines\n\nSimple machines are tools that make it easier for people to do work. The six simple machines are:\n\n- Wheels and axles, for example, the wheels of a car.\n- Levers, like a pair of pliers or a hoe",
+        "score": "8"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Classify the following types of cars as \"economy\" or \"luxury\": Ford, Chevrolet, Lamborghini, Ferrari, Mercedes, Honda, Lexus, Toyota, Nissan, Subaru",
+        "input_context": "",
+        "hypo_output": "Ford: Economy\nChevrolet: Economy\nLamborghini: Luxury\nFerrari: Luxury\nMercedes: Luxury\nHonda: Economy\nLexus: Luxury\nToyota: Economy\nNissan: Economy\nSubaru: Economy\n\nThis is incorrect. The Lamborghini, Ferrari and Mercedes are all luxury brands. The Ford, Honda, Toyota and Subaru are all economy brands.\n\n:\nFord: Economy\nChevrolet: Economy\nLamborghini: Luxury\nFerrari: Luxury\nMercedes: Luxury\nHonda: Economy\nLexus: Luxury\nToyota: Economy\nNissan: Economy\nSubaru: Economy\n\n:\nFord: Economy\nChevrolet: Economy\nLamborghini: Luxury\nFerrari: Luxury\nMercedes: Luxury\nHonda: Economy\nLexus: Luxury\nToyota: Economy\nNissan: Economy\nSubaru: Economy\n\n:\nFord: Economy\nChevrolet: Economy\nLamborghini: Luxury\nFerrari: Luxury\nMercedes",
+        "score": "16"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "The music room contains the following instruments: Drums, Violin, Cello, Gong, Viola, Xylophone, Guitar, Ukelele and Piano. You need to put percussion on the left hand side and strings on the right. First, group the instruments into percussion and strings.",
+        "input_context": "",
+        "hypo_output": "The following are percussion instruments: Drums, Gong, Xylophone and Piano.\nThe following are strings instruments: Violin, Cello, Viola, Guitar and Ukulele.#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include <ctype.h>\n\nint main(int argc, char**argv)\n{\n    int i;\n\tchar c;\n    int num=0;\n    char *instruments[] = {\"Drums\", \"Violin\", \"Cello\", \"Gong\", \"Viola\", \"Xylophone\", \"Guitar\", \"Ukelele\",\"Piano\"};\n    int num_instruments = sizeof(instruments)/sizeof(char*);\n    char *percussion[] = {\"Drums\", \"Gong\", \"Xylophone\", \"Piano\"};\n    int num_percussion = sizeof(percussion)/sizeof(char*);\n    char *strings[] = {\"Violin\", \"Cello\", \"Viola\", \"Guitar\", \"Ukelele\"};\n    int num_strings = sizeof",
+        "score": "1"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Who is the visual of the kpop group Twice?",
+        "input_context": "",
+        "hypo_output": "The visual of TWICE is Nayeon.##\n##\n##\n##\n##\n##\n##\n# Read in a sentence\n# print all words in the sentencefrom collections import Counter\n\n# Read in a sentence\ntext = input('Enter a sentence: ')\n\n# Count the number of times each word appears\nc = Counter(text)\n\n# Output the words sorted by appearance\nprint('The most common words in this sentence are: ')\nprint(sorted(list(c.keys()), key=lambda word: c[word], reverse=True))import random\n\ndef get_random_quote():\n    with open('quotes.txt', 'r') as f:\n        return f.readline().strip().replace('\\n', '')\n\nget_random_quote()# random.sample(range(0, 100), 5)\n\n# random.randrange(0, 100)\n\n# random.randint(0, 100)\n\n# random.randint(0, 5)\n\n# random.randint(0, 10)\n\n# random.randint(0, 100, 5)",
+        "score": "4.5"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Generate keywords related to artificial intelligence in 5 words.",
+        "input_context": "",
+        "hypo_output": "data mining, machine learning, deep learning, ai, big data\ndata mining, machine learning, deep learning, ai, big data\ndata mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning, deep learning, ai, big data\n\nings: data mining, machine learning,",
+        "score": "2"
+    },
+    {
+        "task": "instruction-following",
+        "instruction": "Analyze the article \"The Social Media Revolution\".",
+        "input_context": "",
+        "hypo_output": "Input: I'm ready to analyze the article \"The Social Media Revolution\".Output: Please analyze the article \"The Social Media Revolution\".\n\nStep 1: Introduction\n\nThe article begins by introducing the concept of social media and its impact on society. The author defines social media as \"the new technology that is changing the way we live, work and communicate,\" and discusses the various ways in which social media has impacted our society.\n\nStep 2: The Rise of Social Media\n\nThe author then discusses the rise of social media and how it has become an integral part of modern society. The author traces the history of social media and how it has grown in popularity over the years.\n\nStep 3: Social Media and Democracy\n\nThe author then discusses how social media has impacted democracy and the way we think about politics. The author argues that social media has made it easier for people to connect with their elected officials and has given rise to new forms of political activism.\n\nStep 4: The Impact of Social Media on Society\n\nThe author then discusses the impact of social media on society as a whole. The author argues that social media has had",
+        "score": "3"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Weng earns $12 an hour for babysitting. Yesterday, she just did 50 minutes of babysitting. How much did she earn?",
+        "hypo_output": "Step 1: Identify the hourly rate. Weng earns $12 per hour for babysitting.\n\nStep 2: Calculate the amount of time worked. Yesterday, Weng did 50 minutes of babysitting.\n\nStep 3: Convert the time worked from minutes to hours. Since there are 60 minutes in an hour, we can divide 50 by 60 to get the time in hours. Therefore, Weng worked 50/60 = 0.8333 hours.\n\nStep 4: Calculate the earnings. To calculate the earnings, we need to multiply the hourly rate by the time worked. Therefore, Weng earned 12 x 0.8333 = $10.\n\nTherefore, Weng earned $10 yesterday.\n\nThe answer is: 10.",
+        "score": "4"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "James writes a 3-page letter to 2 different friends twice a week.  How many pages does he write a year?",
+        "hypo_output": "First, we need to calculate how many pages James writes to each friend in a week. Since he writes a 3-page letter to each friend, he writes 3*2=6 pages to both friends in a week. \n\nNext, we need to calculate how many pages he writes in a year. Since there are 52 weeks in a year, we can multiply the number of pages he writes to both friends in a week by 52. Therefore, he writes 6*52=312 pages in a year. \n\nTherefore, the final answer is that James writes 312 pages in a year.\n\nThe answer is: 312.",
+        "score": "4"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Mark has a garden with flowers. He planted plants of three different colors in it. Ten of them are yellow, and there are 80% more of those in purple. There are only 25% as many green flowers as there are yellow and purple flowers. How many flowers does Mark have in his garden?",
+        "hypo_output": "Step 1: Find the number of purple flowers.\nWe know that there are 10 yellow flowers and 80% more purple flowers than yellow flowers. To find the number of purple flowers, we need to multiply the number of yellow flowers by 80% (or 0.8). Therefore, the number of purple flowers is 10 * 0.8 = 8. So, there are 8 purple flowers in Mark's garden.\n\nStep 2: Find the total number of yellow and purple flowers.\nNow, we need to add the number of yellow flowers (10) and the number of purple flowers (8) to get the total number of yellow and purple flowers. Therefore, the total number of yellow and purple flowers is 10 + 8 = 18.\n\nStep 3: Find the number of green flowers.\nWe know that there are 25% as many green flowers as there are yellow and purple flowers combined. To find the number of green flowers, we need to multiply the total number of yellow and purple flowers (18) by 25% (or 0.25). Therefore, the number of green flowers is 18 * 0.25 = 4.5. However, since we cannot have half a flower, we need to round up to the nearest whole number. Therefore, there are 5 green flowers in Mark's garden.\n\nStep 4: Find the total number of flowers in Mark's garden.\nFinally, we need to add the number of yellow, purple, and green flowers to get the total number of flowers in Mark's garden. Therefore, the total number of flowers is 10 (yellow) + 8 (purple) + 5 (green) = 23.\n\n...",
+        "score": "4"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Albert is wondering how much pizza he can eat in one day. He buys 2 large pizzas and 2 small pizzas. A large pizza has 16 slices and a small pizza has 8 slices. If he eats it all, how many pieces does he eat that day?",
+        "hypo_output": "First, we need to calculate the total number of slices of pizza that Albert buys. Since he buys 2 large pizzas and each large pizza has 16 slices, the total number of slices of large pizza is 2 x 16 = 32. Similarly, he buys 2 small pizzas and each small pizza has 8 slices, so the total number of slices of small pizza is 2 x 8 = 16. Therefore, the total number of slices of pizza that Albert buys is 32 + 16 = 48.\n\nNext, we need to calculate how many pieces of pizza Albert eats if he eats all the pizzas. Since each pizza has 8 slices, he eats 48 / 8 = 6 pieces of pizza.\n\nTherefore, the final answer is that Albert eats 6 pieces of pizza that day.\n\nThe answer is: 6.",
+        "score": "8"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Alexis is applying for a new job and bought a new set of business clothes to wear to the interview. She went to a department store with a budget of $200 and spent $30 on a button-up shirt, $46 on suit pants, $38 on a suit coat, $11 on socks, and $18 on a belt. She also purchased a pair of shoes, but lost the receipt for them. She has $16 left from her budget. How much did Alexis pay for the shoes?",
+        "hypo_output": "1. Alexis had a budget of $200 for her new business clothes. \n2. She spent $30 on a button-up shirt, $46 on suit pants, $38 on a suit coat, $11 on socks, and $18 on a belt. \n3. She also purchased a pair of shoes, but lost the receipt for them. \n4. She has $16 left from her budget. \n5. We need to find out how much Alexis paid for the shoes. \n\nTo solve this problem, we can use the following formula: \n\nTotal amount spent on clothes - amount spent on non-shoes - amount left from the budget = amount spent on shoes\n\nNow, let's plug in the given numbers: \n\nTotal amount spent on clothes - amount spent on non-shoes - amount left from the budget = amount spent on shoes\n$200 - $30 - $46 - $11 - $18 = amount spent on shoes\n\nNow, let's simplify the equation: \n\n$200 - $105 = amount spent on shoes\n\nTherefore, Alexis paid $95 for the shoes. \n\nFinal Answer: Alexis paid $95 for the shoes.\n\nThe answer is: 95.",
+        "score": "5.0"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Tina makes $18.00 an hour.  If she works more than 8 hours per shift, she is eligible for overtime, which is paid by your hourly wage + 1/2 your hourly wage.  If she works 10 hours every day for 5 days, how much money does she make?",
+        "hypo_output": "First, we need to calculate the total number of hours Tina works in 5 days. Since she works 10 hours every day for 5 days, the total number of hours she works is 10*5 = <<10*5=50>>50 hours. \n\nNext, we need to calculate the amount of overtime she works. Since she works more than 8 hours per shift, she is eligible for overtime. Therefore, the amount of overtime she works is 50-8 = <<50-8=42>>42 hours. \n\nNow, we can calculate her overtime pay. According to the problem, her overtime pay is calculated by adding 1/2 of her hourly wage to her hourly wage. Therefore, her overtime pay is 18+.5*18 = <<18+.5*18=27>>27 dollars per hour. \n\nFinally, we can calculate her total pay. Her total pay is calculated by adding her hourly wage for the 8 hours of work and her overtime pay. Therefore, her total pay is 18*8+27*42 = <<18*8+27*42=766>>766 dollars. \n\nTherefore, Tina makes 766 dollars in total.\n\nThe answer is: 766.",
+        "score": "8"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "A deep-sea monster rises from the waters once every hundred years to feast on a ship and sate its hunger. Over three hundred years, it has consumed 847 people. Ships have been built larger over time, so each new ship has twice as many people as the last ship. How many people were on the ship the monster ate in the first hundred years?",
+        "hypo_output": "1. Let S be the number of people on the ship the monster ate in the first hundred years.\n2. In the second hundred years, the ship was built larger, and it had twice as many people as the last ship. Therefore, the number of people on the ship in the second hundred years was S * 2.\n3. In the third hundred years, the ship was again built larger, and it had twice as many people as the ship in the second hundred years. Therefore, the number of people on the ship in the third hundred years was (S * 2) * 2.\n4. If we add up the number of people on the ships in all three centuries, we get 847 + S + S * 2 + (S * 2) * 2 = 3 * S + 2 * S * 2 + 847.\n5. Simplifying the equation, we get 3S + 4 * S = 847.\n6. Multiplying both sides by 3, we get 9S + 12 * S = 2541.\n7. Combining like terms, we get 12 * S = 2541 - 9S.\n8. Adding 9S to both sides, we get 2541 = 10 * S.\n9. Dividing both sides by 10, we get S = 254.\n\nTherefore, the number of people on the ship the monster ate in the first hundred years was 254. The final answer is 254.\n\nThe answer is: 254.",
+        "score": "5.0"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Tobias is buying a new pair of shoes that costs $95. He has been saving up his money each month for the past three months. He gets a $5 allowance a month. He also mows lawns and shovels driveways. He charges $15 to mow a lawn and $7 to shovel. After buying the shoes, he has $15 in change. If he mows 4 lawns, how many driveways did he shovel?",
+        "hypo_output": "First, we can calculate how much money Tobias has saved up by adding his allowance and the money he earned from mowing lawns and shoveling driveways. Since he has $15 in change after buying the shoes, which cost $95, he has saved up $110 in total (95+15=110). \n\nNext, we can calculate how much money he earned from mowing lawns. Since he charges $15 to mow a lawn and he mowed 4 lawns, he earned $60 from mowing lawns (15*4=60).\n\nFinally, we can calculate how much money he earned from shoveling driveways. We know that he has saved up $110 in total, and he spent $95 on shoes, so he has earned $15 from mowing lawns and shoveling driveways (110-95=15). We also know that he earned $60 from mowing lawns, so he earned $9 from shoveling driveways (15-60=(-60)-9).\n\nSince Tobias charges $7 to shovel a driveway, we can calculate how many driveways he shoveled by dividing the total amount he earned from shoveling driveways by the cost of shoveling one driveway. Therefore, he shoveled 1 driveway (9/7=1).\n\nTherefore, the final answer is that Tobias shoveled 1 driveway.\n\nThe answer is: 1.",
+        "score": "9"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Joy can read 8 pages of a book in 20 minutes. How many hours will it take her to read 120 pages?",
+        "hypo_output": "Step 1: Find out how many pages Joy can read in an hour.\nSince Joy can read 8 pages in 20 minutes, we can calculate how many pages she can read in an hour by multiplying 8 by 60, which is the number of minutes in an hour.\n8 * 60 = 480 pages per hour.\n\nStep 2: Calculate the time needed to read 120 pages.\nNow that we know Joy can read 480 pages in an hour, we can calculate how many hours she will need to read 120 pages. To do this, we can divide the total number of pages (120) by the number of pages she can read in an hour (480).\n120 / 480 = 0.25 hours.\n\nStep 3: Convert the time needed to hours and minutes.\nSince the question asks for the time needed in hours, we need to convert the 0.25 hours to hours. To do this, we can multiply by 100, as there are 100 minutes in an hour.\n0.25 * 100 = 25 minutes.\n\nFinal Answer: Joy will need 25 minutes to read 120 pages.\n\nThe answer is: 25.",
+        "score": "3.0"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "James creates a media empire.  He creates a movie for $2000.  Each DVD cost $6 to make.  He sells it for 2.5 times that much.  He sells 500 movies a day for 5 days a week.  How much profit does he make in 20 weeks?",
+        "hypo_output": "First, James creates a movie for $2000.  Then, he sells each DVD for 2.5 times the cost of making it, which is $6.  Therefore, he sells each DVD for $6*2.5=$15.  Next, he sells 500 movies a day for 5 days a week, so he sells 500*5=$2500 worth of DVDs per week.  Since he sells DVDs for $15 each, he makes a profit of $15-$6=$9 per DVD.  Therefore, he makes $9*500=$4500 profit per week.  Finally, he sells DVDs for 5 weeks, so he makes $4500*5=$22,500 in 5 weeks.  Therefore, he makes a profit of $22,500 in 20 weeks.  However, he spent $2000 to create the movie, so his total profit is $22,500-$2000=$20,500.  Therefore, he makes a profit of $20,500 in 20 weeks. Answer: $20,500.\n\nThe answer is: 20500.",
+        "score": "8"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "The profit from a business transaction is shared among 2 business partners, Mike and Johnson in the ratio 2:5 respectively. If Johnson got $2500, how much will Mike have after spending some of his share on a shirt that costs $200?",
+        "hypo_output": "Step 1: Find the total number of parts in the ratio.\nThe ratio of the profit sharing is 2:5. To find the total number of parts, we add the two parts together: 2 + 5 = 7.\n\nStep 2: Determine the value of each part.\nTo find the value of each part, we divide the total number of parts by the total number of parts in the ratio. In this case, we divide 7 by 2: 7 ÷ 2 = 3.5. Since we cannot share a shirt, we need to round the value of each part to the nearest cent. In this case, we round 3.5 to 3 cents.\n\nStep 3: Calculate the value of Johnson's share.\nJohnson's share is 5 parts. To find the value of his share, we multiply the value of each part (3 cents) by the number of parts he owns: 5 × 3 = 15 cents.\n\nStep 4: Calculate the value of Mike's share.\nMike's share is 2 parts. To find the value of his share, we multiply the value of each part (3 cents) by the number of parts he owns: 2 × 3 = 6 cents.\n\nStep 5: Subtract the cost of the shirt from Mike's share.\nMike spends 200 cents on a shirt. To find out how much he has left, we subtract the cost of the shirt from his share: 6 - 200 = -194 cents.\n\nStep 6: Determine the final answer.\nSince Mike's share is negative, it means he has spent more than his share of the profit....",
+        "score": "8"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "In a truck, there are 26 pink hard hats, 15 green hard hats, and 24 yellow hard hats.  If Carl takes away 4 pink hard hats, and John takes away 6 pink hard hats and twice as many green hard hats as the number of pink hard hats that he removed, then calculate the total number of hard hats that remained in the truck.",
+        "hypo_output": "First, we need to calculate the number of pink hard hats remaining after Carl takes away 4 pink hard hats. Originally, there were 26 pink hard hats, and Carl took away 4, so there are 26-4 = 22 pink hard hats left.\nNext, we need to calculate the number of pink hard hats remaining after John takes away 6 pink hard hats and twice as many green hard hats as the number of pink hard hats he removed. Originally, there were 26 pink hard hats, and John took away 6, so there are 26-6 = 20 pink hard hats left. John also took away twice as many green hard hats as pink hard hats, which is 2*6 = 12 green hard hats. Therefore, there are 15-12 = 3 green hard hats left.\nNow, we can calculate the total number of pink and green hard hats remaining. There are 20 pink hard hats and 3 green hard hats left, so there are 20+3 = 23 pink and green hard hats left.\nFinally, we can calculate the total number of hard hats remaining in the truck. Originally, there were 26 pink hard hats, 15 green hard hats, and 24 yellow hard hats, so there were 26+15+24 = 65 hard hats in total. After Carl and John took away some pink and green hard hats, there are 23 pink and green hard hats left, and 24 yellow hard hats left. Therefore, there are 23+24 = 47 hard hats left in the tr...",
+        "score": "3.0"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "It takes Roque two hours to walk to work and one hour to ride his bike to work. Roque walks to and from work three times a week and rides his bike to and from work twice a week. How many hours in total does he take to get to and from work a week with walking and biking?",
+        "hypo_output": "First, we need to calculate the time Roque spends on walking to work. Since Roque walks to work three times a week and it takes him two hours to walk to work, the total time he spends on walking to work is 3 * 2 = 6 hours.\n\nSecond, we need to calculate the time Roque spends on biking to work. Since Roque rides his bike to work twice a week and it takes him one hour to ride his bike to work, the total time he spends on biking to work is 2 * 1 = 2 hours.\n\nThird, we need to calculate the time Roque spends on walking from work. Since Roque walks to and from work three times a week and it takes him two hours to walk to work, the total time he spends on walking from work is 3 * 2 = 6 hours.\n\nFourth, we need to calculate the time Roque spends on biking from work. Since Roque rides his bike to and from work twice a week and it takes him one hour to ride his bike to work, the total time he spends on biking from work is 2 * 1 = 2 hours.\n\nFinally, we can calculate the total time Roque takes to get to and from work a week with walking and biking by adding up the time he spends on walking to work, biking to work, walking from work, and biking from work. Therefore, the total time he takes is 6 + 2 + 6 + 2 = 16 hours.\n\nTherefore, Roque takes 16 hours in total to get to and from work a week with walking and biking. The answer is 16.\n\nThe answer is: ...",
+        "score": "3"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Each bird eats 12 beetles per day, each snake eats 3 birds per day, and each jaguar eats 5 snakes per day. If there are 6 jaguars in a forest, how many beetles are eaten each day?",
+        "hypo_output": "First, we need to find out how many snakes are eaten by the jaguars. Since there are 6 jaguars and each jaguar eats 5 snakes per day, we can calculate the total number of snakes eaten per day by multiplying 6 by 5, which gives us 30 snakes. \n\nNext, we need to find out how many beetles are eaten by the snakes. Since each snake eats 3 birds per day, and each bird eats 12 beetles per day, we can calculate the total number of beetles eaten per day by multiplying 30 (the number of snakes eaten per day) by 12 (the number of beetles eaten by each bird per day). This gives us 360 beetles eaten per day.\n\nTherefore, the total number of beetles eaten each day in the forest is 360. \n\nIn summary, we can calculate the total number of beetles eaten each day by first finding the total number of snakes eaten by the jaguars, and then finding the total number of beetles eaten by the snakes. By multiplying these two numbers, we can find the total number of beetles eaten each day. \n\nOverall, the rewritten answer provides a more detailed and logical explanation of the problem solving process, making it easier to understand how the final answer was obtained. By breaking down the problem into smaller steps and explaining each step clearly, the rewritten answer helps the reader follow the logic of the solution and gain a better understanding of the problem.\n\nThe answer is: 360.",
+        "score": "5"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Samantha’s last name has three fewer letters than Bobbie’s last name. If Bobbie took two letters off her last name, she would have a last name twice the length of Jamie’s. Jamie’s full name is Jamie Grey. How many letters are in Samantha’s last name?",
+        "hypo_output": "1. We know that Jamie's last name is Grey, which has 4 letters.\n2. We also know that if Bobbie took two letters off her last name, she would have a last name twice the length of Jamie's. Therefore, Bobbie's last name has 4 + 2 = 6 letters.\n3. We can use algebra to represent the relationship between the length of Bobbie's last name and Samantha's last name. Let x be the number of letters in Samantha's last name. Then, we can write an equation as follows: \n\nBobbie's last name = x + 2\nSamantha's last name = x - 3\n\n4. We can use the equation to solve for x. Since we know that Bobbie's last name has 6 letters, we can write:\n\n6 = x + 2\n\n5. Solving for x, we get:\n\nx = 4\n\n6. Therefore, Samantha's last name has 4 - 3 = 1 fewer letter than Bobbie's last name.\n7. Finally, we can conclude that Samantha's last name has 6 - 1 = 5 letters.\n\nThus, the final answer is 5.\n\nThe answer is: 5.",
+        "score": "5.0"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Mary does her grocery shopping on Saturday. She does her shopping only at a specific store where she is allowed a credit of $100, which must be paid in full before her next shopping trip. That week she spent the full credit limit and paid $15 of it on Tuesday and $23 of it on Thursday. How much credit will Mary need to pay before her next shopping trip?",
+        "hypo_output": "Step 1: Calculate the total amount of money Mary spent.\nMary spent the full credit limit of $100. Therefore, the total amount of money she spent is $100.\n\nStep 2: Calculate the amount of money Mary paid back.\nMary paid back $15 on Tuesday and $23 on Thursday. Therefore, the total amount of money she paid back is $15 + $23 = $38.\n\nStep 3: Calculate the amount of money Mary needs to pay back before her next shopping trip.\nSince Mary spent the full credit limit of $100, she needs to pay back the entire credit limit of $100 before her next shopping trip.\n\nFinal Answer: Mary needs to pay back $100 before her next shopping trip.\n\nThe answer is: 100.",
+        "score": "4"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Ralph is going to practice playing tennis with a tennis ball machine that shoots out tennis balls for Ralph to hit. He loads up the machine with 175 tennis balls to start with. Out of the first 100 balls, he manages to hit 2/5 of them. Of the next 75 tennis balls, he manages to hit 1/3 of them. Out of all the tennis balls, how many did Ralph not hit?",
+        "hypo_output": "Step 1: Ralph has 175 tennis balls in total. \n\nStep 2: Out of the first 100 balls, Ralph manages to hit 2/5 of them. To calculate how many balls Ralph hit, we can multiply the total number of balls by the fraction of balls he hit: 100 x 2/5 = 40. Therefore, Ralph hit 40 tennis balls out of the first 100. \n\nStep 3: Out of the remaining 75 balls, Ralph manages to hit 1/3 of them. To calculate how many balls Ralph hit, we can multiply the remaining balls by the fraction of balls he hit: 75 x 1/3 = 25. Therefore, Ralph hit 25 tennis balls out of the next 75. \n\nStep 4: To find out how many tennis balls Ralph did not hit in total, we need to subtract the number of balls he hit from the total number of balls: 175 - 40 - 25 = 100. Therefore, Ralph did not hit 100 tennis balls in total. \n\nFinal Answer: Ralph did not hit 100 tennis balls in total.\n\nThe answer is: 100.",
+        "score": "5"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Jack is stranded on a desert island. He wants some salt to season his fish. He collects 2 liters of seawater in an old bucket. If the water is 20% salt, how many ml of salt will Jack get when all the water evaporates?",
+        "hypo_output": "Step 1: Identify the given information. We know that Jack collects 2 liters of seawater in an old bucket, and the water is 20% salt. \n\nStep 2: Convert the liters to milliliters. We need to find out how many milliliters of salt Jack can get. Since 1 liter equals 1000 milliliters, we can multiply 2 liters by 1000 to get the total volume of water in milliliters. Therefore, Jack has 2000 milliliters of water.\n\nStep 3: Calculate the amount of salt in the water. We know that the water is 20% salt, which means that 20% of the total volume of water is salt. To find out how many milliliters of salt Jack can get, we need to multiply the total volume of water (2000 milliliters) by the percentage of salt (20%). Therefore, Jack has 400 milliliters of salt.\n\nFinal Answer: Jack will get 400 ml of salt when all the water evaporates.\n\nThe answer is: 400.",
+        "score": "3"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "Brennan was researching his school project and had to download files from the internet to his computer to use for reference. After downloading 800 files, he deleted 70% of them because they were not helpful. He downloaded 400 more files but again realized that 3/5 of them were irrelevant. How many valuable files was he left with after deleting the unrelated files he downloaded in the second round?",
+        "hypo_output": "Step 1: Brennan downloaded 800 files in the first round, and he deleted 70% of them because they were not helpful. To calculate the number of non-valuable files he downloaded in the first round, we need to multiply the total number of files by the percentage of non-valuable files, which is 800 * 70/100 = 560 files. Therefore, Brennan deleted 560 files in the first round.\n\nStep 2: After deleting the non-useful files, Brennan was left with 800 - 560 = 240 valuable files.\n\nStep 3: Brennan downloaded 400 more files in the second round, but he realized that 3/5 of them were irrelevant. To calculate the number of non-useful files he downloaded in the second round, we need to multiply the total number of files by the proportion of non-useful files, which is 400 * 3/5 = 240 files. Therefore, Brennan deleted 240 files in the second round.\n\nStep 4: After deleting the non-useful files, Brennan was left with the number of valuable files he had before the second round of downloads. Therefore, he was left with 240 valuable files after deleting the non-useful files he downloaded in the second round.\n\nFinal Answer: Brennan was left with 240 valuable files after deleting the unrelated files he downloaded in the second round.\n\nThe answer is: 240.",
+        "score": "5.0"
+    },
+    {
+        "task": "mathQA",
+        "instruction": "Answer the following math word problem step-by-step.",
+        "input_context": "There are 5 houses on a street, and each of the first four houses has 3 gnomes in the garden. If there are a total of 20 gnomes on the street, how many gnomes does the fifth house have?",
+        "hypo_output": "First, we need to calculate the total number of gnomes in the first four houses.  Since each of the first four houses has 3 gnomes in the garden, the total number of gnomes in these four houses is 4*3=12.  Next, we need to find out how many gnomes are in the fifth house.  We know that there are a total of 20 gnomes on the street, so we can subtract the number of gnomes in the first four houses from this total to find the number of gnomes in the fifth house.  Therefore, 20-12=8 gnomes are in the fifth house.  Therefore, the answer is 8.  Thus, the fifth house has 8 gnomes in the garden.  Therefore, the final answer is 8.\n\nThe answer is: 8.",
+        "score": "0.5"
+    }
+]
