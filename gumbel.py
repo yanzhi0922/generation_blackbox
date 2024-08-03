@@ -11,6 +11,7 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 import random
 from torch.optim import Adam
+from torch import autograd
 
 
 def query(instruction, input_context, prompt=""):
@@ -20,7 +21,7 @@ def query(instruction, input_context, prompt=""):
     ]
     hypo_output = None
     received = False
-    while not received:
+    while (not received) or (hypo_output is None):
         try:
             hypo_output = client.chat.completions.create(
                 model=chatbot,
@@ -37,18 +38,18 @@ def tigerloss(instruction, input_context, output):
     received = False
     while not received:
         try:
-            results = scorer.score([instruction], [output], [input_context])
+            result = scorer.score([instruction], [output], [input_context])
             received = True
         except:
             time.sleep(1)
-    score = results[0].get('score', 0)  # 使用 get 方法提供默认值 0
+    score = result[0].get('score', 0)  # 使用 get 方法提供默认值 0
     loss = - score if score is not None else 0
     return loss
 
 
 def pmi():
     result = []
-    with open(pmi_data, 'r') as f:
+    with open(pmi_data, 'r', encoding='utf-8') as f:
         for line in f:
             result.append(line.strip('\n'))
     unique = []
@@ -56,45 +57,11 @@ def pmi():
     ngram_index_list = list(unique)
     return ngram_index_list
 
-
-def solve_v_total_exact(prompt_emb):
-    k = 1
-    a, b = 0, 0
-
-    b = prompt_emb.max()
-
-    def f(v):
-        s = (prompt_emb - v).clamp(0, 1).sum()
-        return s - k
-
-    itr = 0
-
-    v = 0
-    while (1):
-        itr += 1
-        v = (a + b) / 2
-        obj = f(v)
-        if abs(obj) < 1e-3 or itr > 20:
-            break
-        if obj < 0:
-            b = v
-        else:
-            a = v
-    return v, itr
-
-
-def constrainScoreByWholeExact(prompt_embeds):
-    for i in range(len(prompt_embeds)):
-        v, itr = solve_v_total_exact(prompt_embeds[i])
-        new_embed = prompt_embeds[i].sub(v).clamp(0, 1)
-        prompt_embeds[i].data = new_embed.data
-
-
 def train(epochs, sample_size):
     alphas_optimizer = Adam([{
         "params": [alphas],
         "weight_decay": 0,
-        "lr": prompt_learning_rate
+        "lr": learning_rate
     }, ])
 
     best_eval_result = 0.0
@@ -102,13 +69,14 @@ def train(epochs, sample_size):
     best_epoch = 0
     eval_results = []
     test_results = []
+    prev_alphas = alphas  # 用于存储上一次迭代的alphas参数
 
     for epoch in range(epochs):
         random.shuffle(train_data)
         for item in train_data:
             prompts_probs = F.gumbel_softmax(alphas, tau=temperature, hard=False)
             prompts_dist = torch.distributions.Categorical(prompts_probs)
-            loss_list = []
+            tigerscore_list = []
             prompts_discrete_indices_list = []
             for k in range(sample_size):
                 prompts_discrete_indices = prompts_dist.sample()
@@ -121,39 +89,39 @@ def train(epochs, sample_size):
                 instruction = item['instruction']
                 input_context = item['input_context']
                 hypo_output = query(instruction, input_context, prompts_discrete)
-                loss = tigerloss(instruction, input_context, hypo_output)
-                loss_list.append(loss)
-            loss_avg = sum(loss_list) / sample_size
+                tigerscore = tigerloss(instruction, input_context, hypo_output)
+                tigerscore_list.append(tigerscore)
+            tigerscore_avg = sum(tigerscore_list) / sample_size
+            
+            print(torch.norm(alphas- prev_alphas))
+            print("epoch:", epoch, "loss_avg:", tigerscore_avg)
 
-            alphas_optimizer.zero_grad()
-
-            # 计算log(P)的梯度
-
-
-            alphas.grad = torch.zeros_like(prompts_probs)
-
-            for k in range(sample_size):
-                alphas.grad += 1 / (sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
-
-            torch.nn.utils.clip_grad_norm_(prompts_probs, 3)
-            alphas_optimizer.step()
-            constrainScoreByWholeExact(prompts_probs)
-            print("epoch:", epoch, "loss_avg:", loss_avg)
+        # 计算alphas参数的变化
+        alphas_change = torch.norm(alphas - prev_alphas)
+        print(f"Alphas change: {alphas_change}")
+        prev_alphas = alphas.detach().clone()  # 更新prev_alphas为当前的alphas
 
         eval_result = evaluate()
 
-        # 保存最好的结果
-        if eval_result > best_eval_result:
+        # 检查是否有性能提升或alphas参数变化是否小于阈值
+        if eval_result > best_eval_result or alphas_change < alpha_change_threshold:
             best_eval_result = eval_result
             best_alphas = alphas.detach().clone()
+            print(f"New best eval result: {best_eval_result} at epoch {epoch} with alphas change: {alphas_change}")
+
+            # 如果alphas参数变化小于阈值，则停止训练
+            if alphas_change < alpha_change_threshold:
+                print(f"Alphas change is below threshold {alpha_change_threshold}, stopping training.")
+                break
 
         # 如果cuda内存不够，清理一下
         if 'cuda' in str(device):
             torch.cuda.empty_cache()
+
     save_path = "data/best_alphas.pt"
     torch.save(best_alphas, save_path)
+    print("Finished training")
     return
-
 
 def evaluate(sample_size=10):
     eval_result = 0
@@ -209,6 +177,7 @@ def test(sample_size=10):
         origin_result.append(origin_loss_avg)
         print("test_loss_avg:", loss_avg)
         print("origin_loss_avg:", origin_loss_avg)
+    print("Finished testing")
     return test_result, origin_result
 
 
@@ -224,22 +193,27 @@ if __name__ == "__main__":
     chatbot = "deepseek-chat"
     # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
     # chatbot = "moonshot-v1-8k"
+    # 读取数据
     data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
     pmi_data = "data/pmi_mrpc_gpt.txt"
     train_data = data[:int(0.1 * len(data))]
     test_data = data[int(0.9 * len(data)):]
-    prompt_learning_rate = 1e-3
+
+    # 设置超参数
+    learning_rate = 1e-2
     ngram_list = pmi()
     prompt_length = 10
     prompt_search_space = 200
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    alphas = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length)
+    print('device:', device)
+    alphas = torch.FloatTensor([[1] * prompt_search_space] * prompt_length)
     alphas.requires_grad = True
     temperature = 1
-    train(epochs=1, sample_size=10)
-    print("Finished training")
+    alpha_change_threshold = 1e-5
+
+    train(epochs=50, sample_size=10)
     test_result, origin_result = test(10)
-    print("Finished testing")
+
     print("test_result:", sum(test_result))
     print("origin_result:", sum(origin_result))
     print("Finished")
