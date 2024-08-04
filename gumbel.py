@@ -11,7 +11,6 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 import random
 from torch.optim import Adam
-from torch import autograd
 
 
 def query(instruction, input_context, prompt=""):
@@ -57,6 +56,7 @@ def pmi():
     ngram_index_list = list(unique)
     return ngram_index_list
 
+
 def train(epochs, sample_size):
     alphas_optimizer = Adam([{
         "params": [alphas],
@@ -76,7 +76,7 @@ def train(epochs, sample_size):
         for item in train_data:
             prompts_probs = F.gumbel_softmax(alphas, tau=temperature, hard=False)
             prompts_dist = torch.distributions.Categorical(prompts_probs)
-            tigerscore_list = []
+            loss_list = []
             prompts_discrete_indices_list = []
             for k in range(sample_size):
                 prompts_discrete_indices = prompts_dist.sample()
@@ -89,16 +89,33 @@ def train(epochs, sample_size):
                 instruction = item['instruction']
                 input_context = item['input_context']
                 hypo_output = query(instruction, input_context, prompts_discrete)
-                tigerscore = tigerloss(instruction, input_context, hypo_output)
-                tigerscore_list.append(tigerscore)
-            tigerscore_avg = sum(tigerscore_list) / sample_size
-            
-            print(torch.norm(alphas- prev_alphas))
-            print("epoch:", epoch, "loss_avg:", tigerscore_avg)
+                tiger_score = tigerloss(instruction, input_context, hypo_output)
+                loss_list.append(tiger_score)
+            loss_avg = sum(loss_list) / sample_size
+
+            alphas_optimizer.zero_grad()
+            # 计算log(P)的梯度
+            derivative = torch.zeros_like(alphas).repeat(sample_size, 1, 1)
+            for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
+                for i in range(prompt_length):
+                    alphas.grad = torch.zeros_like(alphas)
+                    # log(Pij)
+                    log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
+                    # 计算log(P)的梯度
+                    log_prob.backward(retain_graph=True)
+                    derivative[k] += alphas.grad
+
+            alphas.grad.zero_()  # 清空alphas的梯度
+
+            for k in range(sample_size):
+                alphas.grad += 1 / (sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
+
+            torch.nn.utils.clip_grad_norm_(alphas, 5)
+            alphas_optimizer.step()
+            print("epoch:", epoch, "loss_avg:", loss_avg)
 
         # 计算alphas参数的变化
         alphas_change = torch.norm(alphas - prev_alphas)
-        print(f"Alphas change: {alphas_change}")
         prev_alphas = alphas.detach().clone()  # 更新prev_alphas为当前的alphas
 
         eval_result = evaluate()
@@ -123,7 +140,7 @@ def train(epochs, sample_size):
     print("Finished training")
     return
 
-def evaluate(sample_size=10):
+def evaluate(sample_size=2):
     eval_result = 0
     for item in test_data:
         prompts_probs = F.gumbel_softmax(alphas, tau=temperature, hard=False)
@@ -148,7 +165,7 @@ def evaluate(sample_size=10):
     return eval_result
 
 
-def test(sample_size=10):
+def test(sample_size=5):
     test_result = []
     origin_result = []
     for item in test_data:
@@ -180,6 +197,14 @@ def test(sample_size=10):
     print("Finished testing")
     return test_result, origin_result
 
+def gumbel_softmax(alph, tau, hard=False):
+    prompts_probs = torch.zeros_like(alph)
+    for i in range(prompt_length):
+        for j in range(prompt_search_space):
+            prompts_probs[i][j] = torch.exp(alph[i][j] / tau)
+        prompts_probs[i] = prompts_probs[i] / torch.sum(prompts_probs[i])
+    return prompts_probs
+
 
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -196,11 +221,11 @@ if __name__ == "__main__":
     # 读取数据
     data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
     pmi_data = "data/pmi_mrpc_gpt.txt"
-    train_data = data[:int(0.1 * len(data))]
-    test_data = data[int(0.9 * len(data)):]
+    train_data = data[:int(0.7 * len(data))]
+    test_data = data[int(0.7 * len(data)):]
 
     # 设置超参数
-    learning_rate = 1e-2
+    learning_rate = 1e-3
     ngram_list = pmi()
     prompt_length = 10
     prompt_search_space = 200
@@ -208,11 +233,11 @@ if __name__ == "__main__":
     print('device:', device)
     alphas = torch.FloatTensor([[1] * prompt_search_space] * prompt_length)
     alphas.requires_grad = True
-    temperature = 1
-    alpha_change_threshold = 1e-5
+    temperature = 10
+    alpha_change_threshold = 1e-3
 
     train(epochs=50, sample_size=10)
-    test_result, origin_result = test(10)
+    test_result, origin_result = test(5)
 
     print("test_result:", sum(test_result))
     print("origin_result:", sum(origin_result))
