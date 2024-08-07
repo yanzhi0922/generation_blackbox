@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="root@connect.westb.seetacloud.com:12061 password" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="root@connect.westb.seetacloud.com:36171 password" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="root@connect.bjb1.seetacloud.com:27863 password">
         <serverdata>
@@ -83,6 +83,27 @@
         <serverdata>
           <mappings>
             <mapping deploy="/tmp/pycharm_project_975" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@connect.westb.seetacloud.com:27927 password">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@connect.westb.seetacloud.com:33186 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_1" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@connect.westb.seetacloud.com:36171 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_989" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

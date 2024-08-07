@@ -3,6 +3,7 @@ import logging
 import torch
 import math
 import os
+
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
 import random
@@ -13,6 +14,7 @@ from tqdm.auto import tqdm
 import transformers
 from accelerate import Accelerator
 from torch.optim import Adam, AdamW
+import torch.nn.functional as F
 from transformers import (
     AutoTokenizer,
     DataCollatorWithPadding,
@@ -23,9 +25,10 @@ from transformers import (
 )
 from transformers.utils.versions import require_version
 from transformers.models.roberta.configuration_roberta import RobertaConfig
-from transformers.models.roberta.modeling_roberta import RobertaClassificationHead, RobertaForMaskedLM 
+from transformers.models.roberta.modeling_roberta import RobertaClassificationHead, RobertaForMaskedLM
 from torch.nn import CrossEntropyLoss
 from loss import *
+
 logger = logging.getLogger(__name__)
 
 require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/text-classification/requirements.txt")
@@ -54,9 +57,10 @@ LABEL2ID_CONFIG = {
     "qnli": {" yes": 0, " no": 1},
     "rte": {" yes": 0, " no": 1},
     "CI": {' background': 0, ' comparison': 1, ' extension': 2, ' future': 3, ' motivation': 4, ' use': 5},
-    "SE": {' comparison': 0, ' conjunction': 1, ' evaluation': 2, ' feature': 3, ' hyponym': 4, ' part': 5, ' function': 6},
-    "RCT": {' background': 0, ' conclusion': 1, ' method': 2, ' objective': 3, ' result': 4} ,
-    "HP": {' unhelpful': 0, ' helpful': 1}, # review helpfulness
+    "SE": {' comparison': 0, ' conjunction': 1, ' evaluation': 2, ' feature': 3, ' hyponym': 4, ' part': 5,
+           ' function': 6},
+    "RCT": {' background': 0, ' conclusion': 1, ' method': 2, ' objective': 3, ' result': 4},
+    "HP": {' unhelpful': 0, ' helpful': 1},  # review helpfulness
     "imdb": {" terrible": 0, " great": 1},
     "cr": {" terrible": 0, " great": 1},
     "mr": {" terrible": 0, " great": 1},
@@ -69,12 +73,15 @@ LABEL_CONVERT = {
     "sst2": {0: ' terrible', 1: ' great'},
     'mrpc': {0: ' no', 1: ' yes'},
     'cola': {0: ' no', 1: ' yes'},
-    'wnli': {0:  ' no', 1: ' yes'},
+    'wnli': {0: ' no', 1: ' yes'},
     'qnli': {0: ' yes', 1: ' no'},
     'rte': {0: ' yes', 1: ' no'},
-    'CI': {'Background': ' background', 'CompareOrContrast': ' comparison', 'Extends': ' extension', 'Future': ' future', 'Motivation': ' motivation', 'Uses': ' use'},
-    'SE': {'COMPARE': ' comparison', 'CONJUNCTION': ' conjunction', 'EVALUATE-FOR': ' evaluation', 'FEATURE-OF': ' feature', 'HYPONYM-OF': ' hyponym', 'PART-OF': ' part', 'USED-FOR': ' function'},
-    'RCT': {'BACKGROUND': ' background', 'CONCLUSIONS': ' conclusion', 'METHODS': ' method', 'OBJECTIVE': ' objective', 'RESULTS': ' result'},
+    'CI': {'Background': ' background', 'CompareOrContrast': ' comparison', 'Extends': ' extension',
+           'Future': ' future', 'Motivation': ' motivation', 'Uses': ' use'},
+    'SE': {'COMPARE': ' comparison', 'CONJUNCTION': ' conjunction', 'EVALUATE-FOR': ' evaluation',
+           'FEATURE-OF': ' feature', 'HYPONYM-OF': ' hyponym', 'PART-OF': ' part', 'USED-FOR': ' function'},
+    'RCT': {'BACKGROUND': ' background', 'CONCLUSIONS': ' conclusion', 'METHODS': ' method', 'OBJECTIVE': ' objective',
+            'RESULTS': ' result'},
     'HP': {False: ' unhelpful', True: ' helpful'},
 }
 
@@ -87,7 +94,7 @@ TEMPLATE_CONFIG = {
     "wnli": " entailment? [MASK].",
     "qnli": " entailment? [MASK].",
     "rte": " entailment? [MASK].",
-    "CI": " What is the intent? [MASK].", 
+    "CI": " What is the intent? [MASK].",
     "SE": " What is the relation? [MASK].",
     "RCT": " It is [MASK]. ",
     "HP": " It is [MASK].",
@@ -95,37 +102,10 @@ TEMPLATE_CONFIG = {
     "cr": "It was [MASK].",
 }
 
-def solve_v_total_exact(prompt_emb):
-    k = 1
-    a, b = 0, 0
-
-    b = prompt_emb.max()
-    def f(v):
-        s = (prompt_emb - v).clamp(0, 1).sum()
-        return s - k
-    itr = 0
-
-    v = 0
-    while 1:
-        itr += 1
-        v = (a + b) / 2
-        obj = f(v)
-        if abs(obj) < 1e-3 or itr > 20:
-            break
-        if obj < 0:
-            b = v
-        else:
-            a = v
-    return v, itr
-
-def constrainScoreByWholeExact(prompt_embeds):
-    for i in range(len(prompt_embeds)):
-        v, itr = solve_v_total_exact(prompt_embeds[i])
-        prompt_embeds[i].sub_(v).clamp_(0, 1)
-    
 def parse_args():
     parser = argparse.ArgumentParser(description="Finetune a transformers model on a text classification task")
-    parser.add_argument("--task_name", type=str, default='mrpc', help="The name of the glue task.", choices=list(task_to_keys.keys()))
+    parser.add_argument("--task_name", type=str, default='mrpc', help="The name of the glue task.",
+                        choices=list(task_to_keys.keys()))
     parser.add_argument("--file_name", type=str, default=None, help="The name of the domain-specific task.")
     parser.add_argument("--low_resource", action="store_true")
     parser.add_argument("--ce_loss", type=bool, default=True)
@@ -140,23 +120,33 @@ def parse_args():
     parser.add_argument("--use_wandb", action="store_true", default=True, help="Whether to run wandb.")
     parser.add_argument("--cuda", type=int, default=0)
     parser.add_argument("--max_length", type=int, default=450, help=(
-            "The maximum total input sequence length after tokenization. Sequences longer than this will be truncated,"
-            " sequences shorter will be padded if `--pad_to_max_lengh` is passed."))
-    parser.add_argument("--pad_to_max_length", action="store_true", help="If passed, pad all samples to `max_length`. Otherwise, dynamic padding is used.")
-    parser.add_argument("--per_device_train_batch_size", type=int, default=128, help="Batch size (per device) for the training dataloader.")
-    parser.add_argument("--per_device_eval_batch_size", type=int, default=32, help="Batch size (per device) for the evaluation dataloader.")
-    parser.add_argument("--model_name_or_path", type=str, default='roberta-large', help="Path to pretrained model or model identifier from huggingface.co/models.")
-    parser.add_argument("--use_slow_tokenizer", action="store_true", help="If passed, will use a slow tokenizer (not backed by the 🤗 Tokenizers library).")
+        "The maximum total input sequence length after tokenization. Sequences longer than this will be truncated,"
+        " sequences shorter will be padded if `--pad_to_max_lengh` is passed."))
+    parser.add_argument("--pad_to_max_length", action="store_true",
+                        help="If passed, pad all samples to `max_length`. Otherwise, dynamic padding is used.")
+    parser.add_argument("--per_device_train_batch_size", type=int, default=128,
+                        help="Batch size (per device) for the training dataloader.")
+    parser.add_argument("--per_device_eval_batch_size", type=int, default=32,
+                        help="Batch size (per device) for the evaluation dataloader.")
+    parser.add_argument("--model_name_or_path", type=str, default='roberta-large',
+                        help="Path to pretrained model or model identifier from huggingface.co/models.")
+    parser.add_argument("--use_slow_tokenizer", action="store_true",
+                        help="If passed, will use a slow tokenizer (not backed by the 🤗 Tokenizers library).")
     parser.add_argument("--weight_decay", type=float, default=0.1, help="Weight decay to use.")
-    parser.add_argument("--max_train_steps", type=int, default=None, help="Total number of training steps to perform. If provided, overrides num_train_epochs.")
-    parser.add_argument("--gradient_accumulation_steps", type=int, default=1, help="Number of updates steps to accumulate before performing a backward/update pass.")
-    parser.add_argument("--lr_scheduler_type", type=SchedulerType, default="linear", help="The scheduler type to use.", choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"])
-    parser.add_argument("--num_warmup_steps", type=int, default=100, help="Number of steps for the warmup in the lr scheduler.")
+    parser.add_argument("--max_train_steps", type=int, default=None,
+                        help="Total number of training steps to perform. If provided, overrides num_train_epochs.")
+    parser.add_argument("--gradient_accumulation_steps", type=int, default=1,
+                        help="Number of updates steps to accumulate before performing a backward/update pass.")
+    parser.add_argument("--lr_scheduler_type", type=SchedulerType, default="linear", help="The scheduler type to use.",
+                        choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant",
+                                 "constant_with_warmup"])
+    parser.add_argument("--num_warmup_steps", type=int, default=100,
+                        help="Number of steps for the warmup in the lr scheduler.")
     parser.add_argument("--output_dir", type=str, default=None, help="Where to store the final model.")
     parser.add_argument("--seed", type=int, default=42, help="A seed for reproducible training.")
     parser.add_argument("--k_shot", default=-1, type=int, help="-1 denotes full-shot")
     parser.add_argument("--use_ngram", default=True, type=bool, help="If True, will extract ngrams and use them.")
-    parser.add_argument("--api_limit", type=int, default=8000 , help="The limit of the API request")
+    parser.add_argument("--api_limit", type=int, default=8000, help="The limit of the API request")
     args = parser.parse_args()
 
     args.train_file = './dataset/' + args.file_name + '/train.csv' if args.file_name else None
@@ -178,15 +168,16 @@ def parse_args():
             assert extension in ["csv", "json"], "`validation_file` should be a csv or a json file."
     return args
 
+
 def pmi():
     args = parse_args()
-    result=[]
+    result = []
     if args.file_name:
-        with open("./pmi/" + args.file_name.lower() + ".txt",'r') as f:
+        with open("./pmi/" + args.file_name.lower() + ".txt", 'r') as f:
             for line in f:
                 result = result + (list(line.strip('\n').split(',')))
     elif args.task_name:
-        with open("./pmi/" + args.task_name.lower() + ".txt",'r') as f:
+        with open("./pmi/" + args.task_name.lower() + ".txt", 'r') as f:
             for line in f:
                 result = result + (list(line.strip('\n').split(',')))
 
@@ -195,20 +186,25 @@ def pmi():
     ngram_index_list = list(map(int, unique))
     return ngram_index_list
 
+
 def counter(func):
     def wrapper(*args, **kwargs):
         wrapper.count = wrapper.count + 1
         res = func(*args, **kwargs)
         if wrapper.count % 100 == 0:
-            print ("{0} has been used: {1}x".format(func.__name__, wrapper.count))
+            print("{0} has been used: {1}x".format(func.__name__, wrapper.count))
         return res
+
     wrapper.count = 0
     return wrapper
+
 
 class ApiCallLimitError(Exception):
     pass
 
+
 ngram_list = pmi()
+
 
 def main():
     args = parse_args()
@@ -219,7 +215,8 @@ def main():
     task_name = args.task_name if args.task_name else args.train_file
     args.unique_task_name = task_name.replace("/", ".")
     args.experiment_id = task_name + str(args.prompt_length) + str(args.prompt_learning_rate) \
-                         + str(args.num_train_epochs) + str(args.seed) + str(args.prompt_search_space) + ce_loss_string #'dataset/CI/train.csv1020.0013042160.01falseFALSE'
+                         + str(args.num_train_epochs) + str(args.seed) + str(
+        args.prompt_search_space) + ce_loss_string  # 'dataset/CI/train.csv1020.0013042160.01falseFALSE'
 
     if args.use_wandb:
         args.group_name = "RoBERTa_BDPL_" + task_name
@@ -259,7 +256,7 @@ def main():
         if args.task_name in task_to_keys.keys():
             raw_datasets = load_dataset("glue", args.task_name)
         else:
-            raise(NotImplementedError)
+            raise (NotImplementedError)
     else:
         # Loading the dataset from local csv or json file.
         data_files = {}
@@ -293,7 +290,7 @@ def main():
         from_tf=bool(".ckpt" in args.model_name_or_path),
         config=config,
     )
-    
+
     args.device = torch.device("cuda", args.cuda)
     model.to(args.device)
 
@@ -328,7 +325,7 @@ def main():
     def preprocess_function(examples):
         # Tokenize the texts
         if args.low_resource:
-            train_random_samples = random.sample(range(0, len(examples["label"])), len(examples["label"])//10)
+            train_random_samples = random.sample(range(0, len(examples["label"])), len(examples["label"]) // 10)
             for key in examples.keys():
                 examples[key] = [examples[key][k] for k in train_random_samples]
 
@@ -353,7 +350,8 @@ def main():
         else:
             template = [template_base] * len(examples[sentence1_key])
             texts = (examples[sentence1_key], template)
-        result = tokenizer(*texts, padding=padding, max_length=args.max_length, truncation=True, add_special_tokens=False)
+        result = tokenizer(*texts, padding=padding, max_length=args.max_length, truncation=True,
+                           add_special_tokens=False)
 
         texts = []
         template = [template_base] * len(examples[sentence1_key])
@@ -388,8 +386,8 @@ def main():
             result["labels"] = torch.tensor(label_list)
         else:
             target_encodings = tokenizer.batch_encode_plus(examples["label"], add_special_tokens=False)
-            result["labels"]= torch.tensor(target_encodings['input_ids']).squeeze(dim=1).to(args.device)
-            
+            result["labels"] = torch.tensor(target_encodings['input_ids']).squeeze(dim=1).to(args.device)
+
         return result
 
     def preprocess_function_k_shot(examples):
@@ -410,7 +408,7 @@ def main():
                 for key in examples.keys():
                     new_examples[key].append(examples[key][index])
                 label_count[label] += 1
-        
+
         print("Finish few-shot sampling!")
 
         result = preprocess_function(new_examples)
@@ -483,9 +481,9 @@ def main():
                 load_from_cache_file=False,
                 desc="Running tokenizer on dataset",
             )
-        print("length of train data",len(train_dataset))
-        print("length of eval data",len(eval_dataset))
-        print("length of test data",len(test_dataset))
+        print("length of train data", len(train_dataset))
+        print("length of eval data", len(eval_dataset))
+        print("length of test data", len(test_dataset))
 
     # Log a few random samples from the training set:
     for index in random.sample(range(len(train_dataset)), 3):
@@ -496,7 +494,7 @@ def main():
         data_collator = default_data_collator
     else:
         data_collator = DataCollatorWithPadding(tokenizer, pad_to_multiple_of=(8 if accelerator.use_fp16 else None))
-    # 1%的数据
+
     # 计算1%的样本数量
     train_sample_size = int(len(train_dataset) * 0.01)
     eval_sample_size = int(len(eval_dataset) * 0.01)
@@ -514,17 +512,20 @@ def main():
     test_subset = Subset(test_dataset, test_random_indices)
 
     # 创建新的 DataLoader
-    train_dataloader = DataLoader(train_dataset, shuffle=True, collate_fn=data_collator, batch_size=args.per_device_train_batch_size)
+    train_dataloader = DataLoader(train_dataset, shuffle=True, collate_fn=data_collator,
+                                  batch_size=args.per_device_train_batch_size)
     eval_dataloader = DataLoader(eval_dataset, collate_fn=data_collator, batch_size=args.per_device_eval_batch_size)
     test_dataloader = DataLoader(test_dataset, collate_fn=data_collator, batch_size=args.per_device_eval_batch_size)
 
     train_dataloader
     if args.task_name == 'mnli':
-        test_dataloader_mm = DataLoader(test_dataset_mm, collate_fn=data_collator, batch_size=args.per_device_eval_batch_size)
+        test_dataloader_mm = DataLoader(test_dataset_mm, collate_fn=data_collator,
+                                        batch_size=args.per_device_eval_batch_size)
         test_dataloader_mm = accelerator.prepare(test_dataloader_mm)
     else:
         test_dataloader_mm = None
-    model, train_dataloader, eval_dataloader, test_dataloader = accelerator.prepare(model, train_dataloader, eval_dataloader, test_dataloader)
+    model, train_dataloader, eval_dataloader, test_dataloader = accelerator.prepare(model, train_dataloader,
+                                                                                    eval_dataloader, test_dataloader)
 
     # Note -> the training dataloader needs to be prepared before we grab his length below (cause its length will be shorter in multiprocess)
     # Scheduler and math around the number of training steps.
@@ -546,7 +547,7 @@ def main():
     best_prompts_probs = None
     best_epoch = 0
     eval_results = []
-    test_results = []    
+    test_results = []
 
     total_batch_size = args.per_device_train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps
     logger.info("***** Running training *****")
@@ -563,20 +564,106 @@ def main():
 
     # Black-box Training
     prompt_search_space = args.prompt_search_space
-    prompts_probs = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length)
-    prompts_probs.requires_grad = True
-    
+
+    alphas = torch.FloatTensor([[2] * prompt_search_space] * prompt_length)
+    alphas.requires_grad = True
+    prompts_probs = F.gumbel_softmax(alphas, tau=1, hard=False)
+
     prompt_optimizer = AdamW([{
-        "params": [prompts_probs],
+        "params": [alphas],
         "weight_decay": args.weight_decay,
     }], lr=args.prompt_learning_rate)
 
     print("----Optimizing black-box prompts----")
+    prev_alphas = alphas.clone()
     for epoch in range(args.num_train_epochs):
         try:
             for step, batch in enumerate(train_dataloader):
+                prompts_probs = F.gumbel_softmax(alphas, tau=1, hard=False)
                 prompts_dist = torch.distributions.Categorical(prompts_probs)
-                with torch.no_grad():
+
+                if args.trial and step >= 100:
+                    break
+                bsz = len(batch['input_ids'])
+                label = batch["labels"].to(args.device)
+                loss_list = []
+                prompts_discrete_indices_list = []
+                for k in range(args.sample_size):
+                    prompts_discrete_indices = prompts_dist.sample()
+                    prompts_discrete_indices_list.append(prompts_discrete_indices)
+                    if args.use_ngram:
+                        prompts_discrete_indices_ngram_list = []
+                        indices_list = prompts_discrete_indices.int().tolist()
+                        for idx in indices_list:
+                            prompts_discrete_indices_ngram_list.append(ngram_list[idx])
+                        prompts_discrete_ngram_indices = torch.tensor(prompts_discrete_indices_ngram_list)
+                        cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                   prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                       args.device), batch['input_ids'][:, 1:]], dim=1)
+                    else:
+                        cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                   prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                       args.device), batch['input_ids'][:, 1:]], dim=1)
+
+                    cur_attention_mask = torch.cat(
+                        [torch.ones(bsz, 1).to(args.device), torch.ones(bsz, prompt_length).to(args.device),
+                         batch["attention_mask"][:, 1:]], dim=1)
+                    mask_pos = np.where(np.array(cur_input_ids.cpu()) == tokenizer.mask_token_id)
+                    mask_pos = torch.tensor(mask_pos[-1])
+                    sequence_output = train_api_request(input_ids=cur_input_ids, attention_mask=cur_attention_mask)
+                    last_hidden_state = sequence_output[0].squeeze()
+                    logits = last_hidden_state[torch.arange(last_hidden_state.size(0)), mask_pos]
+
+                    label_keys = list(label_to_id.keys())
+                    label_map = {}
+                    for target in label_keys:
+                        label_map[tokenizer.encode(target, add_special_tokens=False)[0]] = label_to_id[target]
+
+                    converted_target = label.clone()
+                    for key, val in label_map.items():
+                        converted_target[label == key] = val
+                    interest_index = list(label_map.keys())
+                    logits = logits[:, interest_index]
+                    pred = logits.argmax(dim=-1)
+
+                    if args.ce_loss:
+                        loss = ce_loss(logits.view(-1, config.num_labels), converted_target)
+                    else:
+                        loss = hingeloss(logits, converted_target)
+                    loss_list.append(loss.item())
+
+                    if train_api_request.count >= args.api_limit:
+                        raise ApiCallLimitError()
+
+                loss_avg = sum(loss_list) / args.sample_size
+
+                prompt_optimizer.zero_grad()
+
+                derivative = torch.zeros_like(alphas).repeat(args.sample_size, 1, 1)
+                for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
+                    for i in range(prompt_length):
+                        prompt_optimizer.zero_grad()
+                        # log(Pij)
+                        log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
+                        # 计算log(P)的梯度
+                        log_prob.backward(retain_graph=True)
+                        derivative[k] += alphas.grad
+
+                alphas.grad = torch.zeros_like(alphas)
+                for k in range(args.sample_size):
+                    alphas.grad += 1 / (args.sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
+                print("总alphas.grad:", torch.linalg.norm(alphas.grad))
+
+                torch.nn.utils.clip_grad_norm_(prompts_probs, 3)
+                prompt_optimizer.step()
+                print("alphas_change:", torch.linalg.norm(alphas - prev_alphas))
+                prev_alphas = alphas.clone()
+
+                if step % args.gradient_accumulation_steps == 0 or step == len(train_dataloader) - 1:
+                    progress_bar.update(1)
+                    completed_steps += 1
+                if completed_steps >= args.max_train_steps:
+                    break
                     if args.trial and step >= 100:
                         break
                     bsz = len(batch['input_ids'])
@@ -592,12 +679,18 @@ def main():
                             for idx in indices_list:
                                 prompts_discrete_indices_ngram_list.append(ngram_list[idx])
                             prompts_discrete_ngram_indices = torch.tensor(prompts_discrete_indices_ngram_list)
-                            cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device), prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
-                        else: 
-                            cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device), prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
+                            cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                       prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                           args.device), batch['input_ids'][:, 1:]], dim=1)
+                        else:
+                            cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                       prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                           args.device), batch['input_ids'][:, 1:]], dim=1)
 
-                        cur_attention_mask = torch.cat([torch.ones(bsz, 1).to(args.device), torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"][:, 1:]],dim=1)
-                        mask_pos = np.where(np.array(cur_input_ids.cpu()) == tokenizer.mask_token_id) 
+                        cur_attention_mask = torch.cat(
+                            [torch.ones(bsz, 1).to(args.device), torch.ones(bsz, prompt_length).to(args.device),
+                             batch["attention_mask"][:, 1:]], dim=1)
+                        mask_pos = np.where(np.array(cur_input_ids.cpu()) == tokenizer.mask_token_id)
                         mask_pos = torch.tensor(mask_pos[-1])
                         sequence_output = train_api_request(input_ids=cur_input_ids, attention_mask=cur_attention_mask)
                         last_hidden_state = sequence_output[0].squeeze()
@@ -607,7 +700,7 @@ def main():
                         label_map = {}
                         for target in label_keys:
                             label_map[tokenizer.encode(target, add_special_tokens=False)[0]] = label_to_id[target]
-                        
+
                         converted_target = label.clone()
                         for key, val in label_map.items():
                             converted_target[label == key] = val
@@ -625,22 +718,30 @@ def main():
                             raise ApiCallLimitError()
 
                     loss_avg = sum(loss_list) / args.sample_size
-                    
+
                     prompt_optimizer.zero_grad()
 
-                    derivative = (-1 / prompts_probs).repeat(args.sample_size, 1, 1)
+                    derivative = torch.zeros_like(alphas).repeat(args.sample_size, 1, 1)
                     for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
                         for i in range(prompt_length):
-                            derivative[k][i][prompts_discrete_indices[i]] *= -1
+                            prompt_optimizer.zero_grad()
+                            # log(Pij)
+                            log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
+                            # 计算log(P)的梯度
+                            log_prob.backward()
+                            derivative[k] += alphas.grad
 
-                    prompts_probs.grad = torch.zeros_like(prompts_probs)
+                    alphas.grad = torch.zeros_like(alphas)
                     for k in range(args.sample_size):
-                        prompts_probs.grad += 1 / (args.sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
-                    
+                        alphas.grad += 1 / (args.sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
+                    print("总alphas.grad:", torch.linalg.norm(alphas.grad))
+
                     torch.nn.utils.clip_grad_norm_(prompts_probs, 3)
                     prompt_optimizer.step()
+                    print("alphas_change:", torch.linalg.norm(alphas - prev_alphas))
+                    prev_alphas = alphas.clone()
                     constrainScoreByWholeExact(prompts_probs)
-                    
+
                     if step % args.gradient_accumulation_steps == 0 or step == len(train_dataloader) - 1:
                         progress_bar.update(1)
                         completed_steps += 1
@@ -649,7 +750,8 @@ def main():
         except ApiCallLimitError:
             pass
 
-        eval_result = evaluate(args, model, eval_dataloader, metric, ce_loss, config, accelerator, epoch, eval_results, prompts_probs=prompts_probs, prompt_length=prompt_length, tokenizer=tokenizer)
+        eval_result = evaluate(args, model, eval_dataloader, metric, ce_loss, config, accelerator, epoch, eval_results,
+                               prompts_probs=prompts_probs, prompt_length=prompt_length, tokenizer=tokenizer)
 
         if eval_result >= best_eval_result:
             best_eval_result = eval_result
@@ -657,13 +759,16 @@ def main():
 
         if 'cuda' in str(args.device):
             torch.cuda.empty_cache()
-            
+
         if train_api_request.count >= args.api_limit:
             break
-    
-    test(args, model, test_dataloader, metric, accelerator, epoch, test_results, prompts_probs=best_prompts_probs, prompt_length=prompt_length, tokenizer=tokenizer, test_dataloader_mm=test_dataloader_mm)
 
-def evaluate(args,  model, eval_dataloader, metric, ce_loss,config, accelerator, epoch, results, prompts_probs=None, prompt_length=None,tokenizer=None):
+    test(args, model, test_dataloader, metric, accelerator, epoch, test_results, prompts_probs=best_prompts_probs,
+         prompt_length=prompt_length, tokenizer=tokenizer, test_dataloader_mm=test_dataloader_mm)
+
+
+def evaluate(args, model, eval_dataloader, metric, ce_loss, config, accelerator, epoch, results, prompts_probs=None,
+             prompt_length=None, tokenizer=None):
     prompts_discrete_indices = prompts_probs.argmax(1)
 
     if args.use_ngram:
@@ -679,14 +784,19 @@ def evaluate(args,  model, eval_dataloader, metric, ce_loss,config, accelerator,
         bsz = len(batch['input_ids'])
 
         if args.use_ngram:
-            batch['input_ids'] = torch.cat([torch.zeros(bsz,1, dtype=torch.long).to(args.device), prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
+            batch['input_ids'] = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                            prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(args.device),
+                                            batch['input_ids'][:, 1:]], dim=1)
         else:
-            batch['input_ids'] = torch.cat([torch.zeros(bsz,1, dtype=torch.long).to(args.device), prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
-        batch["attention_mask"] = torch.cat([torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"]],dim=1)
+            batch['input_ids'] = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                            prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(args.device),
+                                            batch['input_ids'][:, 1:]], dim=1)
+        batch["attention_mask"] = torch.cat([torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"]],
+                                            dim=1)
 
-        mask_pos=np.where(np.array(batch['input_ids'].cpu()) == tokenizer.mask_token_id) 
+        mask_pos = np.where(np.array(batch['input_ids'].cpu()) == tokenizer.mask_token_id)
         mask_pos = torch.tensor(mask_pos[-1])
-        label_to_id = model.config.label2id 
+        label_to_id = model.config.label2id
 
         sequence_output = model(input_ids=batch['input_ids'], attention_mask=batch["attention_mask"])
         last_hidden_state = sequence_output[0].squeeze()
@@ -730,7 +840,9 @@ def evaluate(args,  model, eval_dataloader, metric, ce_loss,config, accelerator,
 
     return eval_result
 
-def test(args, model, test_dataloader, metric, accelerator, epoch, results, prompts_probs=None, prompt_length=None, tokenizer=None, test_dataloader_mm=None):
+
+def test(args, model, test_dataloader, metric, accelerator, epoch, results, prompts_probs=None, prompt_length=None,
+         tokenizer=None, test_dataloader_mm=None):
     if args.task_name == None or args.k_shot >= 0:
         prompts_discrete_indices = prompts_probs.argmax(1)
 
@@ -745,17 +857,22 @@ def test(args, model, test_dataloader, metric, accelerator, epoch, results, prom
             if args.trial and step >= 100:
                 break
             bsz = len(batch['input_ids'])
-            
+
             if args.use_ngram:
-                batch['input_ids'] = torch.cat([torch.zeros(bsz,1, dtype=torch.long).to(args.device), prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
+                batch['input_ids'] = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                    args.device), batch['input_ids'][:, 1:]], dim=1)
                 prompt_sample = tokenizer.decode(prompts_discrete_indices_ngram_list)
             else:
-                batch['input_ids'] = torch.cat([torch.zeros(bsz,1, dtype=torch.long).to(args.device), prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
-            batch["attention_mask"] = torch.cat([torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"]],dim=1)
+                batch['input_ids'] = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(args.device),
+                                                batch['input_ids'][:, 1:]], dim=1)
+            batch["attention_mask"] = torch.cat(
+                [torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"]], dim=1)
 
-            mask_pos = np.where(np.array(batch['input_ids'].cpu()) == tokenizer.mask_token_id) 
+            mask_pos = np.where(np.array(batch['input_ids'].cpu()) == tokenizer.mask_token_id)
             mask_pos = torch.tensor(mask_pos[-1])
-            label_to_id = model.config.label2id 
+            label_to_id = model.config.label2id
             sequence_output = model(input_ids=batch['input_ids'], attention_mask=batch["attention_mask"])
             last_hidden_state = sequence_output[0].squeeze()
             logits = last_hidden_state[torch.arange(last_hidden_state.size(0)), mask_pos]
@@ -764,7 +881,7 @@ def test(args, model, test_dataloader, metric, accelerator, epoch, results, prom
             label_keys = list(label_to_id.keys())
             label_map = {}
             for target in label_keys:
-                label_map[tokenizer.encode(target, add_special_tokens=False)[0]]  = label_to_id[target]
+                label_map[tokenizer.encode(target, add_special_tokens=False)[0]] = label_to_id[target]
             converted_target = label.clone()
             for key, val in label_map.items():
                 converted_target[label == key] = val
@@ -776,7 +893,7 @@ def test(args, model, test_dataloader, metric, accelerator, epoch, results, prom
                 predictions=accelerator.gather(predictions),
                 references=accelerator.gather(converted_target),
             )
-                
+
         if args.file_name in DOMAIN_DATASET:
             test_metric = metric.compute(average='macro')
         else:
@@ -785,17 +902,22 @@ def test(args, model, test_dataloader, metric, accelerator, epoch, results, prom
         if args.task_name == 'mnli':
             for step, batch in enumerate(test_dataloader_mm):
                 bsz = len(batch['input_ids'])
-                
+
                 if args.use_ngram:
-                    batch['input_ids'] = torch.cat([torch.zeros(bsz,1, dtype=torch.long).to(args.device), prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
+                    batch['input_ids'] = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                    prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                        args.device), batch['input_ids'][:, 1:]], dim=1)
                     prompt_sample = tokenizer.decode(prompts_discrete_indices_ngram_list)
                 else:
-                    batch['input_ids'] = torch.cat([torch.zeros(bsz,1, dtype=torch.long).to(args.device), prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(args.device), batch['input_ids'][:, 1:]], dim=1)
-                batch["attention_mask"] = torch.cat([torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"]],dim=1)
+                    batch['input_ids'] = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
+                                                    prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(
+                                                        args.device), batch['input_ids'][:, 1:]], dim=1)
+                batch["attention_mask"] = torch.cat(
+                    [torch.ones(bsz, prompt_length).to(args.device), batch["attention_mask"]], dim=1)
 
-                mask_pos = np.where(np.array(batch['input_ids'].cpu()) == tokenizer.mask_token_id) 
+                mask_pos = np.where(np.array(batch['input_ids'].cpu()) == tokenizer.mask_token_id)
                 mask_pos = torch.tensor(mask_pos[-1])
-                label_to_id = model.config.label2id 
+                label_to_id = model.config.label2id
                 sequence_output = model(input_ids=batch['input_ids'], attention_mask=batch["attention_mask"])
                 last_hidden_state = sequence_output[0].squeeze()
                 logits = last_hidden_state[torch.arange(last_hidden_state.size(0)), mask_pos]
@@ -804,7 +926,7 @@ def test(args, model, test_dataloader, metric, accelerator, epoch, results, prom
                 label_keys = list(label_to_id.keys())
                 label_map = {}
                 for target in label_keys:
-                    label_map[tokenizer.encode(target, add_special_tokens=False)[0]]  = label_to_id[target]
+                    label_map[tokenizer.encode(target, add_special_tokens=False)[0]] = label_to_id[target]
                 converted_target = label.clone()
                 for key, val in label_map.items():
                     converted_target[label == key] = val
@@ -829,6 +951,7 @@ def test(args, model, test_dataloader, metric, accelerator, epoch, results, prom
 
         logger.info("** test **")
         logger.info(f"epoch {epoch}: {test_metric}")
+
 
 if __name__ == "__main__":
     main()

@@ -70,7 +70,7 @@ def train(epochs, sample_size):
     best_epoch = 0
     eval_results = []
     test_results = []
-    prev_alphas = alphas  # 用于存储上一次迭代的alphas参数
+    prev_alphas = alphas.clone()  # 保存上一次的alphas参数
 
     for epoch in range(epochs):
         random.shuffle(train_data)

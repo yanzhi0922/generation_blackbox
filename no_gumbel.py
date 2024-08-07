@@ -90,8 +90,7 @@ def solve_v_total_exact(prompt_emb):
 def constrainScoreByWholeExact():
     for i in range(len(prompts_probs)):
         v, itr = solve_v_total_exact(prompts_probs[i])
-        new_embed = prompts_probs[i].sub(v).clamp(1e-5, 1-1e-5)
-        prompts_probs[i].data = new_embed.data
+        prompts_probs[i] = prompts_probs[i].sub(v).clamp(1e-5, 1-1e-5)
         if itr > 20:
              prompts_probs[i] = prompts_probs[i]/sum(prompts_probs[i])
 
