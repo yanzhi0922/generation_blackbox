@@ -3,6 +3,7 @@ import os
 import json
 import subprocess
 import os
+
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -43,7 +44,7 @@ def tigerloss(instruction, input_context, output):
             time.sleep(1)
     score = result[0].get('score', 0)  # 使用 get 方法提供默认值 0
     loss = - score if score is not None else 0
-    return loss
+    return loss*10
 
 
 def pmi():
@@ -89,27 +90,29 @@ def train(epochs, sample_size):
                 instruction = item['instruction']
                 input_context = item['input_context']
                 hypo_output = query(instruction, input_context, prompts_discrete)
-                tiger_score = tigerloss(instruction, input_context, hypo_output)
-                loss_list.append(tiger_score)
+                loss = tigerloss(instruction, input_context, hypo_output)
+                loss_list.append(loss)
             loss_avg = sum(loss_list) / sample_size
-
+            print(loss_list)
             alphas_optimizer.zero_grad()
             # 计算log(P)的梯度
             derivative = torch.zeros_like(alphas).repeat(sample_size, 1, 1)
             for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
                 for i in range(prompt_length):
-                    alphas.grad = torch.zeros_like(alphas)
+                    alphas_optimizer.zero_grad()
                     # log(Pij)
                     log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
                     # 计算log(P)的梯度
                     log_prob.backward(retain_graph=True)
                     derivative[k] += alphas.grad
+                    print(str(k)+": alphas.grad[" + str(i) + "]: ",  torch.linalg.norm(alphas.grad))
+                print("derivative" + str(k) + ": ", torch.linalg.norm(derivative[k]))
 
             alphas.grad.zero_()  # 清空alphas的梯度
 
             for k in range(sample_size):
                 alphas.grad += 1 / (sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
-
+            print("总alphas.grad:", torch.linalg.norm(alphas.grad))
             torch.nn.utils.clip_grad_norm_(alphas, 5)
             alphas_optimizer.step()
             print("epoch:", epoch, "loss_avg:", loss_avg)
@@ -214,7 +217,7 @@ if __name__ == "__main__":
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
-    client = OpenAI(api_key="sk-608af9ac56514bba9ffa078eca84fde7", base_url="https://api.deepseek.com/v1")
+    client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
     chatbot = "deepseek-chat"
     # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
     # chatbot = "moonshot-v1-8k"
@@ -227,13 +230,13 @@ if __name__ == "__main__":
     # 设置超参数
     learning_rate = 1e-3
     ngram_list = pmi()
-    prompt_length = 10
-    prompt_search_space = 200
+    prompt_length = 5
+    prompt_search_space = 20
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
-    alphas = torch.FloatTensor([[1] * prompt_search_space] * prompt_length)
+    alphas = torch.FloatTensor([[5] * prompt_search_space] * prompt_length)
     alphas.requires_grad = True
-    temperature = 10
+    temperature = 1
     alpha_change_threshold = 1e-3
 
     train(epochs=50, sample_size=10)

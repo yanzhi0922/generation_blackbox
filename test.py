@@ -1,14 +1,21 @@
-import torch
-import torch.nn.functional as F
-temperature = 10
-prompt_search_space = 5
-prompt_length = 5
-alphas = torch.FloatTensor([[1, 2, 3, 4, 5],
-                            [1, 3, 5, 7, 9],
-                            [1, 4, 7, 10, 13],
-                            [1, 5, 9, 13, 17],
-                            [1, 6, 11, 16, 21]])
-prompts_probs = F.gumbel_softmax(alphas, tau=temperature, hard=False)
-print(alphas)
-print(prompts_probs)
-print(prompts_probs.shape)
+from openai import OpenAI
+client = OpenAI(
+  api_key="sk-tFIIkEXB5icUKs6lWPTvbAwuG09hZxr3mx4xLJoq2unt38b5",
+  base_url="https://api.moonshot.cn/v1",
+)
+prompt = [
+    {"role": "system", "content":"Definition: What are a the How to you	input: sentence one: What are the best romantic songs in English? sentence two: What are the some of the best romantic songs in English? equivalent?\noutput: no"}]
+
+response =  client.completions.create(
+  model="moonshot-v1-8k",
+  messages=prompt,
+  max_tokens=1,
+  temperature=0.5,
+  logprobs=5,
+  stop='\n'
+  )
+# 打印返回的结果的结构
+#print(response.choices)
+
+for a, ans in enumerate(response.choices):
+    print(ans.logprobs.tokens)

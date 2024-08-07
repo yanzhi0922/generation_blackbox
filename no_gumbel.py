@@ -3,6 +3,8 @@ import os
 import json
 import subprocess
 import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -63,36 +65,41 @@ def solve_v_total_exact(prompt_emb):
 
     b = prompt_emb.max()
 
-    def f(v):
-        s = (prompt_emb - v).clamp(0, 1).sum()
+    def f(v_):
+        s = (prompt_emb - v_).clamp(0, 1).sum()
         return s - k
 
     itr = 0
 
     v = 0
-    while (1):
+    while 1:
         itr += 1
         v = (a + b) / 2
         obj = f(v)
-        if abs(obj) < 1e-4 or itr > 200000:
+        if abs(obj) < 1e-3 or itr > 20:
             break
+
         if obj < 0:
             b = v
         else:
             a = v
-    return v
+
+    return v, itr
 
 
 def constrainScoreByWholeExact():
     for i in range(len(prompts_probs)):
-        v = solve_v_total_exact(prompts_probs[i])
-        new_embed = prompts_probs[i].sub(v).clamp(1e-6, 1)
+        v, itr = solve_v_total_exact(prompts_probs[i])
+        new_embed = prompts_probs[i].sub(v).clamp(1e-5, 1-1e-5)
         prompts_probs[i].data = new_embed.data
+        if itr > 20:
+             prompts_probs[i] = prompts_probs[i]/sum(prompts_probs[i])
+
 
 def train(epochs, sample_size):
     prompt_optimizer = Adam([{
         "params": [prompts_probs],
-        "weight_decay": 0,
+        "weight_decay": 0.1,
         "lr": prompt_learning_rate
     }, ])
 
@@ -124,7 +131,7 @@ def train(epochs, sample_size):
                     loss = tigerloss(instruction, input_context, hypo_output)
                     loss_list.append(loss)
                 loss_avg = sum(loss_list) / sample_size
-
+                print(loss_list)
                 prompt_optimizer.zero_grad()
 
                 # prompts_probs = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length)，
@@ -139,14 +146,14 @@ def train(epochs, sample_size):
                 for k in range(sample_size):
                     prompts_probs.grad += 1 / (sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
 
-                torch.nn.utils.clip_grad_norm_(prompts_probs, 5)
+                torch.nn.utils.clip_grad_norm_(prompts_probs, 3) # 梯度裁剪。当梯度的L2范数超过5时，将梯度的L2范数缩放到5
                 prompt_optimizer.step()
                 constrainScoreByWholeExact()
-                print("epoch:", epoch, "loss_avg:", loss_avg)
+                print("epoch:", epoch, "loss_avg:", loss_avg, "Prompts_probs change:", torch.linalg.norm(prompts_probs - prev_prompts_probs))#
                 # 在第一次迭代后保存当前的alphas参数
 
         # 计算prompts_prob参数的变化
-        prompts_probs_change = torch.norm(prompts_probs - prev_prompts_probs)
+        prompts_probs_change = torch.linalg.norm(prompts_probs - prev_prompts_probs)
         prev_prompts_probs = prompts_probs.detach().clone()
         print(f"Prompts_probs change: {prompts_probs_change}")
 
@@ -233,7 +240,7 @@ if __name__ == "__main__":
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
-    client = OpenAI(api_key="sk-608af9ac56514bba9ffa078eca84fde7", base_url="https://api.deepseek.com/v1")
+    client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
     chatbot = "deepseek-chat"
     # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
     # chatbot = "moonshot-v1-8k"
@@ -241,14 +248,14 @@ if __name__ == "__main__":
     # 读取数据
     data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
     pmi_data = "data/pmi_mrpc_gpt.txt"
-    train_data = data[:int(0.1 * len(data))]
-    test_data = data[int(0.9 * len(data)):]
+    train_data = data[:int(0.7 * len(data))]
+    test_data = data[int(0.7 * len(data)):]
 
     # 超参数
     prompt_learning_rate = 1e-3
     ngram_list = pmi()
     prompt_length = 10
-    prompt_search_space = 200
+    prompt_search_space = 20
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
     prompts_probs = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length)
