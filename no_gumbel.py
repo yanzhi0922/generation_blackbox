@@ -12,7 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions import Categorical
 import random
-from torch.optim import Adam
+from torch.optim import Adam, AdamW
 
 
 def query(instruction, input_context, prompt=""):
@@ -27,7 +27,8 @@ def query(instruction, input_context, prompt=""):
             hypo_output = client.chat.completions.create(
                 model=chatbot,
                 messages=message,
-                stream=False
+                stream=False,
+                max_tokens=1024
             )
             received = True
         except:
@@ -96,11 +97,10 @@ def constrainScoreByWholeExact():
 
 
 def train(epochs, sample_size):
-    prompt_optimizer = Adam([{
+    prompt_optimizer = AdamW([{
         "params": [prompts_probs],
         "weight_decay": 0.1,
-        "lr": prompt_learning_rate
-    }, ])
+    }], lr=prompt_learning_rate)
 
     best_eval_result = 0.0
     best_prompts_probs = None
@@ -148,7 +148,7 @@ def train(epochs, sample_size):
                 torch.nn.utils.clip_grad_norm_(prompts_probs, 3) # 梯度裁剪。当梯度的L2范数超过5时，将梯度的L2范数缩放到5
                 prompt_optimizer.step()
                 constrainScoreByWholeExact()
-                print("epoch:", epoch, "loss_avg:", loss_avg, "Prompts_probs change:", torch.linalg.norm(prompts_probs - prev_prompts_probs))#
+                print("epoch:", epoch, "loss_avg:", loss_avg, "Prompts_probs.grad:", torch.linalg.norm(prompts_probs.grad))
                 # 在第一次迭代后保存当前的alphas参数
 
         # 计算prompts_prob参数的变化
@@ -177,7 +177,7 @@ def train(epochs, sample_size):
     torch.save(best_prompts_probs, save_path)
     return
 
-def evaluate(sample_size=5):
+def evaluate(sample_size=2):
     eval_result = 0
     for item in test_data:
         prompts_dist = torch.distributions.Categorical(prompts_probs)
@@ -200,7 +200,7 @@ def evaluate(sample_size=5):
     eval_result /= len(test_data)
     return eval_result
 
-def test(sample_size=10):
+def test(sample_size=3):
     test_result = []
     origin_result = []
     for item in test_data:
@@ -234,9 +234,9 @@ def test(sample_size=10):
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     # set up scorer
-    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
+    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
     client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")

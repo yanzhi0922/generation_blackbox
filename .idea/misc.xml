@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="tigerscore" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="tigerscore_auto (3)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="tigervllm" project-jdk-type="Python SDK" />
 </project>

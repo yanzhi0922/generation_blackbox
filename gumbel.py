@@ -3,7 +3,8 @@ import os
 import json
 import subprocess
 import os
-
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -26,7 +27,8 @@ def query(instruction, input_context, prompt=""):
             hypo_output = client.chat.completions.create(
                 model=chatbot,
                 messages=message,
-                stream=False
+                stream=False,
+                max_tokens=1024
             )
             received = True
         except:
@@ -59,9 +61,9 @@ def pmi():
 
 
 def train(epochs, sample_size):
-    alphas_optimizer = Adam([{
+    prompt_optimizer = Adam([{
         "params": [alphas],
-        "weight_decay": 0,
+        "weight_decay": 0.1,
         "lr": learning_rate
     }, ])
 
@@ -94,12 +96,12 @@ def train(epochs, sample_size):
                 loss_list.append(loss)
             loss_avg = sum(loss_list) / sample_size
             print(loss_list)
-            alphas_optimizer.zero_grad()
+            prompt_optimizer.zero_grad()
             # 计算log(P)的梯度
             derivative = torch.zeros_like(alphas).repeat(sample_size, 1, 1)
             for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
                 for i in range(prompt_length):
-                    alphas_optimizer.zero_grad()
+                    prompt_optimizer.zero_grad()
                     # log(Pij)
                     log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
                     # 计算log(P)的梯度
@@ -114,7 +116,7 @@ def train(epochs, sample_size):
                 alphas.grad += 1 / (sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
             print("总alphas.grad:", torch.linalg.norm(alphas.grad))
             torch.nn.utils.clip_grad_norm_(alphas, 5)
-            alphas_optimizer.step()
+            prompt_optimizer.step()
             print("epoch:", epoch, "loss_avg:", loss_avg)
 
         # 计算alphas参数的变化
@@ -138,8 +140,8 @@ def train(epochs, sample_size):
         if 'cuda' in str(device):
             torch.cuda.empty_cache()
 
-    save_path = "data/best_alphas.pt"
-    torch.save(best_alphas, save_path)
+        save_path = "data/best_alphas.pt"
+        torch.save(best_alphas, save_path)
     print("Finished training")
     return
 
@@ -212,9 +214,9 @@ def gumbel_softmax(alph, tau, hard=False):
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     # set up scorer
-    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
+    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
     client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
@@ -240,7 +242,7 @@ if __name__ == "__main__":
     alpha_change_threshold = 1e-3
 
     train(epochs=50, sample_size=10)
-    test_result, origin_result = test(5)
+    test_result, origin_result = test(3)
 
     print("test_result:", sum(test_result))
     print("origin_result:", sum(origin_result))

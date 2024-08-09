@@ -3,7 +3,6 @@ import logging
 import torch
 import math
 import os
-
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
 import random
@@ -104,29 +103,28 @@ TEMPLATE_CONFIG = {
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Finetune a transformers model on a text classification task")
-    parser.add_argument("--task_name", type=str, default='mrpc', help="The name of the glue task.",
+    parser.add_argument("--task_name", type=str, default='qqp', help="The name of the glue task.",
                         choices=list(task_to_keys.keys()))
     parser.add_argument("--file_name", type=str, default=None, help="The name of the domain-specific task.")
     parser.add_argument("--low_resource", action="store_true")
     parser.add_argument("--ce_loss", type=bool, default=True)
-    parser.add_argument("--sample_size", type=int, default=20, help="IMPORTANT, sample size per batch")
-    parser.add_argument("--prompt_length", type=int, default=6)
-    parser.add_argument("--prompt_learning_rate", type=float, default=5e-5)
-    parser.add_argument("--prompt_search_space", type=int, default=20)
+    parser.add_argument("--sample_size", type=int, default=30, help="IMPORTANT, sample size per batch")
+    parser.add_argument("--prompt_length", type=int, default=25)
+    parser.add_argument("--prompt_learning_rate", type=float, default=5e-3)
+    parser.add_argument("--prompt_search_space", type=int, default=60)
     parser.add_argument("--num_train_epochs", type=int, default=30, help="Total number of training epochs to perform.")
     parser.add_argument("--ckpt_path", type=str, default="./ckpts")
     parser.add_argument("--margin", type=float, default=1)
     parser.add_argument("--trial", action="store_true")
-    parser.add_argument("--use_wandb", action="store_true", default=True, help="Whether to run wandb.")
     parser.add_argument("--cuda", type=int, default=0)
     parser.add_argument("--max_length", type=int, default=450, help=(
         "The maximum total input sequence length after tokenization. Sequences longer than this will be truncated,"
         " sequences shorter will be padded if `--pad_to_max_lengh` is passed."))
     parser.add_argument("--pad_to_max_length", action="store_true",
                         help="If passed, pad all samples to `max_length`. Otherwise, dynamic padding is used.")
-    parser.add_argument("--per_device_train_batch_size", type=int, default=128,
+    parser.add_argument("--per_device_train_batch_size", type=int, default=16,
                         help="Batch size (per device) for the training dataloader.")
-    parser.add_argument("--per_device_eval_batch_size", type=int, default=32,
+    parser.add_argument("--per_device_eval_batch_size", type=int, default=16,
                         help="Batch size (per device) for the evaluation dataloader.")
     parser.add_argument("--model_name_or_path", type=str, default='roberta-large',
                         help="Path to pretrained model or model identifier from huggingface.co/models.")
@@ -144,7 +142,7 @@ def parse_args():
                         help="Number of steps for the warmup in the lr scheduler.")
     parser.add_argument("--output_dir", type=str, default=None, help="Where to store the final model.")
     parser.add_argument("--seed", type=int, default=42, help="A seed for reproducible training.")
-    parser.add_argument("--k_shot", default=-1, type=int, help="-1 denotes full-shot")
+    parser.add_argument("--k_shot", default=16, type=int, help="-1 denotes full-shot")
     parser.add_argument("--use_ngram", default=True, type=bool, help="If True, will extract ngrams and use them.")
     parser.add_argument("--api_limit", type=int, default=8000, help="The limit of the API request")
     args = parser.parse_args()
@@ -217,9 +215,6 @@ def main():
     args.experiment_id = task_name + str(args.prompt_length) + str(args.prompt_learning_rate) \
                          + str(args.num_train_epochs) + str(args.seed) + str(
         args.prompt_search_space) + ce_loss_string  # 'dataset/CI/train.csv1020.0013042160.01falseFALSE'
-
-    if args.use_wandb:
-        args.group_name = "RoBERTa_BDPL_" + task_name
 
     # Initialize the accelerator. We will let the accelerator handle device placement for us in this example.
     accelerator = Accelerator()
@@ -495,22 +490,6 @@ def main():
     else:
         data_collator = DataCollatorWithPadding(tokenizer, pad_to_multiple_of=(8 if accelerator.use_fp16 else None))
 
-    # 计算1%的样本数量
-    train_sample_size = int(len(train_dataset) * 0.01)
-    eval_sample_size = int(len(eval_dataset) * 0.01)
-    test_sample_size = int(len(test_dataset) * 0.01)
-
-    # 随机选择索引
-    random.seed(42)  # 设置随机种子以确保结果可重现
-    train_random_indices = random.sample(range(len(train_dataset)), train_sample_size)
-    eval_random_indices = random.sample(range(len(eval_dataset)), eval_sample_size)
-    test_random_indices = random.sample(range(len(test_dataset)), test_sample_size)
-
-    # 使用选定的索引创建 Subset
-    train_subset = Subset(train_dataset, train_random_indices)
-    eval_subset = Subset(eval_dataset, eval_random_indices)
-    test_subset = Subset(test_dataset, test_random_indices)
-
     # 创建新的 DataLoader
     train_dataloader = DataLoader(train_dataset, shuffle=True, collate_fn=data_collator,
                                   batch_size=args.per_device_train_batch_size)
@@ -639,19 +618,14 @@ def main():
 
                 prompt_optimizer.zero_grad()
 
-                derivative = torch.zeros_like(alphas).repeat(args.sample_size, 1, 1)
-                for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
-                    for i in range(prompt_length):
-                        prompt_optimizer.zero_grad()
-                        # log(Pij)
-                        log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
-                        # 计算log(P)的梯度
-                        log_prob.backward(retain_graph=True)
-                        derivative[k] += alphas.grad
+                derivative = torch.zeros_like(alphas)
+                for prompts_discrete_indices, loss in zip(prompts_discrete_indices_list, loss_list):
+                    log_probs = prompts_probs.gather(1, prompts_discrete_indices.unsqueeze(1)).squeeze()
+                    log_prob = torch.log(log_probs).sum()
+                    log_prob.backward(retain_graph=True)
+                    derivative += alphas.grad * (loss - loss_avg)
 
-                alphas.grad = torch.zeros_like(alphas)
-                for k in range(args.sample_size):
-                    alphas.grad += 1 / (args.sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
+                alphas.grad = derivative / (args.sample_size - 1)
                 print("总alphas.grad:", torch.linalg.norm(alphas.grad))
 
                 torch.nn.utils.clip_grad_norm_(prompts_probs, 3)
@@ -664,89 +638,7 @@ def main():
                     completed_steps += 1
                 if completed_steps >= args.max_train_steps:
                     break
-                    if args.trial and step >= 100:
-                        break
-                    bsz = len(batch['input_ids'])
-                    label = batch["labels"].to(args.device)
-                    loss_list = []
-                    prompts_discrete_indices_list = []
-                    for k in range(args.sample_size):
-                        prompts_discrete_indices = prompts_dist.sample()
-                        prompts_discrete_indices_list.append(prompts_discrete_indices)
-                        if args.use_ngram:
-                            prompts_discrete_indices_ngram_list = []
-                            indices_list = prompts_discrete_indices.int().tolist()
-                            for idx in indices_list:
-                                prompts_discrete_indices_ngram_list.append(ngram_list[idx])
-                            prompts_discrete_ngram_indices = torch.tensor(prompts_discrete_indices_ngram_list)
-                            cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
-                                                       prompts_discrete_ngram_indices.unsqueeze(0).repeat(bsz, 1).to(
-                                                           args.device), batch['input_ids'][:, 1:]], dim=1)
-                        else:
-                            cur_input_ids = torch.cat([torch.zeros(bsz, 1, dtype=torch.long).to(args.device),
-                                                       prompts_discrete_indices.unsqueeze(0).repeat(bsz, 1).to(
-                                                           args.device), batch['input_ids'][:, 1:]], dim=1)
 
-                        cur_attention_mask = torch.cat(
-                            [torch.ones(bsz, 1).to(args.device), torch.ones(bsz, prompt_length).to(args.device),
-                             batch["attention_mask"][:, 1:]], dim=1)
-                        mask_pos = np.where(np.array(cur_input_ids.cpu()) == tokenizer.mask_token_id)
-                        mask_pos = torch.tensor(mask_pos[-1])
-                        sequence_output = train_api_request(input_ids=cur_input_ids, attention_mask=cur_attention_mask)
-                        last_hidden_state = sequence_output[0].squeeze()
-                        logits = last_hidden_state[torch.arange(last_hidden_state.size(0)), mask_pos]
-
-                        label_keys = list(label_to_id.keys())
-                        label_map = {}
-                        for target in label_keys:
-                            label_map[tokenizer.encode(target, add_special_tokens=False)[0]] = label_to_id[target]
-
-                        converted_target = label.clone()
-                        for key, val in label_map.items():
-                            converted_target[label == key] = val
-                        interest_index = list(label_map.keys())
-                        logits = logits[:, interest_index]
-                        pred = logits.argmax(dim=-1)
-
-                        if args.ce_loss:
-                            loss = ce_loss(logits.view(-1, config.num_labels), converted_target)
-                        else:
-                            loss = hingeloss(logits, converted_target)
-                        loss_list.append(loss.item())
-
-                        if train_api_request.count >= args.api_limit:
-                            raise ApiCallLimitError()
-
-                    loss_avg = sum(loss_list) / args.sample_size
-
-                    prompt_optimizer.zero_grad()
-
-                    derivative = torch.zeros_like(alphas).repeat(args.sample_size, 1, 1)
-                    for k, prompts_discrete_indices in enumerate(prompts_discrete_indices_list):
-                        for i in range(prompt_length):
-                            prompt_optimizer.zero_grad()
-                            # log(Pij)
-                            log_prob = torch.log(prompts_probs[i][prompts_discrete_indices[i]])
-                            # 计算log(P)的梯度
-                            log_prob.backward()
-                            derivative[k] += alphas.grad
-
-                    alphas.grad = torch.zeros_like(alphas)
-                    for k in range(args.sample_size):
-                        alphas.grad += 1 / (args.sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
-                    print("总alphas.grad:", torch.linalg.norm(alphas.grad))
-
-                    torch.nn.utils.clip_grad_norm_(prompts_probs, 3)
-                    prompt_optimizer.step()
-                    print("alphas_change:", torch.linalg.norm(alphas - prev_alphas))
-                    prev_alphas = alphas.clone()
-                    constrainScoreByWholeExact(prompts_probs)
-
-                    if step % args.gradient_accumulation_steps == 0 or step == len(train_dataloader) - 1:
-                        progress_bar.update(1)
-                        completed_steps += 1
-                    if completed_steps >= args.max_train_steps:
-                        break
         except ApiCallLimitError:
             pass
 
