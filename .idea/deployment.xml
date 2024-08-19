@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="root@connect.westb.seetacloud.com:13353 password" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="root@region-42.seetacloud.com:23397 password" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="root@connect.bjb1.seetacloud.com:27863 password">
         <serverdata>
@@ -156,6 +156,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="root@connect.westc.gpuhub.com:36491 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_316" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="root@connect.yza1.seetacloud.com:18016 password">
         <serverdata>
           <mappings>
@@ -191,6 +198,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="root@i-1.gpushare.com:7863 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_387" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="root@region-31.seetacloud.com:47532 password">
         <serverdata>
           <mappings>
@@ -216,6 +230,13 @@
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@region-42.seetacloud.com:23397 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_951" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

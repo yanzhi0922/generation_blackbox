@@ -4,7 +4,8 @@ import torch
 import math
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'   # AutoDL数据盘
+# os.environ['HF_HOME'] = '/root/hy-tmp/cache'   # 恒源云数据盘
 import random
 import datasets
 from datasets import load_dataset, load_metric
@@ -108,10 +109,18 @@ def parse_args():
     parser.add_argument("--file_name", type=str, default=None, help="The name of the domain-specific task.")
     parser.add_argument("--low_resource", action="store_true")
     parser.add_argument("--ce_loss", type=bool, default=True)
+    parser.add_argument("--seed", type=int, default=42, help="A seed for reproducible training.")
+    parser.add_argument("--k_shot", default=16, type=int, help="-1 denotes full-shot")
+    parser.add_argument("--tau", type=float, default=1, help="The temperature of the Gumbel-Softmax distribution.")
     parser.add_argument("--sample_size", type=int, default=30, help="IMPORTANT, sample size per batch")
-    parser.add_argument("--prompt_length", type=int, default=25)
-    parser.add_argument("--prompt_learning_rate", type=float, default=5e-3)
-    parser.add_argument("--prompt_search_space", type=int, default=60)
+    parser.add_argument("--prompt_length", type=int, default=50)
+    parser.add_argument("--prompt_learning_rate", type=float, default=1e-4)
+    parser.add_argument("--prompt_search_space", type=int, default=100)
+    parser.add_argument("--per_device_train_batch_size", type=int, default=16,
+                        help="Batch size (per device) for the training dataloader.")
+    parser.add_argument("--per_device_eval_batch_size", type=int, default=32,
+                        help="Batch size (per device) for the evaluation dataloader.")
+
     parser.add_argument("--num_train_epochs", type=int, default=30, help="Total number of training epochs to perform.")
     parser.add_argument("--ckpt_path", type=str, default="./ckpts")
     parser.add_argument("--margin", type=float, default=1)
@@ -122,10 +131,6 @@ def parse_args():
         " sequences shorter will be padded if `--pad_to_max_lengh` is passed."))
     parser.add_argument("--pad_to_max_length", action="store_true",
                         help="If passed, pad all samples to `max_length`. Otherwise, dynamic padding is used.")
-    parser.add_argument("--per_device_train_batch_size", type=int, default=16,
-                        help="Batch size (per device) for the training dataloader.")
-    parser.add_argument("--per_device_eval_batch_size", type=int, default=16,
-                        help="Batch size (per device) for the evaluation dataloader.")
     parser.add_argument("--model_name_or_path", type=str, default='roberta-large',
                         help="Path to pretrained model or model identifier from huggingface.co/models.")
     parser.add_argument("--use_slow_tokenizer", action="store_true",
@@ -141,8 +146,6 @@ def parse_args():
     parser.add_argument("--num_warmup_steps", type=int, default=100,
                         help="Number of steps for the warmup in the lr scheduler.")
     parser.add_argument("--output_dir", type=str, default=None, help="Where to store the final model.")
-    parser.add_argument("--seed", type=int, default=42, help="A seed for reproducible training.")
-    parser.add_argument("--k_shot", default=16, type=int, help="-1 denotes full-shot")
     parser.add_argument("--use_ngram", default=True, type=bool, help="If True, will extract ngrams and use them.")
     parser.add_argument("--api_limit", type=int, default=8000, help="The limit of the API request")
     args = parser.parse_args()
@@ -558,7 +561,7 @@ def main():
     for epoch in range(args.num_train_epochs):
         try:
             for step, batch in enumerate(train_dataloader):
-                prompts_probs = F.gumbel_softmax(alphas, tau=1, hard=False)
+                prompts_probs = F.gumbel_softmax(alphas, tau=args.tau, hard=False)
                 prompts_dist = torch.distributions.Categorical(prompts_probs)
 
                 if args.trial and step >= 100:
