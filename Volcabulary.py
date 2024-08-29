@@ -1,4 +1,9 @@
 import argparse
+import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'   # AutoDL数据盘
+# os.environ['HF_HOME'] = 'D:/tmp/cache'
+os.environ["HF_HOME"] = "/mnt/d/tmp/cache"
 from collections import defaultdict
 import re
 import math
@@ -114,9 +119,9 @@ if __name__ == '__main__':
     dataset = 'data/new_mix_.json'
     output_dir = 'data/vocab.txt'
     ngram = 5
-    min_count = 2
+    min_count = 5
     min_pmi = 1
-    ngram_freq_threshold = 0.0000001
+    ngram_freq_threshold = 5
     delete_special_symbol = True
 
     print('dataset: ', dataset)

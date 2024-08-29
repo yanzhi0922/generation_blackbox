@@ -4,7 +4,8 @@ import torch
 import math
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
+os.environ['HF_HOME'] = 'D:/tmp/cache'
 import random
 import datasets
 from datasets import load_dataset, load_metric

@@ -3,7 +3,9 @@ import json
 import subprocess
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
+#os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
+os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -133,7 +135,7 @@ def train(epochs, sample_size):
     print("Finished training")
     return
 
-def evaluate(sample_size=2):
+def evaluate(sample_size=3):
     eval_result = 0
     for item in test_data:
         prompts_probs = F.gumbel_softmax(alphas, tau=temperature, hard=False)
@@ -190,21 +192,14 @@ def test(sample_size=3):
     print("Finished testing")
     return test_result, origin_result
 
-def gumbel_softmax(alph, tau, hard=False):
-    prompts_probs = torch.zeros_like(alph)
-    for i in range(prompt_length):
-        for j in range(prompt_search_space):
-            prompts_probs[i][j] = torch.exp(alph[i][j] / tau)
-        prompts_probs[i] = prompts_probs[i] / torch.sum(prompts_probs[i])
-    return prompts_probs
 
 
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     # set up scorer
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
+    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
-    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
     client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
@@ -213,15 +208,15 @@ if __name__ == "__main__":
     # chatbot = "moonshot-v1-8k"
     # 读取数据
     data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
-    pmi_data = "data/pmi_mrpc_gpt.txt"
+    pmi_data = "data/vocab.txt"
     train_data = data[:int(0.7 * len(data))]
     test_data = data[int(0.7 * len(data)):]
 
     # 设置超参数
     learning_rate = 1e-3
     ngram_list = pmi()
-    prompt_length = 5
-    prompt_search_space = 20
+    prompt_length = 30
+    prompt_search_space = 100
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
     alphas = torch.FloatTensor([[5] * prompt_search_space] * prompt_length)
@@ -229,7 +224,7 @@ if __name__ == "__main__":
     temperature = 1
     alpha_change_threshold = 1e-3
 
-    train(epochs=3, sample_size=10)
+    train(epochs=6, sample_size=10)
     test_result, origin_result = test(5)
 
     print("test_result:", sum(test_result))

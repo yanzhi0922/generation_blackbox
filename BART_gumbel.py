@@ -3,7 +3,9 @@ import json
 import subprocess
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'
+# os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'  # AutoDL
+# os.environ['HF_HOME'] = 'D:/tmp/cache'      # win11
+os.environ["HF_HOME"] = "/mnt/d/tmp/cache"    # wsl2
 import time
 from bart_score import BARTScorer
 import torch
@@ -226,7 +228,7 @@ if __name__ == "__main__":
     temperature = 1
     alpha_change_threshold = 1e-3
 
-    train(epochs=3, sample_size=10)
+    train(epochs=8, sample_size=10)
     test_result, origin_result = test(5)
 
     print("test_result:", sum(test_result))

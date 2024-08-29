@@ -4,8 +4,9 @@ import torch
 import math
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'   # AutoDL数据盘
-# os.environ['HF_HOME'] = '/root/hy-tmp/cache'   # 恒源云数据盘
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'   # AutoDL数据盘
+# os.environ['HF_HOME'] = 'D:/tmp/cache'
+os.environ["HF_HOME"] = "/mnt/d/tmp/cache"
 import random
 import datasets
 from datasets import load_dataset, load_metric
@@ -104,7 +105,7 @@ TEMPLATE_CONFIG = {
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Finetune a transformers model on a text classification task")
-    parser.add_argument("--task_name", type=str, default='qqp', help="The name of the glue task.",
+    parser.add_argument("--task_name", type=str, default='mrpc', help="The name of the glue task.",
                         choices=list(task_to_keys.keys()))
     parser.add_argument("--file_name", type=str, default=None, help="The name of the domain-specific task.")
     parser.add_argument("--low_resource", action="store_true")
@@ -516,11 +517,11 @@ def main():
 
     # Get the metric function
     if args.task_name is not None:
-        metric = load_metric("glue", args.task_name, experiment_id=args.experiment_id)
+        metric = load_metric("glue", args.task_name, experiment_id=args.experiment_id, trust_remote_code=True)
     elif args.file_name in DOMAIN_DATASET:
-        metric = load_metric('f1', args.experiment_id)
+        metric = load_metric('f1', args.experiment_id, trust_remote_code=True)
     else:
-        metric = load_metric('accuracy', args.experiment_id)
+        metric = load_metric('accuracy', args.experiment_id, trust_remote_code=True)
 
     # Only show the progress bar once on each machine.
     progress_bar = tqdm(range(args.max_train_steps), disable=not accelerator.is_local_main_process)
