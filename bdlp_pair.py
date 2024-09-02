@@ -3,8 +3,8 @@ import json
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 #os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
-#os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
-os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
+#os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -14,10 +14,11 @@ from torch.distributions import Categorical
 import random
 from torch.optim import AdamW
 from concurrent.futures import ThreadPoolExecutor
+import matplotlib.pyplot as plt
 
 def solve_v_total_exact(prompt_emb):
     k = 1
-    a, b = 0, 0
+    a, b = -3, 0
 
     b = prompt_emb.max()
 
@@ -105,18 +106,17 @@ def pmi():
     return ngram_index_list
 
 def train(epochs, sample_size):
-    prompt_optimizer = AdamW([{
-        "params": [prompts_probs],
-        "weight_decay": 0.1,
-    }], lr=learning_rate)
-
     best_eval_result = 0.0
-    best_alphas = None
+    best_probs = None
     best_epoch = 0
     eval_results = []
     test_results = []
+    train_losses = []
+    patience = 0
+    prev_prompts_probs = prompts_probs.clone()
 
     for epoch in range(epochs):
+        epoch_loss = 0
         random.shuffle(train_data)
         for item in train_data:
             prompts_dist = torch.distributions.Categorical(prompts_probs)
@@ -137,7 +137,9 @@ def train(epochs, sample_size):
                 for hypo_output in hypo_outputs:
                     loss = tigerloss(item['instruction'], item['input_context'], hypo_output)
                     loss_list.append(loss)
+
                 loss_avg = sum(loss_list) / sample_size
+                epoch_loss += loss_avg
                 print(loss_list)
 
                 prompt_optimizer.zero_grad()
@@ -151,19 +153,50 @@ def train(epochs, sample_size):
                 for k in range(sample_size):
                     prompts_probs.grad += 1 / (sample_size - 1) * (loss_list[k] - loss_avg) * derivative[k]
 
+                prompts_probs.grad += loss_avg
                 torch.nn.utils.clip_grad_norm_(prompts_probs, 3)
                 prompt_optimizer.step()
                 constrainScoreByWholeExact(prompts_probs)
-
                 print("epoch:", epoch, "loss_avg:", loss_avg)
 
+        epoch_loss /= len(train_data)
+        train_losses.append(epoch_loss)
+        print("Epoch:", epoch, "Training Loss:", epoch_loss)
 
+        probs_change = torch.norm(prompts_probs - prev_prompts_probs)
+        prev_prompts_probs = prompts_probs.detach().clone()
         eval_result = evaluate()
-
+        eval_results.append(eval_result)
         # 检查是否有性能提升或alphas参数变化是否小于阈值
-        if eval_result > best_eval_result:
+        if eval_result < best_eval_result:
             best_eval_result = eval_result
-            print(f"New best eval result: {best_eval_result} at epoch {epoch}")
+            best_probs = prompts_probs.clone()
+            best_epoch = epoch
+            print(f"New best eval result: {best_eval_result} at epoch {epoch} with probs_change {probs_change}")
+            patience = 0
+        else:
+            patience += 1
+            print(f"Patience counter: {patience}")
+
+        if probs_change < probs_change_threshold or patience >= patience_threshold:
+            print(f"Stopping training. probs_change: {probs_change}, patience: {patience}")
+            break
+
+        # 保存检查点
+        if (epoch + 1) % checkpoint_interval == 0:
+            checkpoint_path = f"data/checkpoint/bdql_checkpoint_epoch_{epoch + 1}.pt"
+            torch.save({
+                'epoch': epoch + 1,
+                'prompts_probs': prompts_probs,
+                'optimizer': prompt_optimizer.state_dict(),
+                'train_losses': train_losses,
+                'eval_results': eval_results,
+                'test_results': test_results,
+                'best_eval_result': best_eval_result,
+                'best_probs': best_probs,
+                'best_epoch': best_epoch,
+            }, checkpoint_path)
+            print(f"Checkpoint saved at epoch {epoch + 1}")
 
         # 如果cuda内存不够，清理一下
         if 'cuda' in str(device):
@@ -172,6 +205,16 @@ def train(epochs, sample_size):
     save_path = "data/prompt_probs.pt"
     torch.save(prompts_probs, save_path)
     print("Finished training")
+
+    # 绘制训练和验证损失
+    plt.figure(figsize=(10, 5))
+    plt.plot(train_losses, label='Training Loss')
+    plt.plot(eval_results, label='Validation Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training and Validation Loss')
+    plt.legend()
+    plt.show()
     return
 
 def evaluate(sample_size=5):
@@ -230,6 +273,8 @@ def test(sample_size=5):
         print("test_loss_avg:", loss_avg)
         print("origin_loss_avg:", origin_loss_avg)
     print("Finished testing")
+    test_result /= len(test_data)
+    origin_result /= len(test_data)
     return test_result, origin_result
 
 
@@ -255,14 +300,24 @@ if __name__ == "__main__":
     # 设置超参数
     learning_rate = 1e-3
     ngram_list = pmi()
-    prompt_length = 30
+    prompt_length = 35
     prompt_search_space = 100
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
     prompts_probs = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length)
     prompts_probs.requires_grad = True
+    probs_change_threshold = 1e-3
+    patience_threshold = 5
+    checkpoint_interval = 5
 
-    train(epochs=6, sample_size=10)
+
+    # 设置优化器
+    prompt_optimizer = AdamW([{
+        "params": [prompts_probs],
+        "weight_decay": 0.1,
+    }], lr=learning_rate)
+
+    train(epochs=20, sample_size=10)
     test_result, origin_result = test(5)
 
     print("test_result:", sum(test_result))
