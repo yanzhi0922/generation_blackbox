@@ -140,7 +140,7 @@ def train(epochs, sample_size):
         if 'cuda' in str(device):
             torch.cuda.empty_cache()
 
-        save_path = "data/best_alphas.pt"
+        save_path = "data/best_alphas0902.pt"
         torch.save(best_alphas, save_path)
     print("Finished training")
     return

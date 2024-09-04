@@ -14,12 +14,13 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 import random
 from torch.optim import Adam, AdamW
+from concurrent.futures import ThreadPoolExecutor
 
 
-def query(instruction, input_context, prompt=""):
+def query(input):
     message = [
         {"role": "system", "content": ""},
-        {"role": "user", "content": prompt + instruction + input_context},
+        {"role": "user", "content": input},
     ]
     hypo_output = None
     received = False
@@ -29,12 +30,24 @@ def query(instruction, input_context, prompt=""):
                 model=chatbot,
                 messages=message,
                 stream=False,
-                max_tokens=1024
+                max_tokens=960
             )
             received = True
         except:
             time.sleep(1)
     return hypo_output.choices[0].message.content
+
+def query_concurrently(prompts, instruction, input_context):
+    with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
+        futures = [executor.submit(query, p + instruction + input_context) for p in prompts]
+        results = [future.result() for future in futures]
+    return results
+
+def query_concurrently_sample_size(sample_size, instruction, input_context):
+    with ThreadPoolExecutor(max_workers=sample_size) as executor:
+        futures = [executor.submit(query, instruction + input_context) for _ in range(sample_size)]
+        results = [future.result() for future in futures]
+    return results
 
 
 def tigerloss(instruction, input_context, output):
@@ -60,14 +73,13 @@ def pmi():
     return ngram_index_list
 
 
-def test(sample_size=3):
-    test_result = []
-    origin_result = []
+def evaluate(sample_size=5):
+    eval_result = 0
     for item in test_data:
-        prompts_probs = F.gumbel_softmax(alphas, tau=temperature, hard=False)
+        prompts_probs = F.softmax(alphas,dim=-1)
         prompts_dist = torch.distributions.Categorical(prompts_probs)
         loss_list = []
-        origin_loss_list = []
+        prompts = []
         for k in range(sample_size):
             prompts_discrete_indices = prompts_dist.sample()
             prompts_discrete_ngram_list = []
@@ -75,16 +87,47 @@ def test(sample_size=3):
             for idx in indices_list:
                 prompts_discrete_ngram_list.append(ngram_list[idx])
             prompts_discrete = ' '.join(prompts_discrete_ngram_list)
-            instruction = item['instruction']
-            input_context = item['input_context']
-            output = query(instruction, input_context, prompts_discrete)
-            output_origin = query(instruction, input_context)
-            loss = tigerloss(instruction, input_context, output)
-            origin_loss = tigerloss(instruction, input_context, output_origin)
+            prompts.append(prompts_discrete)
+        hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
+
+        for hypo_output in hypo_outputs:
+            loss = tigerloss(item['instruction'], item['input_context'], hypo_output)
+            loss_list.append(loss)
+        loss_avg = sum(loss_list) / sample_size
+        print("eval_loss_avg:", loss_avg)
+        eval_result += loss_avg
+
+    eval_result /= len(test_data)
+    return eval_result
+
+def test(sample_size=5):
+    test_result = []
+    origin_result = []
+    for item in test_data:
+        prompts_probs = F.softmax(alphas,dim=-1)
+        prompts_dist = torch.distributions.Categorical(prompts_probs)
+        loss_list = []
+        origin_loss_list = []
+        prompts = []
+        for k in range(sample_size):
+            prompts_discrete_indices = prompts_dist.sample()
+            prompts_discrete_ngram_list = []
+            indices_list = prompts_discrete_indices.int().tolist()
+            for idx in indices_list:
+                prompts_discrete_ngram_list.append(ngram_list[idx])
+            prompts_discrete = ' '.join(prompts_discrete_ngram_list)
+            prompts.append(prompts_discrete)
+        outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
+        outputs_origin = query_concurrently_sample_size(sample_size, item['instruction'], item['input_context'])
+        for output, output_origin in zip(outputs, outputs_origin):
+            loss = tigerloss(item['instruction'], item['input_context'], output)
+            origin_loss = tigerloss(item['instruction'], item['input_context'], output_origin)
             loss_list.append(loss)
             origin_loss_list.append(origin_loss)
         loss_avg = sum(loss_list) / sample_size
+        loss_avg /= len(test_data)
         origin_loss_avg = sum(origin_loss_list) / sample_size
+        origin_loss_avg /= len(test_data)
         test_result.append(loss_avg)
         origin_result.append(origin_loss_avg)
         print("test_loss_avg:", loss_avg)
@@ -115,15 +158,14 @@ if __name__ == "__main__":
     # 设置超参数
     learning_rate = 1e-3
     ngram_list = pmi()
-    prompt_length = 30
+    prompt_length = 35
     prompt_search_space = 100
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
     # 从文件夹data/best_alphas0828.pth中加载最优的alphas
-    alphas = torch.load("data/best_alphas0828.pt",weights_only=True)
+    alphas = torch.load("data/best_alphas.pt",weights_only=True)
     alphas.requires_grad = True
     temperature = 1
-    alpha_change_threshold = 1e-3
 
     test_result, origin_result = test(5)
 

@@ -1,21 +1,45 @@
 from openai import OpenAI
-client = OpenAI(
-  api_key="sk-tFIIkEXB5icUKs6lWPTvbAwuG09hZxr3mx4xLJoq2unt38b5",
-  base_url="https://api.moonshot.cn/v1",
-)
-prompt = [
-    {"role": "system", "content":"Definition: What are a the How to you	input: sentence one: What are the best romantic songs in English? sentence two: What are the some of the best romantic songs in English? equivalent?\noutput: no"}]
+import json
+import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
+os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
+#os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+import time
+from tigerscore import TIGERScorer
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.distributions import Categorical
+import random
+from torch.optim import AdamW
+from concurrent.futures import ThreadPoolExecutor
+import matplotlib.pyplot as plt
 
-response =  client.completions.create(
-  model="moonshot-v1-8k",
-  messages=prompt,
-  max_tokens=1,
-  temperature=0.5,
-  logprobs=5,
-  stop='\n'
-  )
-# 打印返回的结果的结构
-#print(response.choices)
+def query(input):
+    message = [
+        {"role": "system", "content": ""},
+        {"role": "user", "content": input},
+    ]
+    hypo_output = None
+    received = False
+    while (not received) or (hypo_output is None):
+        try:
+            hypo_output = client.chat.completions.create(
+                model=chatbot,
+                messages=message,
+                stream=False,
+                max_tokens=1024
+            )
+            received = True
+        except:
+            time.sleep(1)
+    return hypo_output.choices[0].message.content
 
-for a, ans in enumerate(response.choices):
-    print(ans.logprobs.tokens)
+
+if __name__ == "__main__":
+  client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
+  chatbot = "deepseek-chat"
+  print(query("Write a summary of the text below. A Manchester canal was turned into a giant bubble bath after fire crews tackling a nearby chemical plant blaze saw their water mix with a detergent creating a six foot wall of foam. The Ashton Canal was filled with heavy suds which appeared after a fire at an industrial unit occupied by a drug development company. It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings. Scroll down for video The Ashton Canal in Manchester, which was turned into a giant bubble bath when fire crews tackled a blaze at a nearby chemical plant It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings Three-year-old Jason Kernick looks out of the window of his family's canal boat as they try to navigate their way through the foam This then turned into a huge wall of foam when it drained into the canal, which runs in the shadow of Manchester City's Etihad Stadium. Now the Environment Agency have launched an investigation to assess if the foam has impacted on wildlife after concerns were raised for the safety of fish in the affected waters. A spokesman for the agency said: 'The Environment Agency is investigating after receiving reports of foam on a 30 metre stretch of the Ashton Canal, Manchester. 'Initial investigations by Environment Agency officers show that there appears to have been minimal impact on water quality, but our officers will continue to monitor and respond as necessary. Richard Kernick takes a picture on his mobile phone of his boat trying to negotiate a lock and the foam, which ran into the Ashton Canal A cyclist takes a picture on his mobile phone as the foam comes up on to the cycle path. The Environment Agency are investigating to assess of the foam has harmed any wildlife The foam reached as high as six foot in some places and covered a 30 metre stretch along the water in the Clayton area of Manchester 'We are working with the fire service and taking samples of the foam to understand what it is made of, and what impact it may have on local wildlife in and around the canal.' At the height of the blaze on Sunday afternoon, which caused the foam, up to 50 firefighters were tackling the fire and police were also forced to wear face masks. Families in east Manchester were urged to say indoors after a blast was reported at the industrial unit, which is just a few hundred yards from the Manchester City training ground on the Etihad campus. The fire at the chemical factory next to Manchester City's Etihad stadium send a huge plume of smoke across the city on Easter Sunday..."))
+  print("\n\n\n")
+  print(query("Write a summary of the text below. A Manchester canal was turned into a giant bubble bath after fire crews tackling a nearby chemical plant blaze saw their water mix with a detergent creating a six foot wall of foam. The Ashton Canal was filled with heavy suds which appeared after a fire at an industrial unit occupied by a drug development company. It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings. Scroll down for video The Ashton Canal in Manchester, which was turned into a giant bubble bath when fire crews tackled a blaze at a nearby chemical plant It is believed that the water used by firefighters to dampen down the flames mixed with the detergent being stored in the burning buildings Three-year-old Jason Kernick looks out of the window of his family's canal boat as they try to navigate their way through the foam This then turned into a huge wall of foam when it drained into the canal, which runs in the shadow of Manchester City's Etihad Stadium. Now the Environment Agency have launched an investigation to assess if the foam has impacted on wildlife after concerns were raised for the safety of fish in the affected waters. A spokesman for the agency said: 'The Environment Agency is investigating after receiving reports of foam on a 30 metre stretch of the Ashton Canal, Manchester. 'Initial investigations by Environment Agency officers show that there appears to have been minimal impact on water quality, but our officers will continue to monitor and respond as necessary. Richard Kernick takes a picture on his mobile phone of his boat trying to negotiate a lock and the foam, which ran into the Ashton Canal A cyclist takes a picture on his mobile phone as the foam comes up on to the cycle path. The Environment Agency are investigating to assess of the foam has harmed any wildlife The foam reached as high as six foot in some places and covered a 30 metre stretch along the water in the Clayton area of Manchester 'We are working with the fire service and taking samples of the foam to understand what it is made of, and what impact it may have on local wildlife in and around the canal.' At the height of the blaze on Sunday afternoon, which caused the foam, up to 50 firefighters were tackling the fire and police were also forced to wear face masks. Families in east Manchester were urged to say indoors after a blast was reported at the industrial unit, which is just a few hundred yards from the Manchester City training ground on the Etihad campus. The fire at the chemical factory next to Manchester City's Etihad stadium send a huge plume of smoke across the city on Easter Sunday..."))

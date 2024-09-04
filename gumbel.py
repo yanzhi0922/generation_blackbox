@@ -87,7 +87,7 @@ def train(epochs, sample_size):
         epoch_loss = 0
         random.shuffle(train_data)
         for item in train_data:
-            prompts_probs = F.softmax(alphas,dim=-1)
+            prompts_probs = F.gumbel_softmax(alphas)
             prompts_dist = torch.distributions.Categorical(prompts_probs)
             loss_list = []
             prompts_discrete_indices_list = []
@@ -171,7 +171,7 @@ def train(epochs, sample_size):
         if 'cuda' in str(device):
             torch.cuda.empty_cache()
 
-    save_path = "data/best_alphas.pt"
+    save_path = "data/best_alphas_gumbel.pt"
     torch.save(best_alphas, save_path)
     print("Finished training")
 
@@ -184,12 +184,12 @@ def train(epochs, sample_size):
     plt.title('Training and Validation Loss')
     plt.legend()
     plt.show()
-    return
+    return best_alphas
 
 def evaluate(sample_size=5):
     eval_result = 0
     for item in test_data:
-        prompts_probs = F.softmax(alphas,dim=-1)
+        prompts_probs = F.gumbel_softmax(alphas)
         prompts_dist = torch.distributions.Categorical(prompts_probs)
         loss_list = []
         prompts = []
@@ -213,11 +213,11 @@ def evaluate(sample_size=5):
     eval_result /= len(test_data)
     return eval_result
 
-def test(sample_size=5):
+def test(sample_size=5, alphas=None):
     test_result = []
     origin_result = []
     for item in test_data:
-        prompts_probs = F.softmax(alphas,dim=-1)
+        prompts_probs = F.gumbel_softmax(alphas)
         prompts_dist = torch.distributions.Categorical(prompts_probs)
         loss_list = []
         origin_loss_list = []
@@ -237,15 +237,14 @@ def test(sample_size=5):
             origin_loss = tigerloss(item['instruction'], item['input_context'], output_origin)
             loss_list.append(loss)
             origin_loss_list.append(origin_loss)
-
         loss_avg = sum(loss_list) / sample_size
+        loss_avg /= len(test_data)
         origin_loss_avg = sum(origin_loss_list) / sample_size
+        origin_loss_avg /= len(test_data)
         test_result.append(loss_avg)
         origin_result.append(origin_loss_avg)
         print("test_loss_avg:", loss_avg)
         print("origin_loss_avg:", origin_loss_avg)
-    test_result /= len(test_data)
-    origin_result /= len(test_data)
     print("Finished testing")
     return test_result, origin_result
 
@@ -280,7 +279,7 @@ if __name__ == "__main__":
     test_data = data[int(0.7 * len(data)):]
 
     # 设置超参数
-    learning_rate = 1e-3
+    learning_rate = 1e-4
     ngram_list = pmi()
     prompt_length = 35
     prompt_search_space = 100
@@ -301,8 +300,8 @@ if __name__ == "__main__":
     }], lr=learning_rate)
 
 
-    train(epochs=20, sample_size=10)
-    test_result, origin_result = test(5)
+    best_alphas = train(epochs=20, sample_size=10)
+    test_result, origin_result = test(5, best_alphas)
 
     print("test_result:", sum(test_result))
     print("origin_result:", sum(origin_result))
