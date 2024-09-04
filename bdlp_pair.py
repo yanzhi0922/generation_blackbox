@@ -287,8 +287,8 @@ if __name__ == "__main__":
     # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
     # chatbot = "moonshot-v1-8k"
     # 读取数据
-    data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
-    pmi_data = "data/vocab.txt"
+    data = json.load(open("data/translation_data200.json", 'r', encoding='utf-8'))
+    pmi_data = "data/vocab_translation_all.txt"
     train_data = data[:int(0.7 * len(data))]
     test_data = data[int(0.7 * len(data)):]
 
