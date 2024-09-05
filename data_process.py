@@ -45,6 +45,6 @@ def gettestdata(data, cut_data, num, task):
     print("处理完成，数据已保存到 %s" % cut_data)
 
 data = "data/new_mix_.json"
-cut_data = "data/translation_data_all.json"
+processed_data = "data/mathQA_data_200.json"
 
-gettestdata(data, cut_data, 20000000, "translation")
+gettestdata(data, processed_data, 200, "mathQA")

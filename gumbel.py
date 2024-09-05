@@ -49,7 +49,7 @@ def query_concurrently_sample_size(sample_size, instruction, input_context):
         results = [future.result() for future in futures]
     return results
 
-def tigerloss(instruction, input_context, output):
+def tiger_loss(instruction, input_context, output):
     received = False
     while not received:
         try:
@@ -104,7 +104,7 @@ def train(epochs, sample_size):
             hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
 
             for hypo_output in hypo_outputs:
-                loss = tigerloss(item['instruction'], item['input_context'], hypo_output)
+                loss = tiger_loss(item['instruction'], item['input_context'], hypo_output)
                 loss_list.append(loss)
 
             loss_avg = sum(loss_list) / sample_size
@@ -204,7 +204,7 @@ def evaluate(sample_size=5):
         hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
 
         for hypo_output in hypo_outputs:
-            loss = tigerloss(item['instruction'], item['input_context'], hypo_output)
+            loss = tiger_loss(item['instruction'], item['input_context'], hypo_output)
             loss_list.append(loss)
         loss_avg = sum(loss_list) / sample_size
         print("eval_loss_avg:", loss_avg)
@@ -233,8 +233,8 @@ def test(sample_size=5, alphas=None):
         outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
         outputs_origin = query_concurrently_sample_size(sample_size, item['instruction'], item['input_context'])
         for output, output_origin in zip(outputs, outputs_origin):
-            loss = tigerloss(item['instruction'], item['input_context'], output)
-            origin_loss = tigerloss(item['instruction'], item['input_context'], output_origin)
+            loss = tiger_loss(item['instruction'], item['input_context'], output)
+            origin_loss = tiger_loss(item['instruction'], item['input_context'], output_origin)
             loss_list.append(loss)
             origin_loss_list.append(origin_loss)
         loss_avg = sum(loss_list) / sample_size
@@ -292,13 +292,16 @@ if __name__ == "__main__":
     alpha_change_threshold = 1e-2
     patience_threshold = 5
     checkpoint_interval = 5
-
+    '''
     # 设置优化器
     prompt_optimizer = AdamW([{
         "params": [alphas],
         "weight_decay": 0.1,
     }], lr=learning_rate)
-
+    '''
+    prompt_optimizer = Adam([{
+        "params": [alphas],
+    }], lr=learning_rate)
 
     best_alphas = train(epochs=20, sample_size=10)
     test_result, origin_result = test(5, best_alphas)

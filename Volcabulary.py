@@ -116,8 +116,8 @@ class FindNgrams:
 
 if __name__ == '__main__':
     ngram_list = []
-    dataset = 'data/translation_data_all.json'
-    output_dir = 'data/vocab_translation_all.txt'
+    dataset = 'data/data2text_data_all.json'
+    output_dir = 'data/vocabulary/vocab_data2text.txt'
     ngram = 5
     min_count = 5
     min_pmi = 1

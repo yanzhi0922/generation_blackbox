@@ -1,0 +1,2159 @@
+the
+is
+of
+, the
+The
+. The column header
+title
+table
+the subjtitle is
+, the subjsubtitle is
+Given the table title of
+. The row header
+year
+the year
+, the year
+, the year is
+Year
+List of
+name
+in
+and
+name is
+date
+, the name is
+, the date
+, the date is
+( [TABLECONTEXT
+season
+1
+) , the
+Title
+team
+population
+Name
+score
+2
+score is
+records
+Club
+, the score is
+( [TABLECONTEXT], [TITLE
+team is
+2010
+United
+result is
+record
+2008
+to
+Season
+list
+, the result is
+) is
+player
+4
+Date
+3
+, the team is
+at
+records , the
+for
+Film
+, the opponent is
+league
+2009
+2011
+2015
+League
+2014
+awards
+5
+winner
+) , the subjsubtitle is
+2007
+2006
+by
+, the player is
+2012
+football
+world
+the subjtitle is list of
+award
+, the venue is
+United States
+2000
+, the position is
+results
+rank
+2016
+no
+cup
+New
+m
+, the rank is
+season , the subjsubtitle is
+, Representing
+Team
+a
+winner is
+national
+2005
+winners
+location is
+championship
+game
+career
+Demographics
+new
+performance
+is 1
+discography
+film
+country
+Cup
+6
+, the winner is
+, the location is
+state
+7
+1st
+World
+2003
+Award
+election
+attendance
+10
+season is
+Series
+club
+series
+final
+8
+united
+No
+office
+time
+2017
+Player
+2002
+, the country is
+'s
+tournament
+2008 , the
+games
+YEAR
+championships
+State
+Party
+Television
+Division
+20
+12
+city
+South
+11
+, the attendance is
+history , the
+best
+points
+International
+s
+role
+1999
+14
+, the no
+stadium
+9
+school
+champions
+October
+at the
+2018
+high
+champion
+total
+from
+with
+international
+City
+round
+as
+1996
+de
+chart
+National
+Career
+16
+" , the
+Country
+arts
+July
+, the role is
+( s
+goals
+19
+, the time
+, the record is
+films
+March
+First
+, the award is
+years
+division
+September
+states
+party
+number
+2007 , the
+cup , the subjsubtitle is
+Time
+event
+DATE
+August
+25
+may
+John
+notes is
+Championship
+on
+competition
+champion is
+November
+13
+( s ) is
+tv
+23
+2004
+1997
+, the subjsubtitle is career
+july
+august
+June
+England
+29
+won
+united states
+records , the subjsubtitle is
+place
+Album
+, the tournament is
+time is
+south
+2nd
+, the points is
+leaders
+individual
+December
+1995
+17
+june
+is 1 , the
+, the notes is
+, the event is
+2013
+or
+artist
+, the years
+, the total
+, the film is
+new york
+league , the subjsubtitle is
+cricket
+coach
+May
+European
+18
+tour
+september
+players
+Australia
+A
+county
+21
+, the time is
+october
+km
+falls
+university
+is 2
+general
+championship , the subjsubtitle is
+15
+, the game is
+, the champion is
+home
+election in
+director
+association
+February
+(Agremiação_Sportiva_Arapiraquense,league,Campeonato_Brasileiro_Série_C
+titles
+single
+label
+first
+episodes
+conference
+200
+, the runner-up is
+november
+march
+major
+f.c
+North
+Games
+, the subjsubtitle is individual
+, the competition is
+, the album is
+30
+26
+, the club is
+(Bionico,course,Dessert
+January
+Bay
+(Ciudad_Ayala,populationDensity,1604.0
+Great
+County
+january
+is best
+baseball
+april
+George
+rugby
+december
+Round
+District
+31
+100
+park
+history , the year is
+data
+United States presidential election in
+House of
+22
+teams
+office is
+february
+award , the
+Song
+OPPONENT
+Main
+College
+April
+24
+work
+district
+college
+William
+TITLE
+, the label
+, the home
+song
+head
+football , the subjsubtitle is
+events
+Summer
+POSITION
+(Alan_Shepard,deathPlace,California
+music
+canada
+France
+F.C
+1984
+field
+English
+Conference
+type
+television
+match
+l
+high school
+video
+prize
+mm
+U.S
+I
+, the nationality is
+(Liselotte_Grschebina,deathDate,1994-06-14
+nation
+is 4
+area
+You
+Michael
+, US
+paul
+is 9
+football team
+Olympic
+Governors of
+, the label is
+, the goals is
+(Liselotte_Grschebina,birthPlace,Karlsruhe
+personal
+gold
+athletics
+albums
+West
+Top
+Road
+RESULT
+Men's
+(Liselotte_Grschebina,nationality,Israel
+(Liselotte_Grschebina,birthDate,1908-05-02
+up
+singles
+one
+number is
+league is
+in a
+details
+current
+basketball
+Tour
+East
+400
+1960
+open
+money
+ft
+LOCATION
+Chart
+(Bedford_Aerodrome,location,Thurleigh
+wins
+the subjtitle is 2008
+john
+england
+chicago
+Saint
+New York
+NUMBER
+Me
+Grand
+1970
+(Alan_Shepard,birthDate,"1923-11-18
+top
+staff
+is 3
+australia
+Production
+Fight
+Big
+1992
+, the artist is
+overs
+most
+million
+i
+championship is
+Test
+Series results
+Park
+Election
+Asian
+Anthony
+, the total is
+, the games is
+, Season
+(Ciudad_Ayala,isPartOf,Morelos
+( [TABLECONTEXT], TITLE
+& amp
+production
+not
+hockey
+championships , the subjsubtitle is
+TV
+Republic
+Pennsylvania
+Name . The row header
+London
+James
+II
+COUNTRY
+Assembly
+Albums
+, the term
+, the result is l
+(Super_Capers,starring,Michael_Rooker
+the subjtitle is national
+racing
+media
+episode
+car
+average
+american
+actor
+One
+Music
+Minnesota
+India
+Home
+FC
+David
+Class
+Chicago
+COMPETITION
+American
+4 . The row header
+(Mexico,currency,Mexican_peso) (Mexico,demonym,Mexicans) (Bionico,course,Dessert
+(Ciudad_Ayala,utcOffset,−6
+(Ciudad_Ayala,country,Mexico
+( [TABLECONTEXT], YEAR
+type is
+the National
+north
+buildings
+TOTAL
+Office
+High
+Football
+Defence
+2008–09
+, the result is w
+, the nation is
+, the distance is
+, the dates is
+, the date is june
+(Liselotte_Grschebina,deathPlace,Israel
+(Abraham_A._Ribicoff,spouse,"Ruth Ribicoff
+west
+u.s
+red
+race
+is 6 , the
+former
+achievements
+Texas
+San
+RANK
+J
+, the category is best
+(Lady_Anne_Monson,birthPlace,Darlington
+% , the
+yards is
+uk
+tries
+soccer
+metres
+green
+council
+University
+Peter
+Major
+Democratic
+Champions
+, the school is
+, the party is
+, the date is september
+, Radeon HD
+(Liselotte_Grschebina,birthPlace,German_Empire
+(Bedford_Aerodrome,operatingOrganisation,MotorSport_Vision
+( 5
+( 4
+political
+mph
+english
+australian
+TEAM
+Hall
+, the game site is
+, the city is
+(English_Without_Tears,runtime,89.0
+(Death_on_a_Factory_Farm,producer,Tom_Simon
+(Acharya_Institute_of_Technology,affiliation,Visvesvaraya_Technological_University
+vs
+runs
+is 30
+general election
+from is
+european
+band
+St
+Republican
+NAME
+King
+British
+1972
+, the years is
+, the tv
+, the score in
+(Death_on_a_Factory_Farm,director,Tom_Simon
+(1147_Stavropolis,discoverer,Grigory_Neujmin
+( [TABLECONTEXT], [TITLE], List of
+up is
+the final is
+prize money
+la
+VENUE
+Thomas
+Street
+L
+Johnson
+Islands
+Day
+500
+1952
+, the subjsubtitle is world
+, the number is
+, the date is may
+, Climate data for
+, 0
+(It's_Great_to_Be_Young_(1956_film),starring,John_Mills
+(Ciudad_Ayala,populationMetro,1777539
+( October
+runners-up
+ii
+ice
+age
+Paul
+House of Representatives
+Charles
+California
+(Super_Capers,starring,Tom_Sizemore
+(Super_Capers,distributor,Roadside_Attractions
+(Super_Capers,distributor,Lionsgate
+(Nurhan_Atasoy,residence,Istanbul
+(Ciudad_Ayala,leaderTitle,"City Manager
+( 2
+( 1
+premiers
+junior
+change
+challenge
+cc
+association , the subjsubtitle is
+annual
+Union
+Third
+Roman
+Australian
+28
+, the subjsubtitle is other
+(Nie_Haisheng,birthPlace,Zaoyang
+(Bedford_Aerodrome,runwayLength,1095.0
+(BBC,city,Broadcasting_House
+(11th_Mississippi_Infantry_Monument,established,2000) (11th_Mississippi_Infantry_Monument,location,Adams_County,_Pennsylvania
+track
+the subjtitle is 2007
+sports
+road
+records in
+height
+day
+community
+coast
+census
+actress
+Women's
+Tournament
+Stadium
+Smith
+SCORE
+Queen
+Love
+Kansas
+It
+Army
+4th
+2011–12
+, the subjsubtitle is players
+, the subjsubtitle is international
+, the subjsubtitle is current
+, the format is
+(Mermaid_(Train_song),followedBy,Imagine_(John_Lennon_song
+(Bedford_Aerodrome,cityServed,Bedford_Autodrome
+( European
+trophy
+tournaments
+the subjtitle is 2008–09
+second
+royal
+records and statistics
+played
+nations
+miami
+group
+era
+White
+Pop
+Open
+Jack
+Henry
+General
+G
+Chris
+2 . The row header
+(Darinka_Dentcheva,citizenship,United_States
+(Aleksandr_Prudnikov,youthclub,FC_Spartak_Moscow
+(Abraham_A._Ribicoff,spouse,"Ruth Ribicoff") (Abraham_A._Ribicoff,inOfficeWhilePresident,John_F._Kennedy) (Abraham_A._Ribicoff,nationality,American
+( 3
+van
+v
+unit
+tour , the subjsubtitle is
+released
+parties
+out
+golf
+chief
+canadian
+born
+air
+Wales
+Robert
+Richard
+NOTES
+Jones
+Joe
+Indian
+Illinois
+, the type is
+, the sport is
+, the number of
+(Olga_Bondareva,deathPlace,Saint_Petersburg
+(Nurhan_Atasoy,nationality,Turkish_people
+(Lady_Anne_Monson,birthPlace,Kingdom_of_England
+(Bootleg_Series_Volume_1:_The_Quine_Tapes,artist,The_Velvet_Underground
+united f.c
+stadium , the subjsubtitle is
+skating
+republican
+previous
+man
+education
+draft
+do
+awards and nominations received by
+assistant
+Western
+Washington
+Video
+Trinity
+Township
+Tigers
+Social
+ROLE
+Mike
+DIRECTED_BY
+Christian
+Baseball
+ATTENDANCE
+50
+5 . The row header
+27
+2004–05
+1961
+, the director is
+, the date is july
+, the car is
+, the away is
+(Turn_Me_On_(album),producer,The_Honeymoon_Killers_(American_band
+(Nurhan_Atasoy,birthPlace,Turkey
+(Nord_(Year_of_No_Light_album),releaseDate,2006-09-06
+(Liselotte_Grschebina,training,School_of_Applied_Arts_in_Stuttgart
+(Liselotte_Grschebina,deathPlace,Petah_Tikva
+(Bootleg_Series_Volume_1:_The_Quine_Tapes,precededBy,Squeeze_(The_Velvet_Underground_album
+( tv
+( [TABLECONTEXT], NUMBER
+( [TABLECONTEXT], NAME
+was
+the subjtitle is world
+the subjtitle is 2007–08
+philadelphia
+long
+independent
+club , the subjsubtitle is
+channel
+blue
+award for best
+War
+WRITTEN_BY
+W
+UK
+Special
+Saskatchewan
+Pittsburgh
+Movie
+Michigan
+M
+Jackson
+Green
+Gordon
+Game
+400 m
+3 . The row header
+2010 . The row header
+2009–10
+2008 . The row header
+1966
+1942
+, the opponents is
+) , the name is
+(The_Fellowship_of_the_Ring,publisher,George_Allen_&_Unwin
+(Piotr_Hallmann,birthPlace,Gdynia,_Poland
+(Nord_(Year_of_No_Light_album),genre,Sludge_metal
+(Mermaid_(Train_song),runtime,3.16
+(Darinka_Dentcheva,influencedBy,Andrzej_Piotr_Ruszczyński
+( September
+white
+washington
+warriors
+under
+the subjtitle is 2006
+special
+service
+qualification
+professional
+nfl
+minor
+medal
+line
+leader
+language
+female
+elections
+du
+conference , the subjsubtitle is
+cd
+c
+by year
+bulldogs
+bronze
+an
+all-time
+Wind
+Tom
+Super
+Summer Olympics – Men's
+Sports
+Royal
+Port
+PARTY
+NCAA
+King of
+Florida
+Adelaide
+2013 . The row header
+2009 . The row header
+2006–07
+2005–06
+1955
+, the votes is
+, the runners-up is
+, the playoffs is
+, the district is
+, the date is january
+(Nurhan_Atasoy,residence,Turkey
+(Nie_Haisheng,mission,Shenzhou_10
+(Mexico,currency,Mexican_peso) (Mexico,demonym,Mexicans) (Bionico,course,Dessert) (Bionico,region,Guadalajara
+(English_Without_Tears,releaseDate,1944-07-28
+williams
+war
+tigers
+texas
+region
+order
+note
+movie
+minnesota
+metre
+manager
+lost
+live
+ii , the
+force
+federal
+east
+doubles
+back
+all
+against
+V8
+United States to
+Stakes
+Senate
+Red
+Players
+Player . The row header
+POINTS
+PLAYER
+ORIGINAL_AIR_DATE
+NATIONALITY
+My
+Mark
+Lost
+Line
+Indianapolis
+Georgia
+Formula
+Died
+Basketball
+Avg
+Aircraft
+Academy
+65
+52
+40
+2006 . The row header
+1956
+, the runner up is
+, the publisher is
+, the period is
+, the length
+, the date is february
+, the crowd is
+, the class is
+(Turn_Me_On_(album),precededBy,Let_It_Breed
+(ALCO_RS-3,buildDate,"May 1950 - August 1956
+( [TABLECONTEXT], SEASON
+( 6
+young
+x
+wind
+who
+valley
+speed
+playoff
+montreal
+member
+lee
+kg
+indoor
+hall
+georgia
+change is
+centre
+california
+buffalo
+bowl , the subjsubtitle is
+board
+b
+awards , the subjsubtitle is
+athletic
+USA
+Star
+Ryan
+Real
+Racing
+President
+Lee
+Karl
+Indoor
+H
+Daniel
+Brian
+Blue
+Beach
+Andy
+41
+2.0
+1948
+1934
+1500
+, the subjsubtitle is historical
+, the source is
+(Nord_(Year_of_No_Light_album),producer,Year_of_No_Light
+(Aleksandr_Prudnikov,club,FC_Terek_Grozny
+( [TABLECONTEXT], MONTH
+summer
+stations
+schools
+run
+report
+program
+people
+numbers
+netball
+me
+lake
+island
+hurricane
+his
+george
+drama
+debut
+county is
+batting
+baseball , the subjsubtitle is
+after
+WINNER
+ROUND
+R
+Pacific
+Ohio
+OPPONENT, at
+Missouri
+Life
+K
+Jan
+Ian
+Hong Kong
+Group
+Grand Prix
+Female
+EVENT
+E
+DRIVERS
+Capital
+Canal
+C
+All
+63
+2018 . The row header
+1935
+1900
+, the passengers is
+, the height
+, the date is 12
+, John
+(footballer, born
+(Turks
+(Piotr_Hallmann,birthDate,1987-08-25
+(Nurhan_Atasoy,birthPlace,Reşadiye
+(Nie_Haisheng,birthPlace,Hubei
+(Mermaid_(Train_song),genre,Reggae
+(Aleksandr_Prudnikov,height,185.0 (centimetres
+(Aaron_Turner,genre,Post-metal
+( [TABLECONTEXT], COMPETITION
+( 2006
+% ) , the
+virginia
+town
+the subjtitle is new zealand
+stage
+senior
+senate
+scoring
+runs is
+records , the player is
+recipients
+project
+present
+park , the subjsubtitle is
+military
+it
+houston
+her
+held
+growth
+grand prix
+eagles
+death
+de la
+countries
+comedy
+coins
+borough
+asian
+are
+academy
+Your
+Williams
+Who
+This
+TYPE
+SUCCESSOR
+Professional
+Police
+Point
+Outdoor
+Military
+III
+I'm
+GOLD
+Eastern
+Cincinnati
+Central
+CITY
+Black
+Awards
+Alan
+AFC
+2003–04
+1932
+1918
+10 . The row header
+, the other
+, the date is 27
+, the athlete is
+) , the no
+(Piotr_Hallmann,weight,70.308
+(Olga_Bondareva,birthPlace,Leningrad,_USSR
+(Acharya_Institute_of_Technology,city,Bangalore
+( New
+vice
+tony
+the subjtitle is united states
+the subjtitle is german
+taylor
+switzerland
+society
+selected
+part
+olympic
+official
+offensive
+national football team
+more
+ministers
+michigan
+mi
+male
+love
+lakes
+j
+hurricanes
+highest
+good
+franchise
+flow
+fc , the subjsubtitle is
+dublin
+dream
+digital
+clubs
+chiefs
+century
+cast
+at 20 °C
+arena
+Youth
+Story
+Source
+STL
+Place
+NYG
+Most
+Mexico
+Louis
+Jane
+Independent
+Harry
+Golden
+Ford
+Field
+Episode
+Empire
+El
+Copa
+Columbia
+Colorado
+Chief
+Challenge
+Athletic
+Albert
+AREA_KM2
+39
+2017 . The row header
+1949
+1921
+10,000
+, the silver is
+, the seasons is
+, the result is loss
+, the reg
+, the average is
+(Piotr_Hallmann,height,175.26
+(ENAIRE,city,Madrid
+(D
+(Cape Verde
+(ALCO_RS-3,cylinderCount,12
+( United States
+( US Open
+( Asian
+( 7
+( 1997
+winter
+wickets
+volleyball
+towns
+theatre
+the subjtitle is paul
+the subjtitle is american
+the subjtitle is 2000
+than
+tennis
+system
+stories
+solo
+since
+short
+science
+rock
+republic of
+railway
+races
+primary
+power
+point
+pacific
+nrl
+normals, extremes
+newcastle
+municipal
+motorsports
+mile
+meters
+leading
+institute
+inches
+hong kong
+hill
+heads of
+gold is
+giants
+games played
+fire
+eastern
+dynasty
+designation
+design
+critics
+council , the subjsubtitle is
+constituency
+choice
+chess
+began
+army
+Winter
+What
+Walker
+Van
+Tim
+Sydney
+Stewart
+Senior
+Seat
+Schedule
+SR
+S
+RESULT, W
+Province
+Poland
+Performance
+Oregon
+Not
+Nations
+Metropolitan
+Louisiana
+Los Angeles
+Liverpool
+Little
+Joseph
+Jon
+INCUMBENT
+Hurricane
+Hot
+Heavyweight
+Han
+Golf
+Gary
+Franklin
+Federal
+Feature
+F
+Drama
+Don
+Dead
+Dance
+Cuba
+Coaches
+Cleveland
+Choice
+Chinese
+Challenger
+Cape
+Bobby
+Attendance
+Atlantic
+Andrew McCarthy
+Albany
+Alabama
+ARTIST
+88
+66
+62
+59
+54
+33
+250
+1995–96
+1925
+169
+158
+120
+, the yards is
+, the subjsubtitle is wta
+, the subjsubtitle is professional
+, the subjsubtitle is all-time
+, the era is
+, the date is 16
+, the bronze is
+, Fiscal/calendar year
+(tons exported
+(season
+(University_of_Burgundy,numberOfUndergraduateStudents,16800
+(Super_Capers,starring,Adam_West
+(Super_Capers,budget,2000000.0
+(Mermaid_(Train_song),writer,Espen_Lind
+(Mermaid_(Train_song),precededBy,This'll_Be_My_Year
+(Abraham_A._Ribicoff,spouse,"Ruth Ribicoff") (Abraham_A._Ribicoff,inOfficeWhilePresident,John_F._Kennedy) (Abraham_A._Ribicoff,nationality,American) (Abraham_A._Ribicoff,deathPlace,United_States
+(Aaron_Turner,genre,Black_metal
+(Aaron_Turner,associatedBand/associatedMusicalArtist,Lotus_Eaters_(band
+( m ) is
+( William
+( Bill
+( 9
+( 14 games
+( 13
+( 10
+( % ) is
+you
+we
+vote
+videos
+victoria
+to par is
+their
+the subjtitle is west
+the subjtitle is royal
+the subjtitle is european
+the subjtitle is british
+the subjtitle is 2006–07
+the defense of democracy
+the Cayman Islands
+test
+supporting
+suffolk
+stars
+sq
+songs
+son of
+singer
+signed
+secretary
+scorer
+sales is
+rivalry
+revolution
+regional
+ranked
+rally
+pro
+pop
+poker
+pick
+pete
+per
+pennsylvania
+pass
+netherlands
+nelson
+my
+membership
+managers
+ma
+lutheran
+las
+knights
+kit
+iran
+iowa
+indiana
+in New
+grade
+fourth
+forces
+ep
+e
+days
+dallas cowboys
+d
+coverage
+course
+contested
+concert
+composition
+commander
+college is
+chinese
+ceremony
+center
+catalog
+book
+blackburn
+billboard
+between
+awarded
+asia
+arthur
+acting
+Yugoslav
+When
+Universe
+Transport
+Toronto
+The Voice of
+Tennessee
+TOURNAMENT
+TIME
+Steve
+Sport
+Song Contest
+School
+SILVER
+Rice
+Reserves
+Regional
+Referee
+RECORD
+Public Offices
+Pts
+Prince
+Porsche
+Poker
+Perry
+Period
+P
+Out of
+On
+Murphy
+Motorsports
+Mississippi
+Minor
+Melbourne
+Malta
+Like
+Legislative
+Lake
+La
+Jean
+Horse
+Highest
+HIGH_ASSISTS
+Governments
+Glenn
+Frederick
+Frank
+Fort
+FILM
+Emma
+Dublin
+Department of
+D
+Collegiate
+Carl
+Career total
+Can't
+CLUB
+CL
+Buffalo
+BritCar
+Bridge
+Be
+Back
+BMW
+B
+Anderson
+Airport
+AFL
+85
+55
+47
+3–2
+1996–97
+1947
+1883
+185
+165
+136
+12th
+125
+114
+104
+, the term is
+, the subjsubtitle is sales
+, the model is
+, the language is
+, the color
+, the channel is
+, the annual
+(in
+(Turkey,areaTotal,783356.0
+(Nie_Haisheng,mission,Shenzhou_10) (Nie_Haisheng,mission,Shenzhou_6
+(Mermaid_(Train_song),genre,Pop_rock
+(Hypermarcas,type,S.A._(corporation
+(Hypermarcas,foundingDate,2001-01-01
+(English_Without_Tears,runtime,89.0) (English_Without_Tears,musicComposer,Nicholas_Brodszky) (English_Without_Tears,releaseDate,1944-07-28
+(Brandon_Carter,knownFor,Carter_constant
+(Bootleg_Series_Volume_1:_The_Quine_Tapes,artist,The_Velvet_Underground) (Bootleg_Series_Volume_1:_The_Quine_Tapes,producer,The_Velvet_Underground) (Bootleg_Series_Volume_1:_The_Quine_Tapes,runtime,230.05
+(Aaron_Turner,instrument,Singing
+(1147_Stavropolis,apoapsis,418476000000.0) (1147_Stavropolis,orbitalPeriod,1249.6
+( [TABLECONTEXT], PLAYER
+( Illinois
+( 12
+"Honey Bee
+youth
+writer
+works
+when
+weeks
+viewers
+usc
+until
+two
+tour de
+to be
+three
+the wall
+the subjtitle is south
+the subjtitle is new york
+the subjtitle is economy of
+the subjtitle is 2003
+the Roman Republic with
+supreme
+sun
+stolen
+star
+stadium , the attendance is
+sprint
+springs
+sponsorship
+speed is
+served
+serie
+sep
+seconds
+sea
+scores
+russell
+runners
+royals
+romania
+roles
+retired
+research
+queensland
+quebec
+producer
+post
+police
+pole
+play
+percent
+participants
+panthers
+ontario
+ohio
+num
+nick
+neil
+mountain
+medical
+mary
+lopez
+little
+let
+km/h
+kings
+joe
+ivan
+interactive
+honda
+heat
+half
+h
+graham
+goal
+girls
+g
+fresno state
+foundation
+foreign
+flag bearers
+featuring The Notorious
+favorite
+f
+extra
+edmonton
+economic
+directors
+derby
+denver
+deaths
+dave
+da
+collegiate
+clean
+churches
+chile
+candidate
+butterfly
+buffalo bills
+borussia
+birth
+basket
+barry
+bank
+baltimore colts
+arkansas
+actors
+a.f.c
+Yorkshire
+Wrestling
+Wood
+Wolverines
+Wisconsin
+Week
+Want
+Walton
+Vote
+VACATOR
+Transfers
+Thursday
+Susan
+Sun
+Stanley Cup
+Southern
+Small
+Sky
+Scotland
+Saints
+Robinson
+Religion
+Rasmussen
+RAF
+Price
+Phil
+Personal
+People's
+Patrick
+Part
+Parc
+PRODUCTION_CODE
+POPULATION
+PGA
+Oricon
+Orange
+Opposition
+Of
+Nova
+Mountain
+MotoGP
+Morgan
+Mission
+Medal
+Masters
+Main Card
+Luke
+Lord
+Lead
+Laura
+Latin
+LAPS
+Kent
+Keith
+Ka
+Jul
+Judd
+Jordan
+Jay
+Heart
+Grammy
+Gone
+Giants
+GAME_SITE
+Four
+For
+Edition
+Diego
+Detroit
+Davis
+DVD
+Creek
+Council
+Combined
+Capacity
+Canadian
+COUNTY
+COLLEGE
+Brown
+Broadway
+Breaking
+Box
+Bob
+Batting
+Band
+Bad
+Avenue
+Altitude
+Against
+AWAY_TEAM
+ALBUM
+90
+8th
+73
+6–7
+6–1
+4–0
+49
+2–0
+2526T
+1998
+1981
+1954
+17th
+179
+160
+150
+147
+141
+138
+113
+110
+109
+1,000
+0–2
+, the s. no
+, the position is rb
+, the position is assistant
+, the pct
+, the engine is
+, the date is 6
+, the credit is
+(with
+(Nord_(Year_of_No_Light_album),artist,Year_of_No_Light) (Nord_(Year_of_No_Light_album),genre,Post-metal
+(Hypermarcas,location,Brazil) (Hypermarcas,product,Drugs
+(FC_Terek_Grozny,ground,Grozny) (Aleksandr_Prudnikov,currentclub,FC_Amkar_Perm
+(Brandon_Carter,professionalField,General_relativity
+(Bootleg_Series_Volume_1:_The_Quine_Tapes,releaseDate,2001-10-16
+(Bootleg_Series_Volume_1:_The_Quine_Tapes,recordedIn,United_States) (Bootleg_Series_Volume_1:_The_Quine_Tapes,recordedIn,St._Louis,_Missouri
+(Bionico,ingredient,Raisin
+(Aleksandr_Prudnikov,club,FC_Amkar_Perm
+(Adolfo_Suárez_Madrid–Barajas_Airport,operatingOrganisation,ENAIRE) (Adolfo_Suárez_Madrid–Barajas_Airport,location,Alcobendas) (Adolfo_Suárez_Madrid–Barajas_Airport,runwayLength,4349.0
+(Abraham_A._Ribicoff,spouse,Casey_Ribicoff
+(Abraham_A._Ribicoff,party,Democratic_Party_(United_States
+(ALCO_RS-3,engine,V12_engine
+( show
+( Ranvet Stakes
+( December
+( 2007
+( 2004
+( 2002
+( 11
+"I'm
+"I
+"All
+zone
+yds
+xavier
+woman
+will
+wicket
+water
+w
+venues
+utah
+units
+twin
+try
+training
+tracks
+timeline
+thomas
+theme
+the subjtitle is ncaa division
+the subjtitle is national council
+the subjtitle is miami
+the subjtitle is masters
+the subjtitle is martin
+the subjtitle is john
+the subjtitle is chris
+the subjtitle is chicago
+the subjtitle is brian
+the subjtitle is 2001
+the medal table
+the Bahama Islands
+territories
+tampa bay
+symbol
+swiss
+sunderland
+stroke
+strength
+street
+statistician
+station
+stat
+starting
+squad
+spencer
+sox
+some
+small
+six
+screen
+schools is
+saints
+rushing
+rural
+rounds
+roads
+rice
+retegi
+represented
+releases , the name is
+redskins
+records , the distance is
+reception
+raymond
+raceway
+qualifying
+program is
+prime
+predecessor
+poland
+podiums
+pm
+pirates
+patrick
+paris
+p
+others
+original
+oregon
+orange
+of which in
+of origin
+of Goguryeo
+of Alexandria
+notable
+northwestern
+none
+night
+nicole
+names
+nacional
+mugen
+motorsport
+motorcycle
+millions
+medalists
+mcgill
+master
+marathon
+make
+louis
+listing
+liga
+level
+league is usl
+last
+km2
+kentucky
+kW
+k
+joseph
+jordan
+joint
+jets
+jason
+jackson
+issue
+interim
+indian
+human
+hp
+hot
+horse
+honour
+honduran
+heritage
+health
+haroon
+hall of fame
+group of
+gp
+goalscorers
+generals
+gemstones
+gay
+ford
+figures
+family
+expansion
+euroleague
+established
+empire
+emergency
+edward
+editor
+during
+down
+don
+direction
+di
+detainees
+description
+deputy
+democrat
+dan
+cu in
+court of
+cougars
+conferences
+composer
+companies
+communist party
+commonwealth
+comic strips
+colors
+colorado
+colin
+code
+cm
+clyde
+classification
+civil
+children
+channels
+chang
+championship is wimbledon
+chairman
+certifications
+cat
+carolina
+captains
+by Gordon
+bulls
+built
+branch
+boys
+boxing
+box
+bowling
+bobby
+best times
+batted in
+bases
+bangladesh
+attempts
+appearance
+anderson
+al
+african
+acres
+about
+Young
+XT
+World Tag Team
+Weekly
+Washes
+Walter
+Wakefield Trinity
+VOTES
+USB
+UEFA
+Transferred to
+Tonga
+Three
+The Dark Knight
+Terry
+Terminal
+Talent
+T
+Stone
+Sports Car
+Solo
+Simcoe County Road
+Silva
+Ship
+Sharon
+Secret
+Seasons
+Scenic
+STADIUM
+SS
+SP
+Ross
+Ron
+Roger
+Records Set
+Ranking . The row header
+Ramsay
+Ralph
+Railway
+RFC, POINTS
+REASON_FOR_CHANGE
+Pradesh
+Post
+Players transferred in
+Penn
+Peaks
+PERCENT
+Ontario
+One Day International
+Notable
+Nick & Simon
+Nelson
+NBA
+Music Video
+Month
+Miniseries or
+Miller
+Mean
+Marvel's
+Mario
+MLA for
+MCC
+Luis
+Lopes
+Local
+Live
+Leonard
+Leaders
+Landon
+Land
+Labor
+Kentucky
+Jungle Fight
+Juan
+Josh
+Johnny
+Jo
+Jimmy
+Jennifer
+Is
+Iraq
+Institute of
+IC
+Hunt
+Henri
+Heat of
+Health
+Have
+Harris
+Hamlet
+Hamilton
+Gunbird
+Greece
+Godzilla
+Goal
+Go
+GT
+GOALS
+GER
+Francis
+Formula Renault
+Finland
+Finals
+Endurance
+Ellis
+Elena
+Edwards
+Dream
+Donald
+Dick
+Delaware
+Days
+Cross
+Course
+Cooper T51
+Contestant
+Constantine
+Commander
+Clyde
+Chester
+Chelsea
+Candidates
+Cabinet
+CD
+Brentford
+Brendan
+Boeing
+Bell
+Barry
+Banknotes
+Bank
+BRONZE
+Away
+Association
+Art
+Arkansas
+Anthony Michael Hall
+Albania
+Alaska
+About
+Aaron
+AWARD
+AMG
+AHD
+95
+87
+72
+5–7
+48
+318
+224
+212
+2014-15
+200m
+2001
+1–2
+19th
+1993
+1990–91
+1988–89
+1965–66
+1963–64
+1945
+1944
+1931
+1929
+1927
+1926
+1924
+1912
+1911
+1903
+1901
+1896
+1890
+188
+1876
+186
+180
+145
+13th
+137
+134
+133
+124
+108
+106
+1.9
+1.0
+01
+, the sponsor is
+, the reign
+, the occupation is
+, the density
+(featuring
+(born
+(TV
+(Mexico,currency,Mexican_peso) (Mexico,demonym,Mexicans) (Bionico,course,Dessert) (Bionico,region,Guadalajara) (Mexico,leader,Silvano_Aureoles_Conejo
+(Hypermarcas,industry,Pharmaceuticals) (Hypermarcas,keyPerson,CEO
+(Expect_a_Miracle,producer,Brian_Kelly_(composer_&_pianist)) (Expect_a_Miracle,runtime,54.56) (Expect_a_Miracle,artist,Brian_Kelly_(composer_&_pianist
+(Caicos) , Radeon HD
+(Bionico,ingredient,Granola
+(2
+(1981–2010
+(1
+( uk
+( episode
+( [TABLECONTEXT], CHAMPIONSHIP
+( Olympic Games
+( Cumberland University
+( Christian
+"Piercing the Fog
+"Learning as You Go
+"Cruisin
+" , the film is

@@ -3,8 +3,8 @@ import json
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 #os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
-os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
-#os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+#os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
+os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
 import time
 from tigerscore import TIGERScorer
 import torch
