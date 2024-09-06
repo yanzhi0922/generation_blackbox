@@ -25,15 +25,16 @@ def trans_data(origin_data, new_data):
         json.dump(processed_data, file, ensure_ascii=False, indent=4)
     print("处理完成，数据已保存到 %s" % new_data)
 
-def gettestdata(data, cut_data, num, task):
+def get_data(data, cut_data, num, task):
     with open(data, 'r', encoding='utf-8') as file:
         data = json.load(file)
-    # 统计一共有多少个task
-    new_data = []
 
+    new_data = []
     count = 0
     for item in data:
         if item['task'] == task:
+            # 去除item['errors']键值对
+            item.pop('errors', None)
             new_data.append(item)
             count += 1
         if count == num:
@@ -45,6 +46,6 @@ def gettestdata(data, cut_data, num, task):
     print("处理完成，数据已保存到 %s" % cut_data)
 
 data = "data/new_mix_.json"
-processed_data = "data/mathQA_data_200.json"
+processed_data = "data/summarization_data_200.json"
 
-gettestdata(data, processed_data, 200, "mathQA")
+get_data(data, processed_data, 200, "summarization")

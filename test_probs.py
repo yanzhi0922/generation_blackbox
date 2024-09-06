@@ -3,8 +3,8 @@ import json
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 #os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
-os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
-#os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+#os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
+os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -156,8 +156,8 @@ if __name__ == "__main__":
     # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
     # chatbot = "moonshot-v1-8k"
     # 读取数据
-    data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
-    pmi_data = "data/vocab.txt"
+    data = json.load(open("data/translation_data200.json", 'r', encoding='utf-8'))
+    pmi_data = "data/vocab_translation_all.txt"
     train_data = data[:int(0.7 * len(data))]
     test_data = data[int(0.7 * len(data)):]
 
@@ -169,17 +169,6 @@ if __name__ == "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
     prompts_probs = torch.load("data/prompt_probs_pair.pt",weights_only=True)
-    prompts_probs.requires_grad = True
-    probs_change_threshold = 1e-3
-    patience_threshold = 5
-    checkpoint_interval = 5
-
-
-    # 设置优化器
-    prompt_optimizer = AdamW([{
-        "params": [prompts_probs],
-        "weight_decay": 0.1,
-    }], lr=learning_rate)
 
     test_result, origin_result = test(5)
 

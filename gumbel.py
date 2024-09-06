@@ -114,7 +114,7 @@ def train(epochs, sample_size):
             # 计算log(P)的梯度
             derivative = torch.zeros_like(alphas)
             for prompts_discrete_indices, loss in zip(prompts_discrete_indices_list, loss_list):
-                log_probs = prompts_probs.gather(1, prompts_discrete_indices.unsqueeze(1)).squeeze()
+                log_probs = prompts_probs.gather(1, prompts_discrete_indices.unsqueeze(1)).squeeze()# gather函数根据索引取值,unsqueeze(1)增加一个维度
                 log_prob = torch.log(log_probs).sum()
                 log_prob.backward(retain_graph=True)
                 derivative += alphas.grad * (loss - loss_avg)
@@ -146,9 +146,6 @@ def train(epochs, sample_size):
             patience += 1
             print(f"Patience counter: {patience}")
 
-        if alphas_change < alpha_change_threshold or patience >= patience_threshold:
-            print(f"Stopping training. Alphas change: {alphas_change}, Patience: {patience}")
-            break
 
         # 保存检查点
         if (epoch + 1) % checkpoint_interval == 0:
@@ -170,6 +167,10 @@ def train(epochs, sample_size):
         # 如果cuda内存不够，清理一下
         if 'cuda' in str(device):
             torch.cuda.empty_cache()
+
+        if alphas_change < alpha_change_threshold or patience >= patience_threshold:
+            print(f"Stopping training. Alphas change: {alphas_change}, Patience: {patience}")
+            break
 
     save_path = "data/best_alphas_gumbel.pt"
     torch.save(best_alphas, save_path)
@@ -273,8 +274,8 @@ if __name__ == "__main__":
     # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
     # chatbot = "moonshot-v1-8k"
     # 读取数据
-    data = json.load(open("data/cut_data.json", 'r', encoding='utf-8'))
-    pmi_data = "data/vocab.txt"
+    data = json.load(open("data/summarization_data_200.json", 'r', encoding='utf-8'))
+    pmi_data = "data/vocabulary/vocab_summarization.txt"
     train_data = data[:int(0.7 * len(data))]
     test_data = data[int(0.7 * len(data)):]
 

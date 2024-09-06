@@ -4,7 +4,8 @@ import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 #os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
 #os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
-os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+#os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+os.environ["HF_HOME"] = "/hy-tmp/cache"   # 恒源云
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -15,6 +16,8 @@ import random
 from torch.optim import AdamW
 from concurrent.futures import ThreadPoolExecutor
 import matplotlib.pyplot as plt
+import transformers
+from modelscope import snapshot_download
 
 def solve_v_total_exact(prompt_emb):
     k = 1
@@ -47,28 +50,36 @@ def constrainScoreByWholeExact(prompt_embeds):
         prompt_embeds[i].sub_(v).clamp_(1e-7, 1)
 
 def query(input):
+    print("input:", input)
     message = [
         {"role": "system", "content": ""},
         {"role": "user", "content": input},
     ]
-    hypo_output = None
-    received = False
-    while (not received) or (hypo_output is None):
-        try:
-            hypo_output = client.chat.completions.create(
-                model=chatbot,
-                messages=message,
-                stream=False,
-                max_tokens=1024
-            )
-            received = True
-        except:
-            time.sleep(1)
-    return hypo_output.choices[0].message.content
+    if use_llama3:
+        outputs = pipeline(
+            message,
+            max_new_tokens=512,
+        )
+        return outputs[0]["generated_text"][-1]["content"]
+    else:
+        hypo_output = None
+        received = False
+        while (not received) or (hypo_output is None):
+            try:
+                hypo_output = client.chat.completions.create(
+                    model=chatbot,
+                    messages=message,
+                    stream=False,
+                    max_tokens=512
+                )
+                received = True
+            except:
+                time.sleep(1)
+        return hypo_output.choices[0].message.content
 
 def query_concurrently(prompts, instruction, input_context):
     with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
-        futures = [executor.submit(query, p + instruction + input_context) for p in prompts]
+        futures = [executor.submit(query, p + " " + instruction + input_context) for p in prompts]
         results = [future.result() for future in futures]
     return results
 
@@ -78,7 +89,7 @@ def query_concurrently_sample_size(sample_size, instruction, input_context):
         results = [future.result() for future in futures]
     return results
 
-def tigerloss(instruction, input_context, output):
+def tiger_loss(instruction, input_context, output):
     received = False
     cnt = 0
     while not received and cnt < 10:
@@ -132,7 +143,7 @@ def train(epochs, sample_size):
                     prompts.append(prompts_discrete)
                 hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
                 for hypo_output in hypo_outputs:
-                    loss = tigerloss(item['instruction'], item['input_context'], hypo_output)
+                    loss = tiger_loss(item['instruction'], item['input_context'], hypo_output)
                     loss_list.append(loss)
 
                 loss_avg = sum(loss_list) / sample_size
@@ -230,7 +241,7 @@ def evaluate(sample_size=5):
             prompts.append(prompts_discrete)
         hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
         for hypo_output in hypo_outputs:
-            loss = tigerloss(item['instruction'], item['input_context'], hypo_output)
+            loss = tiger_loss(item['instruction'], item['input_context'], hypo_output)
             loss_list.append(loss)
         loss_avg = sum(loss_list) / sample_size
         print("eval_loss_avg:", loss_avg)
@@ -258,8 +269,8 @@ def test(sample_size=5, probs=None):
         outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
         outputs_origin = query_concurrently_sample_size(sample_size, item['instruction'], item['input_context'])
         for output, output_origin in zip(outputs, outputs_origin):
-            loss = tigerloss(item['instruction'], item['input_context'], output)
-            origin_loss = tigerloss(item['instruction'], item['input_context'], output_origin)
+            loss = tiger_loss(item['instruction'], item['input_context'], output)
+            origin_loss = tiger_loss(item['instruction'], item['input_context'], output_origin)
             loss_list.append(loss)
             origin_loss_list.append(origin_loss)
 
@@ -276,19 +287,12 @@ def test(sample_size=5, probs=None):
 
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    # 设置--max-model-len为2848
-    # set up scorer
-    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
-    client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
-    chatbot = "deepseek-chat"
-    # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
-    # chatbot = "moonshot-v1-8k"
+    # PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
     # 读取数据
-    data = json.load(open("data/translation_data200.json", 'r', encoding='utf-8'))
-    pmi_data = "data/vocab_translation_all.txt"
+    data = json.load(open("data/summarization_data_200.json", 'r', encoding='utf-8'))
+    pmi_data = "data/vocabulary/vocab_summarization.txt"
     train_data = data[:int(0.7 * len(data))]
     test_data = data[int(0.7 * len(data)):]
 
@@ -299,11 +303,12 @@ if __name__ == "__main__":
     prompt_search_space = 100
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
-    prompts_probs = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length)
+    prompts_probs = torch.FloatTensor([[1 / prompt_search_space] * prompt_search_space] * prompt_length).to(device)
     prompts_probs.requires_grad = True
     probs_change_threshold = 1e-4
     patience_threshold = 5
     checkpoint_interval = 5
+    use_llama3 = True
 
 
     # 设置优化器
@@ -312,9 +317,32 @@ if __name__ == "__main__":
         "weight_decay": 0.1,
     }], lr=learning_rate)
 
-    best_probs = train(epochs=20, sample_size=10)
-    test_result, origin_result = test(5, best_probs)
 
+    # set up scorer
+    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B",use_vllm=True)  # VLLM on GPU, about 5 instances per seconds
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
+
+
+    if use_llama3:
+        model_id = snapshot_download("LLM-Research/Meta-Llama-3.1-8B-Instruct", cache_dir="/hy-tmp/cache",
+                                     local_dir="/hy-tmp/local", local_files_only=True)
+        pipeline = transformers.pipeline(
+            "text-generation",
+            model=model_id,
+            model_kwargs={"torch_dtype": torch.bfloat16},
+            device_map="auto",
+        )
+    else:
+        client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
+        chatbot = "deepseek-chat"
+        # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
+        # chatbot = "moonshot-v1-8k"
+
+
+    best_probs = train(epochs=20, sample_size=3)
+    test_result, origin_result = test(3, best_probs)
     print("test_result:", sum(test_result))
     print("origin_result:", sum(origin_result))
     print("Finished")
