@@ -3,13 +3,17 @@ import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 #os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'   # AutoDL数据盘
 # os.environ['HF_HOME'] = 'D:/tmp/cache'
-os.environ["HF_HOME"] = "/mnt/d/tmp/cache"
+# os.environ["HF_HOME"] = "/mnt/d/tmp/cache"
+os.environ["HF_HOME"] = "/hy-tmp/cache"      # 恒源云
 from collections import defaultdict
 import re
 import math
 import numpy
 import json
-from transformers import AutoTokenizer
+from transformers import (
+    AutoTokenizer,
+)
+from datasets import load_dataset
 
 tokenizer = AutoTokenizer.from_pretrained("roberta-large")
 
@@ -116,8 +120,8 @@ class FindNgrams:
 
 if __name__ == '__main__':
     ngram_list = []
-    dataset = 'data/summarization_data_all.json'
-    output_dir = 'data/vocabulary/vocab_summarization.txt'
+    dataset = load_dataset("abisee/cnn_dailymail", "3.0.0", cache_dir="/hy-tmp/cache")
+    output_dir = 'data/vocabulary/vocab_cnn.txt'
     ngram = 5
     min_count = 5
     min_pmi = 1
@@ -126,9 +130,16 @@ if __name__ == '__main__':
 
     print('dataset: ', dataset)
 
-    data = json.load(open(dataset, 'r', encoding='utf-8'))
+    data = dataset
 
-    sentence_list = [item['input_context'] for item in data]
+    sentence_list = []
+    train_data = data['train'].select(range(0, int(len(data['train']) * 0.1)))
+    for item in train_data:
+        sentence_list.append(item['article'])
+        sentence_list.append(item['highlights'])
+
+
+    print("sentence_list finished")
 
     ngram_finder = FindNgrams(min_count=min_count, min_pmi=min_pmi)
     ngram_finder.find_ngrams_pmi(sentence_list, ngram, ngram_freq_threshold)

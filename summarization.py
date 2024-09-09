@@ -1,12 +1,13 @@
+from numba.tests.complex_usecases import real_usecase
 from openai import OpenAI
 import json
 import subprocess
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
 #os.environ['HF_HOME'] = 'D:/tmp/cache'      # win11
 #os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
-#os.environ["HF_HOME"] = "/hy-tmp/cache"      # 恒源云
+os.environ["HF_HOME"] = "/hy-tmp/cache"      # 恒源云
 #os.environ["GPU_MEMORY_UTILIZATION"] = "0.5"
 #os.environ["GPU_MEMORY_LIMIT"] = "0.5"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
@@ -23,7 +24,9 @@ import matplotlib.pyplot as plt
 import transformers
 from modelscope import snapshot_download
 from transformers import AutoTokenizer
+from datasets import load_dataset
 from rouge import Rouge
+
 
 def solve_v_total_exact(prompt_emb):
     k = 1
@@ -69,7 +72,7 @@ def query(input):
                 model=chatbot,
                 messages=message,
                 stream=False,
-                max_tokens=512
+                max_tokens=max_new_tokens
             )
             received = True
         except:
@@ -78,22 +81,37 @@ def query(input):
 
 def query_concurrently(prompts, instruction, input_context):
     if use_llama3:
-        inputs = [instruction + input_context] * len(prompts)
-        inputs = [p + " " + i for p, i in zip(prompts, inputs)]
-        sequences = pipeline(
-            inputs,
-            do_sample=True,
-            top_k=10,
-            num_return_sequences=1,
-            eos_token_id=tokenizer1.eos_token_id,
-            truncation=True,
-            max_new_tokens=512,
-            return_full_text=False
-        )
         results = []
-        for s in sequences:
-            result = s[0]['generated_text']
-            results.append(result)
+        for i in range(len(prompts)):
+            input_ = prompts[i] + " " + instruction + input_context
+            sequence = pipeline(
+                input_,
+                # do_sample=True,
+                # top_k=10,
+                num_return_sequences=1,
+                eos_token_id=tokenizer1.eos_token_id,
+                # truncation=True,
+                max_new_tokens=64,
+                return_full_text=False
+            )
+            tmp = sequence[0]['generated_text']
+            while tmp is None or tmp[1]=='.' or len(tmp) < 10:
+                tmp_ = pipeline(
+                    prompts[i] + " " + instruction + input_context,
+                    # do_sample=True,
+                    # top_k=10,
+                    num_return_sequences=1,
+                    eos_token_id=tokenizer1.eos_token_id,
+                    # truncation=True,
+                    max_new_tokens=64,
+                    return_full_text=False
+                )
+                tmp = tmp_[0]['generated_text']
+            print("prompts[i]:", prompts[i])
+            print("instruction+input_context:", instruction + input_context)
+            print("output:", tmp)
+            print("\n\n\n")
+            results.append(tmp)
         return results
     else:
         with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
@@ -110,8 +128,8 @@ def query_concurrently_sample_size(sample_size, instruction, input_context):
             top_k=10,
             num_return_sequences=1,
             eos_token_id=tokenizer1.eos_token_id,
+            max_new_tokens=64,
             truncation=True,
-            max_length=400,
             return_full_text=False
         )
         results = []
@@ -125,7 +143,7 @@ def query_concurrently_sample_size(sample_size, instruction, input_context):
             results = [future.result() for future in futures]
         return results
 
-def tiger_loss(instruction, input_context, output):
+def loss_tiger(instruction, input_context, output):
     received = False
     cnt = 0
     while not received and cnt < 10:
@@ -141,10 +159,6 @@ def tiger_loss(instruction, input_context, output):
 
 def loss_rouge(data_, output):
     rouge = Rouge()
-    print("output:", output)
-    print("data_['article']:", data_['article'])
-    print("data_['highlights']:", data_['highlights'])
-    print("\n\n\n")
     rouge_dict = rouge.get_scores(output, data_['highlights'])[0]
     rouge_l = rouge_dict['rouge-1']['r']
     loss = 1 - rouge_l
@@ -172,8 +186,10 @@ def train(epochs, sample_size):
 
     for epoch in range(epochs):
         epoch_loss = 0
-        random.shuffle(train_data)
+        #random.shuffle(train_data)
         for item in train_data:
+            if (item is None) or (item['article'] is None) or (item['highlights'] is None):
+                continue
             prompts_dist = torch.distributions.Categorical(prompts_probs)
             with torch.no_grad():
                 loss_list = []
@@ -188,9 +204,9 @@ def train(epochs, sample_size):
                         prompts_discrete_ngram_list.append(ngram_list[idx])
                     prompts_discrete = ' '.join(prompts_discrete_ngram_list)
                     prompts.append(prompts_discrete)
-                hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
+                hypo_outputs = query_concurrently(prompts, "Summarize the news article below.", item['article'])
                 for hypo_output in hypo_outputs:
-                    loss = tiger_loss(item['instruction'], item['input_context'], hypo_output)
+                    loss = loss_rouge(item, hypo_output)
                     loss_list.append(loss)
 
                 loss_avg = sum(loss_list) / sample_size
@@ -257,7 +273,7 @@ def train(epochs, sample_size):
         if 'cuda' in str(device):
             torch.cuda.empty_cache()
 
-    save_path = "data/prompt_probs_pair.pt"
+    save_path = "data/prompt_probs_pair_summ.pt"
     torch.save(prompts_probs, save_path)
     print("Finished training")
 
@@ -274,7 +290,7 @@ def train(epochs, sample_size):
 
 def evaluate(sample_size=5):
     eval_result = 0
-    for item in test_data:
+    for item in eval_data:
         prompts_dist = torch.distributions.Categorical(prompts_probs)
         loss_list = []
         prompts = []
@@ -286,9 +302,9 @@ def evaluate(sample_size=5):
                 prompts_discrete_ngram_list.append(ngram_list[idx])
             prompts_discrete = ' '.join(prompts_discrete_ngram_list)
             prompts.append(prompts_discrete)
-        hypo_outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
+        hypo_outputs = query_concurrently(prompts, "Write a summary of the text below.", item['article'])
         for hypo_output in hypo_outputs:
-            loss = tiger_loss(item['instruction'], item['input_context'], hypo_output)
+            loss = loss_rouge(item, hypo_output)
             loss_list.append(loss)
         loss_avg = sum(loss_list) / sample_size
         print("eval_loss_avg:", loss_avg)
@@ -312,11 +328,11 @@ def test(sample_size=5, probs=None):
                 prompts_discrete_ngram_list.append(ngram_list[idx])
             prompts_discrete = ' '.join(prompts_discrete_ngram_list)
             prompts.append(prompts_discrete)
-        outputs = query_concurrently(prompts, item['instruction'], item['input_context'])
-        outputs_origin = query_concurrently_sample_size(sample_size, item['instruction'], item['input_context'])
+        outputs = query_concurrently(prompts, "Summarize the news article below.", item['article'])
+        outputs_origin = query_concurrently_sample_size(sample_size, "Summarize the news article below.", item['article'])
         for output, output_origin in zip(outputs, outputs_origin):
-            loss = tiger_loss(item['instruction'], item['input_context'], output)
-            origin_loss = tiger_loss(item['instruction'], item['input_context'], output_origin)
+            loss = loss_rouge(item, output)
+            origin_loss = loss_rouge(item, output_origin)
             loss_list.append(loss)
             origin_loss_list.append(origin_loss)
 
@@ -334,23 +350,23 @@ def test(sample_size=5, probs=None):
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-
-    # set up scorer
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
-    scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
-    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
-
     # 读取数据
-    data = json.load(open("data/summarization_data_200.json", 'r', encoding='utf-8'))
-    pmi_data = "data/vocabulary/vocab_summarization.txt"
-    train_data = data[:int(0.7 * len(data))]
-    test_data = data[int(0.7 * len(data)):]
+    data = load_dataset("abisee/cnn_dailymail", "3.0.0", cache_dir="/hy-tmp/cache")
+    pmi_data = "data/vocabulary/vocab_cnn.txt"
+    train_data = data['train'] # 取0.001的数据
+    train_data = train_data.select(range(0, int(len(train_data) * 0.001)))
+    print("train_data:", len(train_data))
+    test_data = data['test']
+    test_data = test_data.select(range(0, int(len(test_data) * 0.001)))
+    print("test_data:", len(test_data))
+    eval_data = data['validation']
+    eval_data = eval_data.select(range(0, int(len(eval_data) * 0.001)))
+    print("eval_data:", len(eval_data))
 
     # 设置超参数
     learning_rate = 1e-4
     ngram_list = pmi()
-    prompt_length = 35
+    prompt_length = 20
     prompt_search_space = 100
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('device:', device)
@@ -359,7 +375,10 @@ if __name__ == "__main__":
     probs_change_threshold = 1e-4
     patience_threshold = 5
     checkpoint_interval = 5
-    use_llama3 = False
+    use_llama3 = True           # 是否使用llama3,当为False时使用api
+    loss_type = "summarization" # "summarization" or "translation" or "TigerScore"
+    max_new_tokens = 128
+
 
 
     # 设置优化器
@@ -385,6 +404,13 @@ if __name__ == "__main__":
         # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
         # chatbot = "moonshot-v1-8k"
 
+
+    if loss_type == "TigerScore":
+        # set up scorer
+        scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
+        # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
+        # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
+        # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
     best_probs = train(epochs=20, sample_size=10)
     test_result, origin_result = test(5, best_probs)

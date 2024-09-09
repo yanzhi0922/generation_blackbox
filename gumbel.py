@@ -3,9 +3,11 @@ import json
 import subprocess
 import os
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
-#os.environ['HF_HOME'] = 'D:/tmp/cache'     # win11
+#os.environ['HF_HOME'] = '/root/autodl-tmp/cache/'      # AutoDL
+#os.environ['HF_HOME'] = 'D:/tmp/cache'      # win11
 #os.environ["HF_HOME"] = "/mnt/d/tmp/cache"  # wsl2
+os.environ["HF_HOME"] = "/hy-tmp/cache"      # 恒源云
+os.environ["GPU_MEMORY_LIMIT"] = "0.5"
 import time
 from tigerscore import TIGERScorer
 import torch
@@ -16,38 +18,86 @@ import random
 from torch.optim import Adam, AdamW
 from concurrent.futures import ThreadPoolExecutor
 import matplotlib.pyplot as plt
+import transformers
+from modelscope import snapshot_download
+from transformers import AutoTokenizer
 
 def query(input):
+    print("input:", input)
     message = [
         {"role": "system", "content": ""},
         {"role": "user", "content": input},
     ]
-    hypo_output = None
-    received = False
-    while (not received) or (hypo_output is None):
-        try:
-            hypo_output = client.chat.completions.create(
-                model=chatbot,
-                messages=message,
-                stream=False,
-                max_tokens=960
-            )
-            received = True
-        except:
-            time.sleep(1)
-    return hypo_output.choices[0].message.content
+    if use_llama3:
+        outputs = pipeline(
+            message,
+            max_new_tokens=512,
+        )
+        return outputs[0]["generated_text"][-1]["content"]
+    else:
+        hypo_output = None
+        received = False
+        while (not received) or (hypo_output is None):
+            try:
+                hypo_output = client.chat.completions.create(
+                    model=chatbot,
+                    messages=message,
+                    stream=False,
+                    max_tokens=512
+                )
+                received = True
+            except:
+                time.sleep(1)
+        return hypo_output.choices[0].message.content
 
 def query_concurrently(prompts, instruction, input_context):
-    with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
-        futures = [executor.submit(query, p + instruction + input_context) for p in prompts]
-        results = [future.result() for future in futures]
-    return results
+    if use_llama3:
+        inputs = [instruction + input_context] * len(prompts)
+        inputs = [p + " " + i for p, i in zip(prompts, inputs)]
+        sequences = pipeline(
+            inputs,
+            do_sample=True,
+            top_k=10,
+            num_return_sequences=1,
+            eos_token_id=tokenizer1.eos_token_id,
+            truncation=True,
+            max_new_tokens=512,
+            return_full_text=False
+        )
+        results = []
+        for s in sequences:
+            result = s[0]['generated_text']
+            results.append(result)
+        return results
+    else:
+        with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
+            futures = [executor.submit(query, p + " " + instruction + input_context) for p in prompts]
+            results = [future.result() for future in futures]
+        return results
 
 def query_concurrently_sample_size(sample_size, instruction, input_context):
-    with ThreadPoolExecutor(max_workers=sample_size) as executor:
-        futures = [executor.submit(query, instruction + input_context) for _ in range(sample_size)]
-        results = [future.result() for future in futures]
-    return results
+    if use_llama3:
+        inputs = [instruction + input_context] * sample_size
+        sequences = pipeline(
+            inputs,
+            do_sample=True,
+            top_k=10,
+            num_return_sequences=1,
+            eos_token_id=tokenizer1.eos_token_id,
+            truncation=True,
+            max_length=400,
+            return_full_text=False
+        )
+        results = []
+        for s in sequences:
+            result = s[0]['generated_text']
+            results.append(result)
+        return results
+    else:
+        with ThreadPoolExecutor(max_workers=sample_size) as executor:
+            futures = [executor.submit(query, instruction + input_context) for _ in range(sample_size)]
+            results = [future.result() for future in futures]
+        return results
 
 def tiger_loss(instruction, input_context, output):
     received = False
@@ -249,30 +299,16 @@ def test(sample_size=5, alphas=None):
     print("Finished testing")
     return test_result, origin_result
 
-def load_checkpoint(checkpoint_path):
-    checkpoint = torch.load(checkpoint_path)
-    alphas = checkpoint['alphas']
-    prompt_optimizer.load_state_dict(checkpoint['optimizer'])
-    train_losses = checkpoint['train_losses']
-    eval_results = checkpoint['eval_results']
-    test_results = checkpoint['test_results']
-    best_eval_result = checkpoint['best_eval_result']
-    best_alphas = checkpoint['best_alphas']
-    best_epoch = checkpoint['best_epoch']
-    return alphas, prompt_optimizer, train_losses, eval_results, test_results, best_eval_result, best_alphas, best_epoch
-
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
     # set up scorer
-    #scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
+    # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B")  # on GPU
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", quantized=True) # 4 bit quantization on GPU
     scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B", use_vllm=True) # VLLM on GPU, about 5 instances per seconds
     # scorer = TIGERScorer(model_name="TIGER-Lab/TIGERScore-7B-GGUF", use_llamacpp=True) # 4 bit quantization on CPU
 
-    client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
-    chatbot = "deepseek-chat"
-    # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
-    # chatbot = "moonshot-v1-8k"
     # 读取数据
     data = json.load(open("data/summarization_data_200.json", 'r', encoding='utf-8'))
     pmi_data = "data/vocabulary/vocab_summarization.txt"
@@ -293,6 +329,8 @@ if __name__ == "__main__":
     alpha_change_threshold = 1e-2
     patience_threshold = 5
     checkpoint_interval = 5
+    use_llama3 = True
+
     '''
     # 设置优化器
     prompt_optimizer = AdamW([{
@@ -300,10 +338,25 @@ if __name__ == "__main__":
         "weight_decay": 0.1,
     }], lr=learning_rate)
     '''
+
     prompt_optimizer = Adam([{
         "params": [alphas],
     }], lr=learning_rate)
 
+    if use_llama3:
+        model = "/hy-tmp/local"
+        tokenizer1 = AutoTokenizer.from_pretrained(model)
+        pipeline = transformers.pipeline(
+            "text-generation",
+            model=model,
+            model_kwargs={"torch_dtype": torch.bfloat16},
+            device_map="auto",
+        )
+    else:
+        client = OpenAI(api_key="sk-0c2e4c0ec7444bc7924a645788c4dd24", base_url="https://api.deepseek.com/v1")
+        chatbot = "deepseek-chat"
+        # client = OpenAI(api_key="sk-HPOmC99SEkbTxygFd28Nba6785yOocrSpDqzLu94FafdXqOW", base_url="https://api.moonshot.cn/v1")
+        # chatbot = "moonshot-v1-8k"
     best_alphas = train(epochs=20, sample_size=10)
     test_result, origin_result = test(5, best_alphas)
 
