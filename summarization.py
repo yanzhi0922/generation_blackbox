@@ -107,10 +107,6 @@ def query_concurrently(prompts, instruction, input_context):
                     return_full_text=False
                 )
                 tmp = tmp_[0]['generated_text']
-            print("prompts[i]:", prompts[i])
-            print("instruction+input_context:", instruction + input_context)
-            print("output:", tmp)
-            print("\n\n\n")
             results.append(tmp)
         return results
     else:
@@ -121,22 +117,33 @@ def query_concurrently(prompts, instruction, input_context):
 
 def query_concurrently_sample_size(sample_size, instruction, input_context):
     if use_llama3:
-        inputs = [instruction + input_context] * sample_size
-        sequences = pipeline(
-            inputs,
-            do_sample=True,
-            top_k=10,
-            num_return_sequences=1,
-            eos_token_id=tokenizer1.eos_token_id,
-            max_new_tokens=64,
-            truncation=True,
-            return_full_text=False
-        )
-        results = []
-        for s in sequences:
-            result = s[0]['generated_text']
-            results.append(result)
-        return results
+        result = []
+        for _ in range(sample_size):
+            input_ = instruction + input_context
+            sequence = pipeline(
+                input_,
+                # do_sample=True,
+                # top_k=10,
+                num_return_sequences=1,
+                eos_token_id=tokenizer1.eos_token_id,
+                # truncation=True,
+                max_new_tokens=64,
+                return_full_text=False
+            )
+            tmp = sequence[0]['generated_text']
+            while tmp is None or tmp[1]=='.' or len(tmp) < 10:
+                tmp_ = pipeline(
+                    instruction + input_context,
+                    # do_sample=True,
+                    # top_k=10,
+                    num_return_sequences=1,
+                    eos_token_id=tokenizer1.eos_token_id,
+                    # truncation=True,
+                    max_new_tokens=64,
+                    return_full_text=False
+                )
+                tmp = tmp_[0]['generated_text']
+            result.append(tmp)
     else:
         with ThreadPoolExecutor(max_workers=sample_size) as executor:
             futures = [executor.submit(query, instruction + input_context) for _ in range(sample_size)]
@@ -160,8 +167,8 @@ def loss_tiger(instruction, input_context, output):
 def loss_rouge(data_, output):
     rouge = Rouge()
     rouge_dict = rouge.get_scores(output, data_['highlights'])[0]
-    rouge_l = rouge_dict['rouge-1']['r']
-    loss = 1 - rouge_l
+    rouge_1 = rouge_dict['rouge-1']['r']
+    loss = 1 - rouge_1
     return loss
 
 def pmi():

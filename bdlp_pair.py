@@ -78,22 +78,37 @@ def query(input):
 
 def query_concurrently(prompts, instruction, input_context):
     if use_llama3:
-        inputs = [instruction + input_context] * len(prompts)
-        inputs = [p + " " + i for p, i in zip(prompts, inputs)]
-        sequences = pipeline(
-            inputs,
-            do_sample=True,
-            top_k=10,
-            num_return_sequences=1,
-            eos_token_id=tokenizer1.eos_token_id,
-            truncation=True,
-            max_new_tokens=512,
-            return_full_text=False
-        )
         results = []
-        for s in sequences:
-            result = s[0]['generated_text']
-            results.append(result)
+        for i in range(len(prompts)):
+            input_ = prompts[i] + " " + instruction + input_context
+            sequence = pipeline(
+                input_,
+                # do_sample=True,
+                # top_k=10,
+                num_return_sequences=1,
+                eos_token_id=tokenizer1.eos_token_id,
+                # truncation=True,
+                max_new_tokens=64,
+                return_full_text=False
+            )
+            tmp = sequence[0]['generated_text']
+            while tmp is None or tmp[1] == '.' or len(tmp) < 10:
+                tmp_ = pipeline(
+                    prompts[i] + " " + instruction + input_context,
+                    # do_sample=True,
+                    # top_k=10,
+                    num_return_sequences=1,
+                    eos_token_id=tokenizer1.eos_token_id,
+                    # truncation=True,
+                    max_new_tokens=64,
+                    return_full_text=False
+                )
+                tmp = tmp_[0]['generated_text']
+            print("prompts[i]:", prompts[i])
+            print("instruction+input_context:", instruction + input_context)
+            print("output:", tmp)
+            print("\n\n\n")
+            results.append(tmp)
         return results
     else:
         with ThreadPoolExecutor(max_workers=len(prompts)) as executor:
